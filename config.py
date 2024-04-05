@@ -7,11 +7,12 @@ class Config:
     _instance = None
 
     # 파일 경로
-    sellerFilePath : str = 'seller.txt'
-    cashFilePath : str = 'cash.txt'
-    drinksFilePath : str = 'drinks.txt'
+    seller_file_path : str = 'seller.txt'
+    cash_file_path : str = 'cash.txt'
+    drinks_file_path : str = 'drinks.txt'
     Admin_List = [] #관리자 클래스 리스트 생성
     Currency_List = []
+    
     @staticmethod
     def get_instance():
         if Config._instance is None:
