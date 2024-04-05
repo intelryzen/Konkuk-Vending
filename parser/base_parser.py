@@ -42,7 +42,7 @@ class BaseParser():
 
     # 올바른 '권종'인지 확인 (50000|10000|5000|1000|500|100)
     def is_money_type(self, input: str) -> bool:
-        return int(input) in [50000, 10000, 5000, 1000, 500, 100]
+        return str(input) in ['50000', '10000', '5000', '1000', '500', '100']
     
     # 올바른 '개수'인지 확인 (0?[0-9])|([1-9][0-9])
     def is_count(self, input: str) -> bool:
