@@ -7,7 +7,7 @@ import re
 '''
 모드, 금액 입력, 음료수 선택, 관리자(로그인 아님)
     올바른 입력이 아닙니다.
-금액 입력
+금액 입력 (삭제 예정)
     잔돈이 포화상태입니다. 관리자에게 문의하거나 타 권종을 이용해주세요.
 음료수 선택
     금액이 부족합니다. 다른 음료수를 선택해주세요.
@@ -39,8 +39,21 @@ import re
 '''
 
 class BaseParser():
-    error_prefix: str = "오류:"
 
+    # 올바른 '권종'인지 확인 (50000|10000|5000|1000|500|100)
+    def is_money_type(self, input: str) -> bool:
+        return int(input) in [50000, 10000, 5000, 1000, 500, 100]
+    
+    # 올바른 '개수'인지 확인 (0?[0-9])|([1-9][0-9])
+    def is_count(self, input: str) -> bool:
+        pattern = r'^(0?[0-9]|[1-9][0-9])$'
+        return re.match(pattern, input)
+    
+    # 올바른 '번호'인지 확인 (0?[1-9])|([1-9][0-9])
+    def is_number(self, input: str) -> bool:
+        pattern = r'^(0?[1-9]|[1-9][0-9])$'
+        return re.match(pattern, input)
+    
     # 한 자리 수 숫자인지
     def is_digit_0_to_9(self, input: str) -> bool:
         pattern = r'^[0-9]$'
@@ -57,12 +70,12 @@ class BaseParser():
     # 〈횡공백류열0〉 <단어> 〈횡공백류열1〉 〈단어〉 (〈횡공백류열1〉 〈단어〉)^* 〈횡공백류열0〉
     def parse_all(self, input: str) -> list:
         # 개행 문자는 포함되지 않음
-        pattern = r"[\s\t\v\f]+"
+        pattern = r"[ \t\v\f]+"
         
         # 〈횡공백류열1〉를 기준으로 분할
         parts = re.split(pattern, input.strip())
         
-        # 받은 쪽에서 [''] 경우 , \n 처리해줘야 함.
+        # 받은 쪽에서 [''] 경우와 \n 처리해줘야 함.
         return parts
 
 # 테스트
