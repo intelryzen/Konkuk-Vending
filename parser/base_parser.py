@@ -5,7 +5,7 @@ import re
 '''
 
 '''
-모드, 금액 입력, 음료수 선택, 관리자(로그인 아님)
+모드, 금액 입력, 음료수 선택, 관리자, 관리자 로그인
     올바른 입력이 아닙니다.
 음료수 선택
     금액이 부족합니다. 다른 음료수를 선택해주세요.
@@ -58,6 +58,10 @@ class BaseParser():
         if '\n' in input:
             return True
         return False
+    
+    # 단어인지 확인
+    def is_word(self, input: str) -> bool:
+        return input.isprintable() and not any(c in input for c in " \n\t")
     
     # 한 자리 수 숫자인지
     def is_digit_0_to_9(self, input: str) -> bool:
