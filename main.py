@@ -5,6 +5,21 @@ from config import config as c
 from model import cash, seller
 from config import Currency, Admin
 
+'''
+parser/base_parser.py 의 BaseParser 클래스에서
+
+    # 올바른 '권종'인지 확인 (50000|10000|5000|1000|500|100)
+    # 올바른 '개수'인지 확인 (0?[0-9])|([1-9][0-9])
+    # 올바른 '번호'인지 확인 (0?[1-9])|([1-9][0-9])
+    # 개행이 포함되어 있는지 확인
+    # 단어인지 확인
+    # 한 자리 수 숫자인지
+    # 〈횡공백류열0〉 〈명령어〉 〈횡공백류열0〉
+    # 〈횡공백류열0〉 <단어> 〈횡공백류열1〉 〈단어〉 (〈횡공백류열1〉 〈단어〉)^* 〈횡공백류열0〉
+
+구현되어 있으니 필요하면 가져다 쓰시면 됩니다.
+'''
+
 def main():
     while(True):
         # 자판기(vending) 인스턴스 생성
