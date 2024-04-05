@@ -1,4 +1,5 @@
 import sys
+import re
 from config import config as c
 
 def main():
