@@ -21,6 +21,6 @@ class ModeParser(BaseParser):
 # 테스트
 if __name__ == "__main__":
     parser = ModeParser()
-    test_input = "   \t\f\v3 \t \n\n"
+    test_input = "   \t\f\v2 \t"
     t = parser.parse(test_input)
     print(t)

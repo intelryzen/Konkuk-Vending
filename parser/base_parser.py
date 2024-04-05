@@ -7,11 +7,10 @@ import re
 '''
 모드, 금액 입력, 음료수 선택, 관리자(로그인 아님)
     올바른 입력이 아닙니다.
-금액 입력 (삭제 예정)
-    잔돈이 포화상태입니다. 관리자에게 문의하거나 타 권종을 이용해주세요.
 음료수 선택
     금액이 부족합니다. 다른 음료수를 선택해주세요.
     잔돈이 부족합니다.
+    잔돈이 포화상태입니다. 관리자에게 문의하거나 타 권종을 이용해주세요.
 관리자 로그인
     아이디만 입력을 하였거나 아이디와 비밀번호가 구분되어 있지 않습니다. 아이디와 비밀번호 사이에는 적어도 하나의 횡공백류열이 필요합니다.
     아이디도 입력해야 합니다.
@@ -54,6 +53,12 @@ class BaseParser():
         pattern = r'^(0?[1-9]|[1-9][0-9])$'
         return re.match(pattern, input)
     
+    # 개행이 포함되어 있는지 확인
+    def contains_newline(self, input: str):
+        if '\n' in input:
+            return True
+        return False
+    
     # 한 자리 수 숫자인지
     def is_digit_0_to_9(self, input: str) -> bool:
         pattern = r'^[0-9]$'
@@ -61,6 +66,9 @@ class BaseParser():
 
     # 〈횡공백류열0〉 〈명령어〉 〈횡공백류열0〉
     def parse_command(self, input: str) -> int:
+        if self.contains_newline(input):
+            return -1
+        
         input = input.strip()
         if self.is_digit_0_to_9(input):
             return int(input)
@@ -69,8 +77,10 @@ class BaseParser():
 
     # 〈횡공백류열0〉 <단어> 〈횡공백류열1〉 〈단어〉 (〈횡공백류열1〉 〈단어〉)^* 〈횡공백류열0〉
     def parse_all(self, input: str) -> list:
-        # 개행 문자는 포함되지 않음
-        pattern = r"[ \t\v\f]+"
+        if self.contains_newline(input):
+            return None
+
+        pattern = r"[\s\t\v\f]+"
         
         # 〈횡공백류열1〉를 기준으로 분할
         parts = re.split(pattern, input.strip())
@@ -81,6 +91,6 @@ class BaseParser():
 # 테스트
 if __name__ == "__main__":
     parser = BaseParser()
-    test_input = "   \t\f\v명령어 \v\f\t권종  \f\v\t3   \t \n\n"
+    test_input = "   \t\f\v명령어 \v\f\t권종  \f\v\t3   \t"
     t = parser.parse_all(test_input)
     print(t)
