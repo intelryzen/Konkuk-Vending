@@ -39,6 +39,7 @@ import re
 '''
 
 class BaseParser():
+    error_prefix: str = "오류:"
 
     # 한 자리 수 숫자인지
     def is_digit_0_to_9(self, input: str) -> bool:
