@@ -10,7 +10,8 @@ class Config:
     sellerFilePath : str = 'seller.txt'
     cashFilePath : str = 'cash.txt'
     drinksFilePath : str = 'drinks.txt'
-	
+    Admin_List = [] #관리자 클래스 리스트 생성
+    Currency_List = []
     @staticmethod
     def get_instance():
         if Config._instance is None:
