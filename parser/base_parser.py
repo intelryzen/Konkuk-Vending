@@ -1,7 +1,8 @@
+import re
+
 '''
 공통으로 사용되는 파서 기능이 있다면 본 base 클래스에서 정의 및 구현하고, 각 프롬프트별 파서가 해당 클래스를 상속
 '''
-
 
 '''
 모드, 금액 입력, 음료수 선택, 관리자(로그인 아님)
@@ -36,3 +37,38 @@
     음료수의 가격은 100의 배수이어야 합니다. (음료수 추가)
     음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요. (음료수 추가)
 '''
+
+class BaseParser():
+
+    # 한 자리 수 숫자인지
+    @staticmethod
+    def is_digit_0_to_9(input: str) -> bool:
+        pattern = r'^[0-9]$'
+        return re.match(pattern, input) is not None
+
+    # 〈횡공백류열0〉 〈명령어〉 〈횡공백류열0〉
+    @staticmethod
+    def parse_command(input: str) -> int:
+        input = input.strip()
+        if BaseParser.is_digit_0_to_9(input):
+            return int(input)
+        else:
+            return -1
+
+    # 〈횡공백류열0〉 <단어> 〈횡공백류열1〉 〈단어〉 (〈횡공백류열1〉 〈단어〉)^* 〈횡공백류열0〉
+    @staticmethod
+    def parse_all(input: str) -> list:
+        # 개행 문자는 포함되지 않음
+        pattern = r"[\s\t\v\f]+"
+        
+        # 〈횡공백류열1〉를 기준으로 분할
+        parts = re.split(pattern, input.strip())
+        
+        # 받은 쪽에서 [''] 경우 , \n 처리해줘야 함.
+        return parts
+
+# 테스트
+if __name__ == "__main__":
+    test_input = "   \t\f\v명령어 \v\f\t권종  \f\v\t3   \t \n\n"
+    t = BaseParser.parse_all(test_input)
+    print(t)
