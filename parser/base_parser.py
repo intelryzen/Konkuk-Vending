@@ -41,23 +41,20 @@ import re
 class BaseParser():
 
     # 한 자리 수 숫자인지
-    @staticmethod
-    def is_digit_0_to_9(input: str) -> bool:
+    def is_digit_0_to_9(self, input: str) -> bool:
         pattern = r'^[0-9]$'
         return re.match(pattern, input) is not None
 
     # 〈횡공백류열0〉 〈명령어〉 〈횡공백류열0〉
-    @staticmethod
-    def parse_command(input: str) -> int:
+    def parse_command(self, input: str) -> int:
         input = input.strip()
-        if BaseParser.is_digit_0_to_9(input):
+        if self.is_digit_0_to_9(input):
             return int(input)
         else:
             return -1
 
     # 〈횡공백류열0〉 <단어> 〈횡공백류열1〉 〈단어〉 (〈횡공백류열1〉 〈단어〉)^* 〈횡공백류열0〉
-    @staticmethod
-    def parse_all(input: str) -> list:
+    def parse_all(self, input: str) -> list:
         # 개행 문자는 포함되지 않음
         pattern = r"[\s\t\v\f]+"
         
@@ -69,6 +66,7 @@ class BaseParser():
 
 # 테스트
 if __name__ == "__main__":
+    parser = BaseParser()
     test_input = "   \t\f\v명령어 \v\f\t권종  \f\v\t3   \t \n\n"
-    t = BaseParser.parse_all(test_input)
+    t = parser.parse_all(test_input)
     print(t)
