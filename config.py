@@ -18,3 +18,17 @@ class Config:
         return Config._instance
     
 config = Config.get_instance()
+
+class Currency: #권종 클래스
+	def __init__(self, value, quantity):
+			self.value = value #권종
+			self.quantity = quantity #개수
+	def __str__(self):
+		return f"{self.value} {self.quantity}"
+
+class Admin: #관리자 클래스
+	def __init__(self, name, password):
+		self.name = name #아이디
+		self.password = password #비밀번호
+	def __str__(self):
+		return f"{self.name} {self.password}"
