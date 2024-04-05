@@ -1,7 +1,7 @@
 import re
 
-from config import Admin
-from config import config as c
+from ..config import Admin
+from ..config import config as c
 
 Admin_List = [] #관리자 클래스 리스트 생성
 
