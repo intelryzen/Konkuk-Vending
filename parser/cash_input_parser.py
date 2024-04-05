@@ -21,10 +21,6 @@ class CashInputParser(BaseParser):
             return True, command
        
         input = self.parse_all(input)
-
-        # # 인자가 홀수개인지 확인
-        # if len(input) % 2 != 0:
-        #     return False, error_message
                 
         # 인자가 홀수 개이면 오류, 인자가 \n을 포함하고 있으면 오류, 주어진 인자가 규칙을 따르지 않으면 오류 
         try:
