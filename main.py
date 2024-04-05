@@ -1,6 +1,8 @@
 import sys
 import re
 from config import config as c
+from config import Admin
+from config import Currency
 
 def main():
     while(True):
