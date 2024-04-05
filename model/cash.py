@@ -1,7 +1,7 @@
 import re
 
-from config import Currency
-from config import config as c
+from ..config import Currency
+from ..config import config as c
 
 Currency_List = [] #권종 클래스 리스트 생성
 
@@ -9,7 +9,7 @@ def Save_Currencies(): #잔돈 파일 생성/저장
 	"""
 	저장하는 과정에서 저장에 대한 에러는 무시하는지 정해진 것으로 아는데 맞는지 확인 필요함
 	"""
-	with open(c.cashFilePath, 'w') as file:
+	with open(".." + c.cashFilePath, 'w') as file:
 		for Currency in c.Currency_List:
 			file.write(f"{Currency.value} {Currency.quantity}\n") #공백으로 권종, 개수 분리
 
