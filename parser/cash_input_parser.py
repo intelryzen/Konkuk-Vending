@@ -33,9 +33,6 @@ class CashInputParser(BaseParser):
                 money_type = input[i]
                 count = input[i+1]
 
-                if('\n' in money_type or '\n' in count):
-                    raise Exception("\n 포함") 
-
                 if(not self.is_money_type(money_type)):
                     raise Exception("권종 아님") 
                 
@@ -60,7 +57,7 @@ class CashInputParser(BaseParser):
 # 테스트
 if __name__ == "__main__":
     parser = CashInputParser()
-    test_input = "   \t\f\v500 01 100 10 100 1 50000 30 100 88 \n\n"
+    test_input = "   \t\f\v500 01 100 10 100 1 50000 30 100 88"
     # test_input = "   \t\f\v0\n\n"
     t = parser.parse(test_input)
     print(t)
