@@ -13,17 +13,17 @@
 ![전기프 drawio](https://github.com/intelryzen/Konkuk-Vending/assets/66426612/b9b9bf59-1d3d-4ab2-a142-d96e5c897de2)
 
 ## 커밋 컨벤션
-feat: 코드에 새로운 기능(feature) 추가
-fix: 버그 수정
-BREAKING CHANGE: 이전 버젼과 호환되지 않는 수정내역으로, !로 표시가능(예: feat!)
-docs: 개발 문서 변경
-style: 들여쓰기, 따옴표, 세미콜론 등 코드 형식 및 스타일 변경
-ci: CI/CD 관련 코드 변경
-refactor: 중복된 코드 제거, 변수명 변경, 코드 단순화 등 리팩토링 변경
-test: 테스트 관련 코드 변경
-build: 빌드 시스템 관련 코드 변경
-perf: 성능 개선 관련 코드 변경
-chore: 기타 코드 변경
+- feat: 코드에 새로운 기능(feature) 추가
+- fix: 버그 수정
+- BREAKING CHANGE: 이전 버젼과 호환되지 않는 수정내역으로, !로 표시가능(예: feat!)
+- docs: 개발 문서 변경
+- style: 들여쓰기, 따옴표, 세미콜론 등 코드 형식 및 스타일 변경
+- ci: CI/CD 관련 코드 변경
+- refactor: 중복된 코드 제거, 변수명 변경, 코드 단순화 등 리팩토링 변경
+- test: 테스트 관련 코드 변경
+- build: 빌드 시스템 관련 코드 변경
+- perf: 성능 개선 관련 코드 변경
+- chore: 기타 코드 변경
 
 ## 1차 구현 역할
 문법 검증 클래스 2   (우승식, 이유환)
