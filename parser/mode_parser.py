@@ -10,7 +10,7 @@ allows = [0, 1, 2]
 
 class ModeParser(BaseParser):
     
-    # 반환 튜플 형식: (정상 여부), (정상일 경우 명령어(int)나 비정상일 경우 오류메시지)
+    # 반환 형식: (정상 여부[bool], 정상일 경우 명령어(int)나 비정상일 경우 오류메시지[str])
     def parse(self, input: str) -> tuple[bool, any]:
         command = self.parse_command(input)
         if command in allows:
