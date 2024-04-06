@@ -3,7 +3,6 @@ import re
 
 from config import config as c
 from model import cash, seller
-from config import Currency, Admin
 
 '''
 parser/base_parser.py 의 BaseParser 클래스에서
