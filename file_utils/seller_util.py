@@ -1,5 +1,9 @@
 import re
 
+"""
+아이디 비밀번호 변경 함수 추가할지 논의 필요함
+"""
+
 def Load_Admin(sellerFilePath, Admin_List, Admin): #관리자 파일 로드
 	"""
 	아이디 비밀번호 이후 다른 문자에 대한 예외 처리 혹은 에러 처리가 필요함
@@ -10,13 +14,11 @@ def Load_Admin(sellerFilePath, Admin_List, Admin): #관리자 파일 로드
 				parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
 				try:
 					name, password = parts[0], parts[1]
-				
 				except IndexError:
 					pass
 				Admin_List.append(Admin(name, password)) #인스턴스 생성 (리스트)
 	except FileNotFoundError:
-		return "error message" 
-		#에러 코드로 리턴할지 문자열로 리턴할지는 의논이 필요함
+		return "error message" #에러 코드로 리턴할지 문자열로 리턴할지는 논의 필요함
 
 def Save_Admin(sellerFilePath, Admin_List, Admin): #관리자 파일 생성/저장
 	"""
