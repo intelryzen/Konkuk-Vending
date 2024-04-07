@@ -2,6 +2,7 @@ import sys
 import re
 
 from config import config as c
+from file_utils import cash_util, seller_util
 from model import cash, seller
 
 '''
@@ -19,10 +20,24 @@ parser/base_parser.py 의 BaseParser 클래스에서
 구현되어 있으니 필요하면 가져다 쓰시면 됩니다.
 '''
 
+'''
+file_utils 의 cash_util.py에서
+    # Load_Currencies(c.cashFilePath, c.Currency_List, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
+    # 불러온 Currency 데이터들은 c.Currency_List에 저장됩니다.
+    # Save_Currencies(c.cashFilePath, c.Currency_List, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
+    
+file_utils 의 seller_util.py에서
+    # Load_Admin(c.sellerFilePath, c.Admin_List, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
+    # 불러온 Currency 데이터들은 c.Currency_List에 저장됩니다.
+    # Save_Admin(c.sellerFilePath, c.Admin_List, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
+
+'''
+
 def main():
     while(True):
         # 자판기(vending) 인스턴스 생성
             # 자판기가 파일 데이터를 가져와 초기값 저장. 물론 파일을 디코딩하면서 오류생기면 오류문구 출력 후 종료 (클래스가 직접 가져오던, 먼저 가져와서 자판기 클래스의 초기값을 주던 상관없을 것 같습니다.)
+
         # 모드 프롬프트를 호출
             # 모드 프롬프트 내 반복문 
             # 올바른 입력을 받을 때까지 계속 반복 수행함. (ex. 1(관리자 로그인) 또는 2(음료수 보기)를 리턴)
