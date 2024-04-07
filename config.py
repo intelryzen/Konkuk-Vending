@@ -10,6 +10,7 @@ class Config:
     seller_file_path : str = 'seller.txt'
     cash_file_path : str = 'cash.txt'
     drinks_file_path : str = 'drinks.txt'
+    
     Admin_List = [] #관리자 클래스 리스트 생성
     Currency_List = [] #권종 클래스 리스트 생성
     
