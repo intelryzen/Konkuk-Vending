@@ -10,11 +10,12 @@ def Load_Admin(sellerFilePath, Admin_List, Admin): #관리자 파일 로드
 				parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
 				try:
 					name, password = parts[0], parts[1]
+				
 				except IndexError:
 					pass
 				Admin_List.append(Admin(name, password)) #인스턴스 생성 (리스트)
 	except FileNotFoundError:
-		return "File Not Found Error" 
+		return "error message" 
 		#에러 코드로 리턴할지 문자열로 리턴할지는 의논이 필요함
 
 def Save_Admin(sellerFilePath, Admin_List, Admin): #관리자 파일 생성/저장

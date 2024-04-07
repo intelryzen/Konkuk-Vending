@@ -21,5 +21,14 @@ def Load_Currencies(cashFilePath, Currency_List, Currency): #잔돈 파일 로�
 			try:
 				value, quantity = parts[0], parts[1]
 			except IndexError:
-				pass
+				return "error message"
 			Currency_List.append(Currency(int(value), int(quantity))) #인스턴스 생성 (리스트)
+
+def Change_Currency(Currency_List, Currency, Currency_Value, Currency_Amount):
+	for Currency in Currency_List:
+		if Currency.value == Currency_Value:
+			if (Currency.quantity + Currency_Amount < 100) & (Currency.quantity + Currency_Amount >= 0) :
+				Currency.quantity += Currency_Amount
+				break
+			else:
+				return "error message"
