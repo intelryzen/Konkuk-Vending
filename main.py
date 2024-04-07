@@ -28,7 +28,7 @@ file_utils 의 cash_util.py에서
     
 file_utils 의 seller_util.py에서
     # Load_Admin(c.sellerFilePath, c.Admin_List, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
-    # 불러온 Currency 데이터들은 c.Currency_List에 저장됩니다.
+    # 불러온 Admin 데이터들은 c.Admin_List에 저장됩니다.
     # Save_Admin(c.sellerFilePath, c.Admin_List, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
 
 '''
