@@ -22,16 +22,16 @@ parser/base_parser.py 의 BaseParser 클래스에서
 
 '''
 file_utils 의 cash_util.py에서
-    # load_currencies(c.CASH_FILE_PATH, c.CurrencyList, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
+    # load_currencies(c.CASH_FILE_PATH, c.currency_list, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
     # 불러온 Currency 데이터들은 c.Currency_List에 저장됩니다.
-    # save_currencies(c.CASH_FILE_PATH, c.CurrencyList, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
-    # cash_util.Change_Currency(c.CurrencyList, cash.Currency, 권종, 개수) 인자로 호출해서 사용할 수 있습니다. (권종 최대, 최소 보유량 조건식 있음)
+    # save_currencies(c.CASH_FILE_PATH, c.currency_list, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
+    # cash_util.Change_Currency(c.currency_list, cash.Currency, 권종, 개수) 인자로 호출해서 사용할 수 있습니다. (권종 최대, 최소 보유량 조건식 있음)
     # 현재 에러 메세지는 코드, 메세지 중에서 정하지 못해서 임시로 "error message"를 리턴하도록 했습니다.
 
 file_utils 의 seller_util.py에서
-    # load_admin(c.seller_file_Path, c.AdminList, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
+    # load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
     # 불러온 Admin 데이터들은 c.Admin_List에 저장됩니다.
-    # save_admin(c.seller_file_Path, c.AdminList, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
+    # save_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
 '''
 
 def main():
