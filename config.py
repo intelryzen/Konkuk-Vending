@@ -11,8 +11,8 @@ class Config:
     CASH_FILE_PATH : str = 'cash.txt'
     DRINKS_FILE_PATH : str = 'drinks.txt'
     
-    Admin_List = [] #관리자 클래스 리스트 생성
-    Currency_List = [] #권종 클래스 리스트 생성
+    AdminList = [] #관리자 클래스 리스트 생성
+    CurrencyList = [] #권종 클래스 리스트 생성
     
     @staticmethod
     def get_instance():
