@@ -7,9 +7,9 @@ class Config:
     _instance = None
 
     # 파일 경로
-    seller_file_path : str = 'seller.txt'
-    cash_file_path : str = 'cash.txt'
-    drinks_file_path : str = 'drinks.txt'
+    SELLER_FILE_PATH : str = 'seller.txt'
+    CASH_FILE_PATH : str = 'cash.txt'
+    DRINKS_FILE_PATH : str = 'drinks.txt'
     
     Admin_List = [] #관리자 클래스 리스트 생성
     Currency_List = [] #권종 클래스 리스트 생성
