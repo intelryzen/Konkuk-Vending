@@ -34,43 +34,40 @@ class DrinkList:
         # except UnicodeDecodeError:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
-
-        # VV 이거 다시
-        print(len(drinkList.drinks))
         if(len(self.drinks)==0):
             print("경고: 음료수 리스트 파일 내 데이터가 없습니다.")
 
-        elif(self.check_duplicate_numbers()):
-            print("오류: 번호의 중복이 확인되었습니다.")
+        self.check_duplicate_numbers()
 
     def write_to_file(self, filename):
         with open(filename, 'w') as file:
             for drink in self.drinks:
                 file.write(f"{drink.number} {drink.name} {drink.price} {drink.stock}\n")
-    # VV이거 다시
+                
     def check_duplicate_numbers(self):
         numbers = set()
-        duplicates = set()
         for drink in self.drinks:
             if drink.number in numbers:
-                duplicates.add(drink.number)
-            else:
-                numbers.add(drink.number)
-        if duplicates:
-            print("오류: 번호의 중복이 확인되었습니다.")
-            return False
+                print("오류: 번호의 중복이 확인되었습니다.")
+                return False
         return True
+        # duplicates = set()
+        # for drink in self.drinks:
+        #     if drink.number in numbers:
+        #         duplicates.add(drink.number)
+        #     else:
+        #         numbers.add(drink.number)
+        # if duplicates:
+        #     print("오류: 번호의 중복이 확인되었습니다.")
+        #     return False
+        # return True
 
     def print_drinks(self):
         for drinks in self.drinks:
             print(drinks)
 
 # 테스트
-drinkList = DrinkList()
-print(len(drinkList.drinks))
+# drinkList = DrinkList()
+# print(len(drinkList.drinks))
 
-drinkList.read_from_file('drinks.txt')
-drinkList.print_drinks()
-
-if(len(drinkList.drinks)==0):
-    print("경고")
+# drinkList.read_from_file('drinks.txt')
