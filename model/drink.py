@@ -77,6 +77,7 @@ class DrinkList:
     def modify_stock(self, x:str, stock:str):
     # 프롬프트에서 공백 처리될 것이라고 가정
     # x, stock은 문자열만
+    # 상태만 반환하고 출력은 프롬프트에서 처리할까?
         if(len(x)==0 or len(x)>2):
             # 1~2자리만 허용
             print("오류: 올바른 입력이 아닙니다.")
