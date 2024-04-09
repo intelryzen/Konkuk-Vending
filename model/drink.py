@@ -13,7 +13,8 @@ class DrinkList:
         self.drinks = []
 
     def add_drink(self, drink):
-        self.drinks.append(drink)
+        if drink.stock != 0:
+            self.drinks.append(drink)
 
     def read_from_file(self, filename, encoding = 'utf-8'):
         try:
@@ -63,11 +64,56 @@ class DrinkList:
         # return True
 
     def print_drinks(self):
-        for drinks in self.drinks:
-            print(drinks)
+        for drink in self.drinks:
+            print(drink)
+
+    def find_drink(self, x):
+        for drink in self.drinks:
+            if(drink.number == x):
+                return drink
+        print("오류: 존재하지 않는 번호입니다.")
+        return None
+
+    def modify_stock(self, x:str, stock:str):
+    # 프롬프트에서 공백 처리될 것이라고 가정
+    # x, stock은 문자열만
+        if(len(x)==0 or len(x)>2):
+            # 1~2자리만 허용
+            print("오류: 올바른 입력이 아닙니다.")
+        x = x.lstrip("0")
+        if(int(x)<1 or int(x)>99):
+            print("오류: 올바른 입력이 아닙니다.")
+        if(not x.isdecimal()):
+            print("오류: 올바른 입력이 아닙니다.")
+        else:
+            target = self.find_drink(x)
+            if(target != None):
+                if(len(stock)==0 or len(stock)>2):
+                    # 1~2자리만 허용
+                    print("오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요.")
+                # 정수 외의 문자열
+                elif(not stock.isdecimal()):
+                    print("오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요.")
+                stock = int(stock)
+                # 범위 이탈
+                if(stock<0 or stock>99):
+                    print("오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요.")
+                elif(stock == 0):
+                    print(f'{target.number}번 {target.name}가 삭제되었습니다.')
+                    self.drinks.remove(target)
+                else:
+                    target.stock = stock
+                    print(f'{target.number}번 {target.name}의 개수가 {target.stock}개로 변경되었습니다.')
+                    
+                # self.print_drinks() # 정상적으로 수정되는 지 확인하기 위한 라인
 
 # 테스트
-# drinkList = DrinkList()
-# print(len(drinkList.drinks))
+drinkList = DrinkList()
 
-# drinkList.read_from_file('drinks.txt')
+drinkList.read_from_file('drinks.txt')
+
+drinkList.modify_stock("2", "5")
+drinkList.modify_stock("2", "0")
+
+
+drinkList.write_to_file('test.txt')
