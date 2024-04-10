@@ -1,4 +1,4 @@
-from config import config
+from ..config import config
 from model.drink import Drink
 
 class Drinks_util:
@@ -90,7 +90,18 @@ class Drinks_util:
         number = number.lstrip("0")
         self.add_drink(Drink(number, name, price, stock))
 
-    # def buy_drink(self, listNum:str, name)
+    # 돈 처리는 완료되었다고 가정
+    def buy_drink(self, listNum:str):
+        # 목록 내의 번호가 아닌 경우
+        if(listNum<0 or len(config.drinks_list)<listNum ):
+            print("올바른 입력이 아닙니다.")
+        else:
+            config.drinks_list[listNum].stock = config.drinks_list[listNum] - 1
+            # 수량이 0개가 된 경우 목록에서 삭제
+            if(config.drinks_list[listNum].stock == 0):
+                config.drinks_list.remove(listNum)
+            self.write_to_file()
+
 
 # 테스트
 if __name__ == "__main__":
