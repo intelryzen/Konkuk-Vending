@@ -1,4 +1,4 @@
-from ..config import config
+from config import config
 from model.drink import Drink
 
 class Drinks_util:
