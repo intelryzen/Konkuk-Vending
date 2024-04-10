@@ -1,5 +1,21 @@
-from config import config
+# VVV 얘가 안됨. VVV
+from config import Config as config
 from model.drink import Drink
+
+#for the test
+# class config:
+#     drinks_list = []
+#     DRINKS_FILE_PATH = 'drinks.txt'
+
+# class Drink:
+#     def __init__(self, number, name, price, stock):
+#         self.number = number
+#         self.name = name
+#         self.price = price
+#         self.stock = stock
+
+#     def __str__(self):
+#         return f"{self.number} {self.name} {self.price}원 {self.stock}개"
 
 class Drinks_util:
     def add_drink(self, drink):
@@ -58,11 +74,11 @@ class Drinks_util:
 
     #프롬프트별 출력 다름 주의
     #관리자 프롬프트에서의 음료수 재고 출력
-    def print_drinks_for_admin():
+    def print_drinks_for_admin(self):
         for drink in config.drinks_list:
             print(drink)
     #음료수 목록 출력
-    def print_drinks_for_customer():
+    def print_drinks_for_customer(self):
         i = 1
         for drink in config.drinks_list:
             print(f"{i}. {drink.name} {drink.price}원 {drink.stock}개")
@@ -93,13 +109,16 @@ class Drinks_util:
     # 돈 처리는 완료되었다고 가정
     def buy_drink(self, listNum:str):
         # 목록 내의 번호가 아닌 경우
-        if(listNum<0 or len(config.drinks_list)<listNum ):
+        listNum = int(listNum)
+        if(listNum<1 or len(config.drinks_list)<listNum ):
             print("올바른 입력이 아닙니다.")
         else:
-            config.drinks_list[listNum].stock = config.drinks_list[listNum] - 1
+            tStock = config.drinks_list[listNum-1].stock - 1
             # 수량이 0개가 된 경우 목록에서 삭제
-            if(config.drinks_list[listNum].stock == 0):
-                config.drinks_list.remove(listNum)
+            if(tStock == 0):
+                config.drinks_list.remove(listNum-1)
+            else:
+                config.drinks_list[listNum-1].stock = tStock
             self.write_to_file()
 
 
@@ -108,3 +127,9 @@ if __name__ == "__main__":
     du = Drinks_util()
     # test_input = "   \t\f\v0\n\n"
     du.read_from_file()
+    du.print_drinks_for_admin()
+    du.print_drinks_for_customer()
+    du.modify_stock('7', '0')
+    du.buy_drink('0')
+    du.print_drinks_for_admin()
+    du.print_drinks_for_customer()
