@@ -91,8 +91,9 @@ class Drinks_util:
         self.add_drink(Drink(number, name, price, stock))
 
     # def buy_drink(self, listNum:str, name)
-        
-# if __name__ == "__main__":
-Drinks_util.read_from_file()
-Drinks_util.print_drinks_for_admin()
-Drinks_util.print_drinks_for_customer()
+
+# 테스트
+if __name__ == "__main__":
+    du = Drinks_util()
+    # test_input = "   \t\f\v0\n\n"
+    du.read_from_file()
