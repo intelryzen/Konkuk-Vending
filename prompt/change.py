@@ -11,11 +11,11 @@ def Change(change):
 		if i < 0:
 			for j in range(6):
 				Currency_List[i].quantity += won[j]
-			return False
+			return False, "잔돈이 부족합니다"
 
 	ret = "거스름돈: " + str(change) + "원 ("
 	for i in range(5, -1, -1):
 		if won[i] > 0:
 			ret += str(Currency_List[i].value) + "원 " + str(won[i]) + "개 "
 	ret += ")"
-	return ret
+	return True, ret
