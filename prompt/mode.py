@@ -1,5 +1,7 @@
 from parser.mode_parser import ModeParser
-from config import config as c
+from .cash_input import CashInput
+from .login import Login
+
 
 class Mode:
     '''
@@ -34,10 +36,9 @@ class Mode:
                 elif mode == 1:
                     show_drink_list = ShowDrinksList()
                     show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                    # CashInput()  금액 입력 프롬프트로 이동
+                    CashInput()  # 금액 입력 프롬프트로 이동
                     return True, mode
                 elif mode == 2:
-                    from .login import Login
                     Login()  # 로그인 프롬프트로 이동
                     return True, mode
             else:
@@ -66,15 +67,15 @@ class Mode:
             elif mode == 2:
                 Login()
             '''
-
-
+            
+from file_utils.drinks_util import Drinks_util
 class ShowDrinksList:
+    def __init__(self):
+        self.du = Drinks_util()
 
     def show_drinks_list(self):
         print("\n<음료수 목록>")
-        sorted_drink_list = sorted(c.drinks_list, key=lambda x: x.number)
-        for Drink in sorted_drink_list:
-            print(Drink)
+        self.du.print_drinks_for_admin()
         print("(0. 뒤로가기)")
         print("-------------------------------------------")
 
