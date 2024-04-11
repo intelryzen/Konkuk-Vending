@@ -33,15 +33,21 @@ class Cash_Utils:
 				if parser.base_parser.BaseParser.is_money_type(parser.base_parser.BaseParser, parts[0]):
 					for Currency in c.currency_list:
 						if str(Currency.value) == str(parts[0]):
-							Currency.quantity =+ int(parts[1])
+							Currency.quantity += int(parts[1])
+							if parser.base_parser.BaseParser.is_count(parser.base_parser.BaseParser, str(Currency.quantity)):
+								pass
+							else:
+								print("count error message")
+								exit()
 				else:
-					print("error message")
+					print("currency error message")
+					exit()
 
-	def change_currency(currency_list, Currency, Currency_Value, Currency_Amount):
-		for Currency in currency_list:
+	def change_currency(Currency, Currency_Value, Currency_Amount):
+		for Currency in c.currency_list:
 			if Currency.value == Currency_Value:
-				if (Currency.quantity + Currency_Amount < 100) & (Currency.quantity + Currency_Amount >= 0) :
+				if parser.base_parser.BaseParser.is_count(parser.base_parser.BaseParser,str(Currency.quantity +Currency_Amount)):
 					Currency.quantity += Currency_Amount
 					break
 				else:
-					return "error message"
+					print("error message")
