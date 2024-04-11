@@ -30,7 +30,7 @@ class Mode:
             if is_valid:
                 if result == 0:
                     print("프로그램을 종료합니다.")
-                    return True, result
+                    return False, result
                 elif result == 1:
                     show_drink_list = ShowDrinksList()
                     show_drink_list.show_drinks_list()  # 음료수 목록을 출력
