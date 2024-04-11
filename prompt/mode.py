@@ -33,10 +33,10 @@ class Mode:
                 elif mode == 1:
                     show_drink_list = ShowDrinksList()
                     show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                    # CashInput()  금액 입력 프롬프트로 이동
+                    CashInput()  # 금액 입력 프롬프트로 이동
                     return True, mode
                 elif mode == 2:
-                    # Login()  로그인 프롬프트로 이동
+                    Login()  # 로그인 프롬프트로 이동
                     return True, mode
             else:
                 print(mode)  # 오류 메시지 출력
