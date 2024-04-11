@@ -12,7 +12,6 @@ class Mode:
     '''
     def __init__(self):
         self.parser = ModeParser()
-        self.mode_selection_prompt()
 
     # 모드 선택 프롬프트
     def mode_selection_prompt(self):

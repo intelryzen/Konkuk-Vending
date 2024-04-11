@@ -1,6 +1,6 @@
 import sys
 from file_utils import *
-from prompt import *
+from prompt import Mode
 from model import *
 from config import config as c
 
@@ -42,7 +42,11 @@ def main():
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
-        Mode().mode_selection_prompt()
+        print("Dd")
+        is_exit, command = Mode().mode_selection_prompt()
+        print(is_exit)
+        print("Ddd")
+        
         # 모드 프롬프트를 호출
             # 모드 프롬프트 내 반복문 
             # 올바른 입력을 받을 때까지 계속 반복 수행함. (ex. 1(관리자 로그인) 또는 2(음료수 보기)를 리턴)
