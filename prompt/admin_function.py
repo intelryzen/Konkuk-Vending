@@ -33,7 +33,7 @@ class Admin:
             print("5. 음료수 추가")
             print("(0.로그아웃)")
             print("-------------------------------------------")
-            admin_input = input("로그인\n>>>")
+            admin_input = input(">>>")
 
             is_valid, command = self.parser.parser(admin_input)
             
