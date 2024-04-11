@@ -1,6 +1,6 @@
 from parser.mode_parser import ModeParser
-from .cash_input import CashInput
-from .login import Login
+from prompt.cash_input import CashInput
+from prompt.login import Login
 
 
 class Mode:
@@ -36,9 +36,11 @@ class Mode:
                 elif mode == 1:
                     show_drink_list = ShowDrinksList()
                     show_drink_list.show_drinks_list()  # 음료수 목록을 출력
+                    
                     CashInput()  # 금액 입력 프롬프트로 이동
                     return True, mode
                 elif mode == 2:
+                    
                     Login()  # 로그인 프롬프트로 이동
                     return True, mode
             else:
@@ -81,4 +83,5 @@ class ShowDrinksList:
 
 if __name__ == "__main__":
     # 모드 선택 프롬프트 테스트
-    Mode()
+    mode = Mode()
+    mode.mode_selection_prompt()
