@@ -99,7 +99,7 @@ class AdminFunctionParser(BaseParser):
         
         # 0 입력
         elif command == 0:
-            if len(command)!=1 :
+            if len(parts)!=1 :
                 return False, "오류: 인자가 없어야 합니다."
             return True,command# ""
         
