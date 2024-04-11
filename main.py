@@ -1,8 +1,6 @@
 import sys
 import re
-
-from config import config as c
-from file_utils import cash_util, seller_util, drinks_util
+import file_utils
 from model import cash, seller, drink
 
 '''

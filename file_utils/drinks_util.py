@@ -1,5 +1,5 @@
 # VVV 얘네가 안됨. VVV
-from config import Config as config
+from config import config as c
 from model.drink import Drink
 
 # for the test
@@ -23,9 +23,9 @@ class Drinks_util:
             개수가 0개이면 그냥 추가 안함.
         '''
         if drink.stock != 0:
-            config.drinks_list.append(drink)
+            c.drinks_list.append(drink)
 
-    def read_from_file(self, filename=config.DRINKS_FILE_PATH, encoding = 'utf-8'):
+    def read_from_file(self, filename=c.DRINKS_FILE_PATH, encoding = 'utf-8'):
         '''
         인자: filename = config.DRINKS_FILE_PATH, encoding = 'utf-8'
         파일을 읽어와서 음료수의 번호의 선행 0 지우고 개수가 0인 경우를 제외하여 config.drinks_list에 추가한다.
@@ -51,21 +51,21 @@ class Drinks_util:
         # except UnicodeDecodeError:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
-        if(len(config.drinks_list)==0):
+        if(len(c.drinks_list)==0):
             print("경고: 음료수 리스트 파일 내 데이터가 없습니다.")
 
         if(self.check_duplicate_numbers()):
             print("오류: 번호의 중복이 확인되었습니다.")
             exit()
 
-    def write_to_file(self, filename=config.DRINKS_FILE_PATH):
+    def write_to_file(self, filename=c.DRINKS_FILE_PATH):
         '''
         인자: filename = config.DRINKS_FILE_PATH
         파일에 config.drinks_list의 요소들을 한 행에 하나씩 저장
         프롬프트에서 직접적으로 호출할 필요 없음.
         '''
         with open(filename, 'w') as file:
-            for drink in config.drinks_list:
+            for drink in c.drinks_list:
                 file.write(f"{drink.number} {drink.name} {drink.price} {drink.stock}\n")
                 
     def check_duplicate_numbers(self):
@@ -75,7 +75,7 @@ class Drinks_util:
         프롬프트에서 직접적으로 호출할 필요 없음.
         '''
         numbers = set()
-        for drink in config.drinks_list:
+        for drink in c.drinks_list:
             if drink.number in numbers:
                 return True
         return False
@@ -98,7 +98,7 @@ class Drinks_util:
         관리자 프롬프트에서 음료수를 출력할 때 사용
         번호와 음료수를 출력
         '''
-        for drink in config.drinks_list:
+        for drink in c.drinks_list:
             print(drink)
     #음료수 목록 출력
     def print_drinks_for_customer(self):
@@ -108,7 +108,7 @@ class Drinks_util:
         목록 순서대로 번호가 붙어 출력
         '''
         i = 1
-        for drink in config.drinks_list:
+        for drink in c.drinks_list:
             print(f"{i}. {drink.name} {drink.price}원 {drink.stock}개")
             i=i+1
 
@@ -119,7 +119,7 @@ class Drinks_util:
         음료수 재고 수정 시 대상 음료를 찾을 때 사용하는 함수
         프롬프트에서 직접적으로 호출할 필요 없음.
         '''
-        for drink in config.drinks_list:
+        for drink in c.drinks_list:
             if(drink.number == x):
                 return drink
 
@@ -135,11 +135,11 @@ class Drinks_util:
         stock = int(stock)
         if(stock == 0):
             # print(f'{target.number}번 {target.name}가 삭제되었습니다.')
-            config.drinks_list.remove(target)
+            c.drinks_list.remove(target)
         else:
             target.stock = stock
             # print(f'{target.number}번 {target.name}의 개수가 {target.stock}개로 변경되었습니다.')
-        self.write_to_file(config.DRINKS_FILE_PATH)
+        self.write_to_file(c.DRINKS_FILE_PATH)
 
     def add_new_drink(self, number:str, name:str, price:str, stock:str):
         '''
@@ -159,15 +159,15 @@ class Drinks_util:
         '''
         # 목록 내의 번호가 아닌 경우
         listNum = int(listNum)
-        if(listNum<1 or len(config.drinks_list)<listNum ):
+        if(listNum<1 or len(c.drinks_list)<listNum ):
             print("올바른 입력이 아닙니다.")
         else:
-            tStock = config.drinks_list[listNum-1].stock - 1
+            tStock = c.drinks_list[listNum-1].stock - 1
             # 수량이 0개가 된 경우 목록에서 삭제
             if(tStock == 0):
-                config.drinks_list.remove(listNum-1)
+                c.drinks_list.remove(listNum-1)
             else:
-                config.drinks_list[listNum-1].stock = tStock
+                c.drinks_list[listNum-1].stock = tStock
             self.write_to_file()
 
 
