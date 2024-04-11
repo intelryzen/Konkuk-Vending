@@ -1,6 +1,5 @@
 from parser.mode_parser import ModeParser
-from prompt.cash_input import CashInput
-from prompt.login import Login
+from config import config as c
 
 class Mode:
     '''
