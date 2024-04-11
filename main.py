@@ -4,7 +4,6 @@ import file_utils
 import parser
 from config import config as c
 from model import cash, seller, drink
-import parser.base_parser
 
 '''
 parser/base_parser.py 의 BaseParser 클래스에서
