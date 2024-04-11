@@ -1,5 +1,6 @@
 from parser.login_parser import LoginParser
-from model import Admin
+from .admin_function import Admin
+from .mode import Mode
 
 class Login:
     '''

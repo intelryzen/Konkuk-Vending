@@ -28,8 +28,6 @@ class Cash_Utils(BaseParser):
 			Currency(50000,0)
 		]
   
-		print(c.currency_list)
-
 		try:
 			with open(cash_file_path, 'r') as file:
 				for line in file:

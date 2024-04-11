@@ -42,10 +42,9 @@ def main():
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
-        print("Dd")
         is_exit, command = Mode().mode_selection_prompt()
         print(is_exit)
-        print("Ddd")
+        print(command)
         
         # 모드 프롬프트를 호출
             # 모드 프롬프트 내 반복문 
