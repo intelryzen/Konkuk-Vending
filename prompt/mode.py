@@ -25,23 +25,46 @@ class Mode:
             
             command = input("모드를 선택해주세요.\n>>>")
             
-            is_valid, result = self.parser.parse(command)
+            is_valid, mode = self.parser.parse(command)
 
             if is_valid:
-                if result == 0:
+                if mode == 0:
                     print("프로그램을 종료합니다.")
-                    return False, result
-                elif result == 1:
+                    return False, mode
+                elif mode == 1:
                     show_drink_list = ShowDrinksList()
                     show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                    CashInput() # 금액 입력 프롬프트로 이동
-                    return True, result
-                elif result == 2:
-                    Login() # 로그인 프롬프트로 이동
-                    return True, result
+                    # CashInput()  금액 입력 프롬프트로 이동
+                    return True, mode
+                elif mode == 2:
+                    # Login()  로그인 프롬프트로 이동
+                    return True, mode
             else:
-                print(result)  # 오류 메시지 출력
+                print(mode)  # 오류 메시지 출력
                 continue
+            '''
+            # Mode()수정
+            is_valid, mode = self.parser.parse(command)
+            
+            if is_valid:
+                return mode
+            else:
+                print(mode)
+                continue
+                
+            # main() 추가
+            mode = Mode()
+            mode = mode.mode_selection_prompt()
+            if mode == 0:
+                print("프로그램을 종료합니다.")
+                return
+            elif mode == 1:
+                show_drink_list = ShowDrinksList()
+                show_drink_list.show_drinks_list()
+                CashInput()
+            elif mode == 2:
+                Login()
+            '''
 
 
 class ShowDrinksList:
