@@ -32,13 +32,14 @@ class Mode:
                 return True, result
             elif result == 1:
                 show_drink_list = ShowDrinksList() # 음료수 목록을 출력하고 금액입력 프롬프트로 이동
-                cashinput = CashInput()
+                CashInput()
                 return True, result
             elif result == 2:
-                login = Login() # 로그인 프롬프트로 이동
+                Login() # 로그인 프롬프트로 이동
                 return True, result
         else:
             print(result)  # 오류 메시지 출력
+            Mode() # 모드 프롬프트로 이동
             return False, result
 
 
