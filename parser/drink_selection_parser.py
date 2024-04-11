@@ -1,4 +1,4 @@
-from base_parser import BaseParser
+from .base_parser import BaseParser
 
 '''
 음료수 선택

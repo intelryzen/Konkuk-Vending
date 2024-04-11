@@ -1,4 +1,4 @@
-from mode_parser import ModeParser
+from ..parser.mode_parser import ModeParser
 
 class Mode:
     '''
