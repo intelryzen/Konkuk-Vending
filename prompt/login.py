@@ -29,7 +29,7 @@ class Login:
 
             if is_valid:
                 if result == 0:
-                    Mode() # 모드 선택 프롬프트로 이동
+                    Mode().mode_selection_prompt() # 모드 선택 프롬프트로 이동
 
                 else:
                     print("로그인 성공")
