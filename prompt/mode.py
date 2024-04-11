@@ -1,3 +1,5 @@
+from ..parser.mode_parser import ModeParser
+
 class Mode:
     '''
     모드 선택 프롬프트
@@ -9,11 +11,12 @@ class Mode:
         비정상: 모드 선택 프롬프트로 이동
     '''
     def __init__(self):
+        self.parser = ModeParser()
         self.mode_selection_prompt()
 
     # 모드 선택 프롬프트
     def mode_selection_prompt(self):
-        while True:  # 잘못된 입력이면 반복적으로 모드선택프롬프트
+        while True:  # 잘못된 입력이면 모드 선택 프롬프트 반복
             print("\n<모드 선택>")
             print("0. 종료")
             print("1. 음료수 구매")
@@ -22,7 +25,7 @@ class Mode:
             
             command = input("모드를 선택해주세요.\n>>>")
             
-            is_valid, result = self.parse(command)
+            is_valid, result = self.parser.parse(command)
 
             if is_valid:
                 if result == 0:
