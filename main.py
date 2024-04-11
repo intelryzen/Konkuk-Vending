@@ -22,23 +22,28 @@ parser/base_parser.py 의 BaseParser 클래스에서
 
 '''
 file_utils 의 cash_util.py에서
-    # load_currencies(c.CASH_FILE_PATH, c.currency_list, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
+    # file_utils.cash_util.Cash_Utils.load_currencies(file_utils.cash_util.Cash_Utils,c.CASH_FILE_PATH, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
     # 불러온 Currency 데이터들은 c.Currency_List에 저장됩니다.
-    # save_currencies(c.CASH_FILE_PATH, c.currency_list, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
-    # cash_util.Change_Currency(c.currency_list, cash.Currency, 권종, 개수) 인자로 호출해서 사용할 수 있습니다. (권종 최대, 최소 보유량 조건식 있음)
-    # 현재 에러 메세지는 코드, 메세지 중에서 정하지 못해서 임시로 "error message"를 리턴하도록 했습니다.
+    # file_utils.cash_util.Cash_Utils.save_currencies(file_utils.cash_util.Cash_Utils, c.CASH_FILE_PATH, cash.Currency) 인자로 호출해서 사용하시면 됩니다.
+    # cash_util.Change_Currency(file_utils.cash_util.Cash_Utils, cash.Currency, 권종, 개수) 인자로 호출해서 사용할 수 있습니다. (권종 최대, 최소 보유량 조건식 있음)
 
 file_utils 의 seller_util.py에서
-    # load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
+    # file_utils.seller_util.Seller_Utils.load_admin(file_utils.seller_util.Seller_Utils, c.SELLER_FILE_PATH,c.admin_list, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
     # 불러온 Admin 데이터들은 c.Admin_List에 저장됩니다.
-    # save_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
+    # file_utils.seller_util.Seller_Utils.save_admin(file_utils.seller_util.Seller_Utils, c.SELLER_FILE_PATH,c.admin_list, seller.Admin) 인자로 호출해서 사용하시면 됩니다.
 '''
 
 def main():
     while(True):
         # 자판기(vending) 인스턴스 생성
             # 자판기가 파일 데이터를 가져와 초기값 저장. 물론 파일을 디코딩하면서 오류생기면 오류문구 출력 후 종료 (클래스가 직접 가져오던, 먼저 가져와서 자판기 클래스의 초기값을 주던 상관없을 것 같습니다.)
+        
+        #잔돈, 관리자 파일 로드
         file_utils.cash_util.Cash_Utils.load_currencies(file_utils.cash_util.Cash_Utils,c.CASH_FILE_PATH, cash.Currency)
+        file_utils.seller_util.Seller_Utils.load_admin(file_utils.seller_util.Seller_Utils, c.SELLER_FILE_PATH,c.admin_list, seller.Admin)
+        
+        
+        file_utils.cash_util.Cash_Utils.save_currencies(file_utils.cash_util.Cash_Utils, c.CASH_FILE_PATH, cash.Currency)
         # 모드 프롬프트를 호출
             # 모드 프롬프트 내 반복문 
             # 올바른 입력을 받을 때까지 계속 반복 수행함. (ex. 1(관리자 로그인) 또는 2(음료수 보기)를 리턴)
