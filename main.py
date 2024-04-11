@@ -39,6 +39,7 @@ def main():
         
         #잔돈, 관리자 파일 로드
         Cash_Utils().load_currencies(c.CASH_FILE_PATH, cash.Currency)
+        Drinks_util().read_from_file(c.DRINKS_FILE_PATH)
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
