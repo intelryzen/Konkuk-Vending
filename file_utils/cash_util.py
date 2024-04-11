@@ -19,10 +19,11 @@ def load_currencies(cash_file_path, currency_list, Currency): #잔돈 파일 로
 		for line in file:
 			parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
 			try:
-				value, quantity = parts[0], parts[1]
+				for Currency in currency_list:
+					if Currency.value == parts[0]:
+						Currency.quantity =+ parts[1]
 			except IndexError:
 				return "error message"
-			currency_list.append(Currency(int(value), int(quantity))) #인스턴스 생성 (리스트)
 
 def change_currency(currency_list, Currency, Currency_Value, Currency_Amount):
 	for Currency in currency_list:

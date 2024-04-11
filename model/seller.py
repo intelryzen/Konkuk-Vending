@@ -5,3 +5,4 @@ class Admin: #관리자 클래스
 		self.password = password #비밀번호
 	def __str__(self):
 		return f"{self.name} {self.password}"
+	
