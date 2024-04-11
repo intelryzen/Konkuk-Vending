@@ -37,6 +37,7 @@ class Mode:
                     # CashInput()  금액 입력 프롬프트로 이동
                     return True, mode
                 elif mode == 2:
+                    from .login import Login
                     Login()  # 로그인 프롬프트로 이동
                     return True, mode
             else:

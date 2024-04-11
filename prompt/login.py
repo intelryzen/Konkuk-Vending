@@ -1,6 +1,7 @@
 from parser.login_parser import LoginParser
 from .mode import Mode
 from .admin_function import Admin
+from config import config as c
 
 class Login:
     '''
@@ -24,7 +25,7 @@ class Login:
         
             login_input = input("로그인\n>>>")
 
-            is_valid, result = self.parser.parse(login_input)  # parse 메서드 호출 시 입력 문자열 전달
+            is_valid, result = self.parser.parse(login_input, c.admin_list[0].name, c.admin_list[0].password)  # parse 메서드 호출 시 입력 문자열 전달
 
             if is_valid:
                 if result == 0:
