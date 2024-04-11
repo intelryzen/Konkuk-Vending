@@ -1,8 +1,8 @@
-# VVV 얘가 안됨. VVV
+# VVV 얘네가 안됨. VVV
 from config import Config as config
 from model.drink import Drink
 
-#for the test
+# for the test
 # class config:
 #     drinks_list = []
 #     DRINKS_FILE_PATH = 'drinks.txt'
@@ -18,9 +18,6 @@ from model.drink import Drink
 #         return f"{self.number} {self.name} {self.price}원 {self.stock}개"
 
 class Drinks_util:
-    def __init__(self):
-        self.read_from_file()
-
     def add_drink(self, drink):
         '''
             개수가 0개이면 그냥 추가 안함.
@@ -181,6 +178,7 @@ if __name__ == "__main__":
     du.print_drinks_for_admin()
     du.print_drinks_for_customer()
     du.modify_stock('7', '0')
-    du.buy_drink('0')
+    du.buy_drink('1')
+    print()
     du.print_drinks_for_admin()
     du.print_drinks_for_customer()
