@@ -13,7 +13,8 @@ class Config:
     
     admin_list = [] #관리자 클래스 리스트 생성
     currency_list = [] #권종 클래스 리스트 생성
-    
+    drinks_list = []
+
     @staticmethod
     def get_instance():
         if Config._instance is None:

@@ -1,9 +1,7 @@
 import sys
 import re
-
-from config import config as c
-from file_utils import cash_util, seller_util
-from model import cash, seller
+import file_utils
+from model import cash, seller, drink
 
 '''
 parser/base_parser.py 의 BaseParser 클래스에서
