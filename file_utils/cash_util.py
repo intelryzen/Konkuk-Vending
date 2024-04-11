@@ -1,8 +1,8 @@
 import re
-from parser import base_parser
+from parser.base_parser import BaseParser
 from config import config as c
 
-class Cash_Utils:
+class Cash_Utils(BaseParser):
 	def save_currencies(self,cash_file_path, Currency): #잔돈 파일 생성/저장
 		"""
 		저장하는 과정에서 저장에 대한 에러는 무시하는지 정해진 것으로 아는데 맞는지 확인 필요함
@@ -18,6 +18,7 @@ class Cash_Utils:
 
 		또한 권종 개수 이후 다른 문자에 대한 예외 처리 혹은 에러 처리가 필요함
 		"""
+  
 		c.currency_list = [
 			Currency(100,0),
 			Currency(500,0),
@@ -26,15 +27,18 @@ class Cash_Utils:
 			Currency(10000,0),
 			Currency(50000,0)
 		]
+  
+		print(c.currency_list)
+
 		try:
 			with open(cash_file_path, 'r') as file:
 				for line in file:
 					parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
-					if base_parser.BaseParser.is_money_type(base_parser.BaseParser, parts[0]):
+					if self.is_money_type(parts[0]):
 						for Currency in c.currency_list:
 							if str(Currency.value) == str(parts[0]):
 								Currency.quantity += int(parts[1])
-								if base_parser.BaseParser.is_count(base_parser.BaseParser, str(Currency.quantity)):
+								if self.is_count(str(Currency.quantity)):
 									pass
 								else:
 									print("파일 내 <개수>를 확인하십시오.")
@@ -45,14 +49,14 @@ class Cash_Utils:
 		except FileNotFoundError:
 			print("잔돈 파일이 없습니다. 파일을 생성합니다.")
 			self.save_currencies(Cash_Utils, cash_file_path, Currency)
-		if base_parser.BaseParser.is_all_quantity_zero(base_parser.BaseParser, c.currency_list, Currency):
+		if self.is_all_quantity_zero(c.currency_list, Currency):
 			print("잔돈 파일 내 데이터가 없습니다.")
 
 
 	def change_currency(self, Currency, Currency_Value, Currency_Amount):
 		for Currency in c.currency_list:
 			if Currency.value == Currency_Value:
-				if base_parser.BaseParser.is_count(base_parser.BaseParser,str(Currency.quantity +Currency_Amount)):
+				if self.is_count(str(Currency.quantity +Currency_Amount)):
 					Currency.quantity += Currency_Amount
 					break
 				else:

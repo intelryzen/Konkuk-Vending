@@ -27,5 +27,6 @@ class CashInput:
             self.cash_input_prompt()
             
 
-# 금액 입력 프롬프트 테스트
-cashinput = CashInput()
+if __name__ == "__main__":
+    # 금액 입력 프롬프트 테스트
+    cashinput = CashInput()

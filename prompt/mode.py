@@ -1,4 +1,4 @@
-from ..parser.mode_parser import ModeParser
+from parser.mode_parser import ModeParser
 
 class Mode:
     '''
@@ -77,5 +77,6 @@ class ShowDrinksList:
         print("(0. 뒤로가기)")
         print("-------------------------------------------")
 
-# 모드 선택 프롬프트 테스트
-Mode()
+if __name__ == "__main__":
+    # 모드 선택 프롬프트 테스트
+    Mode()

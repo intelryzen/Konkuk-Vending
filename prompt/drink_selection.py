@@ -47,9 +47,9 @@ class DrinkSelection:
 
     
 
-
-# 음료수 선택 프롬프트 테스트
-drinkselection = DrinkSelection()
+if __name__ == "__main__":
+    # 음료수 선택 프롬프트 테스트
+    drinkselection = DrinkSelection()
 
 
         # 잔액 0 아니면 음료수 선택, 잔액 0원이면 금액 입력 프롬프트로 이동 -> 투입금액 부족 오류 상황으로 분류하여 처리함

@@ -2,9 +2,6 @@ from parser.base_parser import BaseParser
 from config import config as c
 #config.py import
 
-
-
-
 class AdminFunctionParser(BaseParser):
     def parser(self, input: str ) -> tuple[bool,any]:  
         

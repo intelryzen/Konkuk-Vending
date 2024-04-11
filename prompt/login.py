@@ -1,5 +1,5 @@
-from ..parser.login_parser import LoginParser
-from ..model import Admin
+from parser.login_parser import LoginParser
+from model import Admin
 
 class Login:
     '''
@@ -36,5 +36,6 @@ class Login:
                 print(result)  # 오류 메시지 출력
                 continue
 
-# 로그인 프롬프트 테스트
-Login()
+if __name__ == "__main__":
+    # 로그인 프롬프트 테스트
+    Login()

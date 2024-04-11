@@ -32,7 +32,7 @@ class Admin:
             admin_input = input(">>>")
 
             is_valid, command = self.parser.parser(admin_input)
-
+            print(command)
             if is_valid:
                 if command == 1:
                     # 잔돈 목록 출력, 비싼 권종에서 싼 권종 순으로
@@ -69,6 +69,7 @@ class Admin:
             else:
                 print(result)  # 오류 메시지 출력
                 continue
-
-# 관리자 프롬프트 테스트
-Admin()
+            
+if __name__ == "__main__":
+    # 관리자 프롬프트 테스트
+    Admin()

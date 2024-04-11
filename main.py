@@ -1,10 +1,8 @@
 import sys
-import re
 from file_utils import *
 from prompt import *
-
+from model import *
 from config import config as c
-from model import cash, seller, drink
 
 '''
 parser/base_parser.py 의 BaseParser 클래스에서
@@ -40,9 +38,9 @@ def main():
             # 자판기가 파일 데이터를 가져와 초기값 저장. 물론 파일을 디코딩하면서 오류생기면 오류문구 출력 후 종료 (클래스가 직접 가져오던, 먼저 가져와서 자판기 클래스의 초기값을 주던 상관없을 것 같습니다.)
         
         #잔돈, 관리자 파일 로드
-        Cash_Utils.load_currencies(Cash_Utils, c.CASH_FILE_PATH, cash.Currency)
-        Seller_Utils.load_admin(Seller_Utils, c.SELLER_FILE_PATH,c.admin_list, seller.Admin)
-        Cash_Utils.save_currencies(Cash_Utils, c.CASH_FILE_PATH, cash.Currency)
+        Cash_Utils().load_currencies(c.CASH_FILE_PATH, cash.Currency)
+        Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
+        Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
         Mode().mode_selection_prompt()
         # 모드 프롬프트를 호출
