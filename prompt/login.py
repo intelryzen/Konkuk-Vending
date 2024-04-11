@@ -1,6 +1,4 @@
 from parser.login_parser import LoginParser
-from .mode import Mode
-from .admin_function import Admin
 from config import config as c
 
 class Login:
@@ -29,10 +27,12 @@ class Login:
 
             if is_valid:
                 if result == 0:
+                    from .mode import Mode
                     Mode().mode_selection_prompt() # 모드 선택 프롬프트로 이동
 
                 else:
                     print("로그인 성공")
+                    from .admin_function import Admin
                     Admin()  # 로그인 성공 시 관리자 프롬프트로 이동
             else:
                 print(result)  # 오류 메시지 출력
