@@ -50,11 +50,14 @@ class Admin:
                     Drinks_util().print_drinks_for_admin()
                 elif command == 3:
                     # 잔돈 수정 기능 구현 
-                    Cash_Utils().change_currency(parts[1], parts[2])
+                    cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성
+                    cash_utils_instance.change_currency(parts[1], parts[2])
                 elif command == 4:
-                    Drinks_util().modify_stock(parts[1], parts[2])
+                    drinks_utils_instance = Drinks_util()
+                    drinks_utils_instance.modify_stock(parts[1], parts[2])
                 elif command == 5:
-                    Drinks_util().add_new_drink(parts[1], parts[2], parts[3], parts[4])
+                    drinks_utils_instance = Drinks_util()
+                    drinks_utils_instance.add_new_drink(parts[1], parts[2], parts[3], parts[4])
                 elif command == 0:
                     from prompt.mode import Mode
                     Mode() # 입력 0이면 모드 선택 프롬프트로 이동
