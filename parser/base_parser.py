@@ -63,6 +63,13 @@ class BaseParser():
     def is_word(self, input: str) -> bool:
         return input.isprintable() and not any(c in input for c in " \n\t")
     
+    #모든 속성이 0인지 확인
+    def is_all_quantity_zero(self, input : list, Currency) -> bool:
+        for Currency in input:
+            if Currency.quantity != 0:
+                return False  # 하나라도 quantity가 0이 아니면 False 반환
+        return True
+
     # 한 자리 수 숫자인지
     def is_digit_0_to_9(self, input: str) -> bool:
         pattern = r'^[0-9]$'

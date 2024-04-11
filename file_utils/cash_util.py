@@ -46,7 +46,9 @@ class Cash_Utils:
 		except FileNotFoundError:
 			print("잔돈 파일이 없습니다. 파일을 생성합니다.")
 			self.save_currencies(Cash_Utils, cash_file_path, Currency)
-			exit()
+		if parser.base_parser.BaseParser.is_all_quantity_zero(parser.base_parser.BaseParser, c.currency_list, Currency):
+			print("잔돈 파일 내 데이터가 없습니다.")
+
 
 	def change_currency(self, Currency, Currency_Value, Currency_Amount):
 		for Currency in c.currency_list:
