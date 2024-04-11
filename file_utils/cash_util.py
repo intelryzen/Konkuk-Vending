@@ -1,7 +1,6 @@
 import re
 import parser
 from config import config as c
-import parser.base_parser
 
 class Cash_Utils:
 	def save_currencies(cash_file_path, Currency): #잔돈 파일 생성/저장
