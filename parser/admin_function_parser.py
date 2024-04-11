@@ -1,4 +1,4 @@
-from base_parser import BaseParser
+from parser.base_parser import BaseParser
 from config import config as c
 #config.py import
 
