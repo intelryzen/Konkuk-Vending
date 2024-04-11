@@ -9,18 +9,12 @@ class AdminFunctionParser(BaseParser):
         drinknum = []  #음료 번호 리스트    
         drinkname = [] #음료 이름 리스트
 
-
         #drinklist에서 drinknum , drinkname 분리하기
-        numpos = 0
-        namepos = 0
         for i in range(len(c.drinks_list)):
-            if i%4==0:
-                drinknum[numpos] = c.drinks_list[i]
-                numpos+=1
-            if i%4==1:
-                drinkname[namepos] = c.drinks_list[i]
-                namepos+=1
-
+            if i % 4 == 0:
+                drinknum.append(c.drinks_list[i])  # .append()를 사용하여 값을 추가
+            elif i % 4 == 1:
+                drinkname.append(c.drinks_list[i])  # .append()를 사용하여 값을 추가
 
 
         # 입력 문자열 앞뒤 공백 제거
