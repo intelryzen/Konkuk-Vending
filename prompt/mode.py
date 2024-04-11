@@ -73,7 +73,7 @@ class ShowDrinksList:
         print("\n<음료수 목록>")
         sorted_drink_list = sorted(c.drinks_list, key=lambda x: x.number)
         for Drink in sorted_drink_list:
-            print(f"{Drink.number}. {Drink.name} {Drink.quantity}개 {Drink.value}원")
+            print(Drink)
         print("(0. 뒤로가기)")
         print("-------------------------------------------")
 
