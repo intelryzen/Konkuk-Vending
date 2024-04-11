@@ -23,7 +23,12 @@ class DrinkSelection:
 
         # 0: 거스름돈 출력하고 음료수 목록 출력 후 금액입력 프롬프트로 이동
         if parsed_command[0] and parsed_command[1] == 0:
-            Change(CashInputParser.parse(command)[1]) # 거스름 돈 출력 <<검토필요: CashInputParser.parse(command)[1]값을 cash_input에서 가져와야함
+            canChange, msg = Change(CashInputParser.parse(command)[1]) # 거스름 돈 출력 <<검토필요: CashInputParser.parse(command)[1]값을 cash_input에서 가져와야함
+            print(msg)
+            if canChange:
+                #투입금: 투입금 - 음료수 가격
+            else:
+                #투입금 변동 X
             ShowDrinksList() # 음료수 목록 출력
             return CashInput() # 금액입력 프롬프트로 이동
 
