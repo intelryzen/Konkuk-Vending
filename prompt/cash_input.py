@@ -1,4 +1,5 @@
 from parser.cash_input_parser import CashInputParser
+from config import config as c
 
 class CashInput:
     '''
@@ -13,11 +14,10 @@ class CashInput:
         self.cash_input_prompt()
 
     def cash_input_prompt(self):
-        print("금액을 입력해주세요")
-        command = input(">>>")
+        c.cash_by_cus = input("금액을 투입해주세요.\n>>>")   
         
         parser = CashInputParser()
-        parsed_command = parser.parse(command)
+        parsed_command = parser.parse(c.cash_by_cus)
         
         if parsed_command == (True, 0):
             from .mode import Mode
