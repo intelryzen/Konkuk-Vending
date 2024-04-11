@@ -1,5 +1,9 @@
 from parser.admin_function_parser import AdminFunctionParser
+from file_utils.cash_util import Cash_Utils
+from file_utils.drinks_util import Drinks_util
 from config import config as c
+from model.drink import Drink
+
 
 
 class Admin:
@@ -29,46 +33,35 @@ class Admin:
             print("5. 음료수 추가")
             print("(0.로그아웃)")
             print("-------------------------------------------")
-            admin_input = input(">>>")
+            admin_input = input("로그인\n>>>")
 
             is_valid, command = self.parser.parser(admin_input)
-            print(command)
+            
             if is_valid:
+                admin_input = admin_input.strip()
+                parts = admin_input.split()
                 if command == 1:
                     # 잔돈 목록 출력, 비싼 권종에서 싼 권종 순으로
                     sorted_currency_list = sorted(c.currency_list, key=lambda x: x.value, reverse=True)
                     for Currency in sorted_currency_list:
-                        print(f"{Currency.value}원 {Currency.quantity}개")
-                    
+                        print(f"{Currency.value}원 {Currency.quantity}개")            
                 elif command == 2:
                     # 음료수 재고 확인 기능 구현 1번 부터 정렬
-                    sorted_drink_list = sorted(c.drinks_list, key=lambda x: x.number)
-                    for Drink in sorted_drink_list:
-                        print(f"{Drink.number} {Drink.name} {Drink.quantity}개 {Drink.value}원")
+                    Drinks_util().print_drinks_for_admin()
                 elif command == 3:
-                    # 잔돈 수정 기능 구현
-                    currency_value = int(parts[1])
-                    currency_amount = int(parts[2])
-                    result = self.change_currency(c.currency_list, Currency, currency_value, currency_amount)
-                    print(result)
+                    # 잔돈 수정 기능 구현 
+                    Cash_Utils().change_currency(parts[1], parts[2])
                 elif command == 4:
-                    # 음료수 재고 수정 기능 구현
-                    drink_stock = int(parts[2])
-                    result = self.change_currency(c.drinks_list, Drink, drink_stock)
-                    print(result)
+                    Drinks_util().modify_stock(parts[1], parts[2])
                 elif command == 5:
-                    # 음료수 추가 기능 구현
-                    drink_stock = int(parts[1])
-                    drink_stock = str(parts[2])
-                    drink_stock = int(parts[3])
-                    drink_stock = int(parts[4])
-                    result = self.change_currency(drink_list, Drink, drink_stock)
-                    print(result)
+                    Drinks_util().add_new_drink(parts[1], parts[2], parts[3], parts[4])
                 elif command == 0:
+                    from prompt.mode import Mode
                     Mode() # 입력 0이면 모드 선택 프롬프트로 이동
             else:
-                print(result)  # 오류 메시지 출력
+                print(command)  # 오류 메시지 출력
                 continue
+            
             
 if __name__ == "__main__":
     # 관리자 프롬프트 테스트
