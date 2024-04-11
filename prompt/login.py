@@ -1,6 +1,6 @@
-from parser.login_parser import LoginParser
-from .admin_function import Admin
-from .mode import Mode
+from parser.mode_parser import ModeParser
+from prompt.cash_input import CashInput
+from prompt.login import Login
 
 class Login:
     '''
