@@ -1,3 +1,7 @@
+from parser.admin_function_parser import AdminFunctionParser
+from config import config as c
+
+
 class Admin:
     '''
         관리자 프롬프트
@@ -27,30 +31,30 @@ class Admin:
             print("-------------------------------------------")
             admin_input = input(">>>")
 
-            is_valid, result = self.parser.parser(admin_input)
+            is_valid, command = self.parser.parser(admin_input)
 
             if is_valid:
                 if command == 1:
                     # 잔돈 목록 출력, 비싼 권종에서 싼 권종 순으로
-                    sorted_currency_list = sorted(currency_list, key=lambda x: x.value, reverse=True)
+                    sorted_currency_list = sorted(c.currency_list, key=lambda x: x.value, reverse=True)
                     for Currency in sorted_currency_list:
                         print(f"{Currency.value}원 {Currency.quantity}개")
                     
                 elif command == 2:
                     # 음료수 재고 확인 기능 구현 1번 부터 정렬
-                    sorted_drink_list = sorted(drink_list, key=lambda x: x.number)
+                    sorted_drink_list = sorted(c.drinks_list, key=lambda x: x.number)
                     for Drink in sorted_drink_list:
                         print(f"{Drink.number} {Drink.name} {Drink.quantity}개 {Drink.value}원")
                 elif command == 3:
                     # 잔돈 수정 기능 구현
                     currency_value = int(parts[1])
                     currency_amount = int(parts[2])
-                    result = self.change_currency(currency_list, Currency, currency_value, currency_amount)
+                    result = self.change_currency(c.currency_list, Currency, currency_value, currency_amount)
                     print(result)
                 elif command == 4:
                     # 음료수 재고 수정 기능 구현
                     drink_stock = int(parts[2])
-                    result = self.change_currency(drink_list, Drink, drink_stock)
+                    result = self.change_currency(c.drinks_list, Drink, drink_stock)
                     print(result)
                 elif command == 5:
                     # 음료수 추가 기능 구현
