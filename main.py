@@ -52,17 +52,27 @@ def main():
                 elif command == 1:
                     show_drink_list = ShowDrinksList()
                     show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                    CashInput()  # 금액 입력 프롬프트로 이동
+                    while True:
+                        cash_input_instans = CashInput() 
+                        C_result = cash_input_instans.cash_input_prompt() # 금액 입력 프롬프트로 이동
+                        print(C_result)
+                        if C_result:
+                            drink_select_prom = DrinkSelection()
+                            drink_select_prom.drink_selection_prompt()
+                            continue
+                        else :
+                            print("c_result가 false됨")
+                            break
                 elif command == 2:
                     login_instance = Login()  # Login 클래스의 인스턴스 생성
                     login_instance.show_admin_login_prompt()
                     log_command = login_instance.show_admin_login_prompt()
-                    # log_status = True
+                    # log_status = True 
                     if log_command == 0:
                         continue
                     else:
                         admin_instance = Admin()
-                        admin_instance.admin_prompt # 로그인 성공 어드민 프롬프트로이동
+                        admin_instance.admin_prompt() # 로그인 성공 어드민 프롬프트로이동
             else:
                 continue
 
@@ -74,7 +84,7 @@ def main():
             # 모드 프롬프트에서 반환한 값을 바탕으로 관리자 로그인 또는 금액 입력 프롬프트 호출
                 # ...
             #i = input(c.cashFilePath)
-            exit()
+        
 
 # 강제 종료
 def exit():
