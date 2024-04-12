@@ -148,11 +148,11 @@ class Drinks_util:
         target = self.find_drink(number)
         stock = int(stock)
         if(stock == 0):
-            # print(f'{target.number}번 {target.name}가 삭제되었습니다.')
+            print(f'{target.number}번 {target.name}가 삭제되었습니다.')
             config.drinks_list.remove(target)
         else:
             target.stock = stock
-            # print(f'{target.number}번 {target.name}의 개수가 {target.stock}개로 변경되었습니다.')
+            print(f'{target.number}번 {target.name}의 개수가 {target.stock}개로 변경되었습니다.')
         self.write_to_file(config.DRINKS_FILE_PATH)
 
     def add_new_drink(self, number:str, name:str, price:str, stock:str):
@@ -162,6 +162,7 @@ class Drinks_util:
         '''
         number = str(number).lstrip("0")
         self.add_drink(Drink(number, str(name), int(price), int(stock)))
+        print(f"{number}번 {name}가 개당 {price}원으로 {stock} 추가되었습니다.")
         self.write_to_file(config.DRINKS_FILE_PATH)
 
     # 돈 처리는 완료되었다고 가정

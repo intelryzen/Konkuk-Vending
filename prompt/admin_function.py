@@ -63,7 +63,7 @@ class AdminPrompt:
                     drinks_utils_instance = Drinks_util()
                     isheredrink = drinks_utils_instance.find_drink(parts[1])
                     if isheredrink != None:
-                        print(isheredrink)
+                        # print(isheredrink)
                         drinks_utils_instance.modify_stock(parts[1], parts[2])
                 elif command == 5:
                     # 음료수 추가

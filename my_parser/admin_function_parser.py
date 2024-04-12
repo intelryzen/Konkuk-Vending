@@ -76,8 +76,6 @@ class AdminFunctionParser(BaseParser):
 
         # 5번 메뉴
         elif command == 5:
-            print([parts[3]])
-            print([parts[4]])
             # 5번 메뉴 인자 개수 확인
             if len(parts) != 5:
                 return False, "오류: 4개의 인자가 필요합니다. 첫번째 인자는 번호, 두번째 인자는 이름, 세번째 인자는 개수, 네번째 인자는 가격을 입력해주세요.(음료수 추가)"
@@ -99,6 +97,8 @@ class AdminFunctionParser(BaseParser):
                 return False, "오류: 음료수의 가격은 100의 배수이어야 합니다."
             if not self.is_count(parts[4]):
                 return False, "오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요."
+            # print([parts[3]])
+            # print([parts[4]])
             return True,command
         
         # 0 입력
