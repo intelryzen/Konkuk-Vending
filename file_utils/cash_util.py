@@ -50,11 +50,11 @@ class Cash_Utils(BaseParser):
 		if self.is_all_quantity_zero(c.currency_list, Currency):
 			print("잔돈 파일 내 데이터가 없습니다.")
 
-	def change_currency(self, Currency_Value, Currency_Amount):
+	def change_currency(self, Currency_Value, Currency_Amount, Currency):
 		found = False  # Currency 객체를 찾았는지 여부를 추적하는 플래그
-		for C in c.currency_list:
-			if C.value == Currency_Value:
-				C.quantity = Currency_Amount
+		for Currency in c.currency_list:
+			if Currency.value == Currency_Value:
+				Currency.quantity = Currency_Amount
 				found = True  # Currency 객체를 찾았으므로 플래그를 True로 설정
 				break
 		if not found:  # Currency 객체를 찾지 못했으면, 예외를 발생시킴
