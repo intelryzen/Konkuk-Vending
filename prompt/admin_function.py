@@ -47,7 +47,7 @@ class Admin:
                         print(f"{Currency.value}원 {Currency.quantity}개")            
                 elif command == 2:
                     # 음료수 재고 확인 기능 구현 1번 부터 정렬
-                    Drinks_util().print_drinks_for_admin()
+                    Drinks_util().print_drinks()
                 elif command == 3:
                     # 잔돈 수정 기능 구현 
                     cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성

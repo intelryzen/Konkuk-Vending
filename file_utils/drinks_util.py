@@ -80,7 +80,7 @@ class Drinks_util:
 
     #프롬프트별 출력 다름 주의
     #관리자 프롬프트에서의 음료수 재고 출력
-    def print_drinks_for_admin(self):
+    def print_drinks(self):
         '''
         인자: 없음
         관리자 프롬프트에서 음료수를 출력할 때 사용
@@ -89,16 +89,16 @@ class Drinks_util:
         for drink in config.drinks_list:
             print(drink)
     #음료수 목록 출력
-    def print_drinks_for_customer(self):
-        '''
-        인자: 없음
-        모드 선택 프롬프트에서 금액 입력 프롬프트로 넘어가기 전 출력에서 사용
-        목록 순서대로 번호가 붙어 출력
-        '''
-        i = 1
-        for drink in config.drinks_list:
-            print(f"{i}. {drink.name} {drink.price}원 {drink.stock}개")
-            i=i+1
+    # def print_drinks_for_customer(self):
+    #     '''
+    #     인자: 없음
+    #     모드 선택 프롬프트에서 금액 입력 프롬프트로 넘어가기 전 출력에서 사용
+    #     목록 순서대로 번호가 붙어 출력
+    #     '''
+    #     i = 1
+    #     for drink in config.drinks_list:
+    #         print(f"{i}. {drink.name} {drink.price}원 {drink.stock}개")
+    #         i=i+1
 
     # 프롬프트에서 호출할 때 인자는 이미 검사 완료되었다고 생각함. 따라서 x는 항상 형식에 맞고 존재하는 번호이다.
     def find_drink(self, x):

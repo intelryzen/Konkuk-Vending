@@ -28,7 +28,21 @@ class Mode:
             command = input("모드를 선택해주세요.\n>>>")
             
             is_valid, mode = self.parser.parse(command)
+             # if is_vaild == True:
+            if is_valid:
+                if mode == 0:
+                    return True, mode
+                elif mode == 1:
+                    return True, mode
+                elif mode == 2:
+                    return True, mode
+            # if is_vaild == False:
+            else:   
+                print(mode)  # 오류 메시지 출력
+                return False, Mode.mode_selection_prompt()
 
+
+            '''
             if is_valid:
                 if mode == 0:
                     print("프로그램을 종료합니다.")
@@ -46,6 +60,7 @@ class Mode:
             else:
                 print(mode)  # 오류 메시지 출력
                 continue
+            '''
             '''
             # Mode()수정
             is_valid, mode = self.parser.parse(command)
@@ -77,7 +92,7 @@ class ShowDrinksList:
 
     def show_drinks_list(self):
         print("\n<음료수 목록>")
-        self.du.print_drinks_for_customer()
+        self.du.print_drinks()
         print("(0. 뒤로가기)")
         print("-------------------------------------------")
 
