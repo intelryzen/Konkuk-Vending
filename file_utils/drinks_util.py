@@ -138,35 +138,30 @@ class Drinks_util:
         self.add_drink(Drink(number, name, price, stock))
 
     # 돈 처리는 완료되었다고 가정
-    def buy_drink(self, listNum:str):
+    def buy_drink(self, number:str):
+        number = number.lstrip("0")
+        target = self.find_drink(number)
         '''
         인자: 목록 상 번호
         음료수 구매 시 개수를 차감하는 함수.
         개수 차감 후 0개가 되면 목록에서 삭제
         구매 완료 후 파일 재작성까지 완.
         '''
-        # 목록 내의 번호가 아닌 경우
-        listNum = int(listNum)
-        if(listNum<1 or len(config.drinks_list)<listNum ):
-            print("올바른 입력이 아닙니다.")
+        tStock = target.stock - 1
+        # 수량이 0개가 된 경우 목록에서 삭제
+        if(tStock == 0):
+            config.drinks_list.remove(target)
         else:
-            tStock = config.drinks_list[listNum-1].stock - 1
-            # 수량이 0개가 된 경우 목록에서 삭제
-            if(tStock == 0):
-                config.drinks_list.remove(listNum-1)
-            else:
-                config.drinks_list[listNum-1].stock = tStock
-            self.write_to_file()
+            target.stock = tStock
+        self.write_to_file()
 
 
 # 테스트
 if __name__ == "__main__":
     du = Drinks_util()
     du.read_from_file()
-    du.print_drinks_for_admin()
-    du.print_drinks_for_customer()
-    du.modify_stock('7', '0')
+    du.print_drinks()
+    du.modify_stock('2', '8')
     du.buy_drink('1')
     print()
-    du.print_drinks_for_admin()
-    du.print_drinks_for_customer()
+    du.print_drinks()

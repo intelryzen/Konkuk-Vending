@@ -17,35 +17,31 @@ class DrinkSelection:
     def __init__(self):
         self.drink_selection_prompt()
         self.drink_list = ShowDrinksList() #음료수 목록 출력 
+        self.command = input("\n구매하실 음료수 번호를 입력해주세요.(0. 거스름 돈 반환 및 뒤로가기)\n>>>")
 
     # 음료수 선택 프롬프트
     def drink_selection_prompt(self):
-        self.command = input("\n구매하실 음료수 번호를 입력해주세요.(0. 거스름 돈 반환 및 뒤로가기)\n>>>")
 
         parser = DrinkSelectionParser()
+        parsed_command = parser.parse(self.command)
 
-        status, parsed_command = parser.parse(self.command)
 
-        print(parsed_command)
-        if status:
-            # 0: 거스름돈 출력하고 음료수 목록 출력 후 금액입력 프롬프트로 이동
-            if parsed_command[0] and parsed_command[1] == 0:
-                canChange = Change(c.cash_by_cus) # 거스름 돈 출력
-                if not canChange:
-                    c.cash_by_cus += drink_price
-                return CashInput() # 금액입력 프롬프트로 이동
+        # 0: 거스름돈 출력하고 음료수 목록 출력 후 금액입력 프롬프트로 이동
+        if  parsed_command == 0:
+            canChange = Change(c.cash_by_cus) # 거스름 돈 출력
+            if not canChange:
+                c.cash_by_cus += drink_price
+            return CashInput() # 금액입력 프롬프트로 이동
 
-            # 정상: 잔액과 업데이트 된 음료수 목록 출력 후 음료수 선택 프롬프트로 이동
-            elif parsed_command[0] and isinstance(parsed_command(self.command)[1],int):
+        # 정상: 잔액과 업데이트 된 음료수 목록 출력 후 음료수 선택 프롬프트로 이동
+        elif parsed_command == 1:
 
-                # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
-                for i in range (0, len(c.drink_list), 4):
-                    if c.drinks_list[i] == self.command:
-                        drink_price = c.drink_list[i+2]
+            # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
+            for i in range (0, len(c.drink_list), 4):
+                if c.drinks_list[i] == int(self.command):
+                    drink_price = c.drink_list[i+2]
 
-                self.remain_cash(c.cash_by_cus, drink_price)
-        else:
-            print(parsed_command)
+            self.remain_cash(c.cash_by_cus, drink_price)
 
     def remain_cash(self, cash_by_cus, drink_price):
         if cash_by_cus <= drink_price: # (잔액 혹은 투입금액) < (음료수 가격)인 경우
