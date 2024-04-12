@@ -74,6 +74,11 @@ class DrinkSelection:
             
             return True
 
+def cash_by_cus():
+        ret = 0
+        for i in range(6):
+            ret += (c.customer_list[i].value * c.customer_list[i].quantity)
+        return ret
 
 if __name__ == "__main__":
     # 음료수 선택 프롬프트 테스트
