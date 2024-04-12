@@ -20,6 +20,7 @@ class CashInput:
         parsed_command = parser.parse(c.cash_by_cus)
         
         if parsed_command == (True, 0):
+            from .mode import Mode
             modeselect = Mode()
             modeselect.mode_selection_prompt()  
             
