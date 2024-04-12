@@ -2,11 +2,9 @@ from my_parser.admin_function_parser import AdminFunctionParser
 from file_utils.cash_util import Cash_Utils
 from file_utils.drinks_util import Drinks_util
 from config import config as c
-from model.drink import Drink
-from model.cash import Currency
 
 
-class Admin:
+class AdminPrompt:
     '''
         관리자 프롬프트
         command:
@@ -20,7 +18,6 @@ class Admin:
     '''    
     def __init__(self):
         self.parser = AdminFunctionParser()
-        self.admin_prompt()
 
     # 관리자 프롬프트
     def admin_prompt(self):
@@ -41,27 +38,34 @@ class Admin:
                 admin_input = admin_input.strip()
                 parts = admin_input.split()
                 if command == 1:
-                    # 잔돈 목록 출력, 비싼 권종에서 싼 권종 순으로
                     sorted_currency_list = sorted(c.currency_list, key=lambda x: x.value, reverse=True)
                     for Currency in sorted_currency_list:
                         print(f"{Currency.value}원 {Currency.quantity}개")            
+                    
                 elif command == 2:
                     # 음료수 재고 확인 기능 구현 1번 부터 정렬
                     Drinks_util().print_drinks()
+                    
                 elif command == 3:
                     # 잔돈 수정 기능 구현 
                     cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성
-                    cash_utils_instance.change_currency(parts[1], parts[2])
+                    cash_utils_instance.change_currency(parts[1], parts[2], Currency)
+                    
                 elif command == 4:
                     drinks_utils_instance = Drinks_util()
                     drinks_utils_instance.modify_stock(parts[1], parts[2])
+                    
                 elif command == 5:
                     drinks_utils_instance = Drinks_util()
                     drinks_utils_instance.add_new_drink(parts[1], parts[2], parts[3], parts[4])
+                    
                 elif command == 0:
+                    return command
+                    '''
                     from prompt.mode import Mode
                     modeselect = Mode()
                     modeselect.mode_selection_prompt()
+                    '''
             else:
                 print(command)  # 오류 메시지 출력
                 continue
@@ -69,4 +73,4 @@ class Admin:
             
 if __name__ == "__main__":
     # 관리자 프롬프트 테스트
-    Admin()
+    AdminPrompt()
