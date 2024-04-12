@@ -27,7 +27,9 @@ class DrinkSelection:
 
         # 0: 거스름돈 출력하고 음료수 목록 출력 후 금액입력 프롬프트로 이동
         if parsed_command[0] and parsed_command[1] == 0:
-            Change(c.cash_by_cus) # 거스름 돈 출력 
+            canChange = Change(c.cash_by_cus) # 거스름 돈 출력
+            if not canChange:
+                c.cash_by_cus += drink_price
             return CashInput() # 금액입력 프롬프트로 이동
 
         # 정상: 잔액과 업데이트 된 음료수 목록 출력 후 음료수 선택 프롬프트로 이동
