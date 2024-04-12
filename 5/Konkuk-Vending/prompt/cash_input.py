@@ -1,4 +1,4 @@
-from parser.cash_input_parser import CashInputParser
+from my_parser.cash_input_parser import CashInputParser
 from config import config as c
 
 class CashInput:
@@ -14,26 +14,23 @@ class CashInput:
         self.cash_input_prompt()
 
     def cash_input_prompt(self):
-        c.cash_by_cus = input("금액을 투입해주세요.\n>>>")   
+       
+        new_input = input("금액을 투입해주세요.\n>>>")
         
+      #  c.cash_by_cus = c.cash_by_cus + new_input
+
         parser = CashInputParser()
-        parsed_command = parser.parse(c.cash_by_cus)
-        
-        if parsed_command == (True, 0):
-            from .mode import Mode
-            Mode()  
-            
-
-        elif parsed_command[0] and isinstance(parsed_command[1], dict):
-            from .drink_selection import DrinkSelection
-            DrinkSelection()
-
+        parsed_command, parser_money = parser.parse(new_input)
+        total_money = 0
+        if parsed_command:     
+            if not parser_money==0:
+                for key in parser_money:
+                    total_money += key * parser_money[key]
+                c.cash_by_cus = total_money
+                return True
+            else:
+                return False
         else:
             # 비정상: 금액 입력 프롬프트로 이동
             print("오류: 올바른 입력이 아닙니다.")
-            self.cash_input_prompt()
-            
-
-if __name__ == "__main__":
-    # 임의의 값을 전달하는 대신, cash_input_prompt 메서드 내에서 입력을 받도록 설정합니다.
-    cashinput = CashInput()
+            return self.cash_input_prompt()
