@@ -2,11 +2,9 @@ from config import config as c
 
 def Change(drink):
 	change = 0
-	for key in c.parser_money:
-		change += key * c.parser_money[key]
-		for i in range(5):
-			if c.currency_list[i].value == key:
-				c.currency_list[i].quantity += c.parser_money[key]
+	for i in range(6):
+		change += (c.customer_list[i].value * c.customer_list[i].quantity)
+		c.currency_list[i].quantity += c.customer_list[i].quantity
 	won = [0] * 6
 	change -= drink
 	ret = change
@@ -28,9 +26,7 @@ def Change(drink):
 	for i in range(5, -1, -1):
 		if won[i] > 0:
 			ret += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
-			for key in c.parser_money:
-				if key == c.currency_list[i].value:
-					c.parser_money[key] = won[i]
+		c.customer_list[i].quantity = won[i]
 	ret += ")"
 	print(ret)
 	return True
