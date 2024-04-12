@@ -32,7 +32,7 @@ class Drinks_util:
                         price = int(data[2])
                         stock = int(data[3])
                         self.add_drink(Drink(number, name, price, stock))
-                    else:
+                    elif len(data) != 0:
                         print(f"최초 오류 발생 행: {line}")
                         print("오류: 잘못된 데이터가 있습니다.")
                         exit()
