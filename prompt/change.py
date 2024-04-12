@@ -19,7 +19,7 @@ def Change(drink):
 		if i < 0:
 			for j in range(6):
 				c.currency_list[i].quantity += won[j]
-			return False, "잔돈이 부족합니다."
+			return False, "오류: 잔돈이 부족합니다."
 
 	ret = "거스름돈: " + str(ret) + "원 ("
 	for i in range(5, -1, -1):
