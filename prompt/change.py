@@ -1,13 +1,15 @@
 from config import config as c
 
-def Change():
+def Change(drink):
 	change = 0
-	for key in parser_money:
-		change += key * parser_money[key]
+	for key in c.parser_money:
+		change += key * c.parser_money[key]
 		for i in range(5):
 			if c.currency_list[i].value == key:
-				c.currency_list[i].quantity += parser_money[key]
+				c.currency_list[i].quantity += c.parser_money[key]
 	won = [0] * 6
+	change -= drink
+	ret = change
 	i = 5
 	while change > 0:
 		if change >= c.currency_list[i].value and c.currency_list[i].quantity > 0:
@@ -22,13 +24,13 @@ def Change():
 			print("잔돈이 부족합니다.")
 			return False
 
-	ret = "거스름돈: " + str(change) + "원 ("
+	ret = "거스름돈: " + str(ret) + "원 ("
 	for i in range(5, -1, -1):
 		if won[i] > 0:
 			ret += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
-			for key in parser_money:
+			for key in c.parser_money:
 				if key == c.currency_list[i].value:
-					parser_money[key] = won[i]
+					c.parser_money[key] = won[i]
 	ret += ")"
 	print(ret)
 	return True
