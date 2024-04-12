@@ -83,7 +83,7 @@ class Drinks_util:
     def print_drinks(self):
         '''
         인자: 없음
-        관리자 프롬프트에서 음료수를 출력할 때 사용
+        음료수를 출력할 때 사용
         번호와 음료수를 출력
         '''
         for drink in config.drinks_list:
