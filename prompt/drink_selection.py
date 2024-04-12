@@ -42,9 +42,9 @@ class DrinkSelection:
                 if r_flag==False:
                     return
                 else:
-                    canChange, null = Change(drink_price)
+                    canChange, msg = Change(drink_price)
                     if not canChange:
-                        print("오류 : 잔돈이 부족합니다.")
+                        print(msg)
                     return self.drink_selection_prompt()
             '''
             if not canChange:
