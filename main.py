@@ -55,13 +55,11 @@ def main():
                     while True:
                         cash_input_instans = CashInput() 
                         C_result = cash_input_instans.cash_input_prompt() # 금액 입력 프롬프트로 이동
-                        print(C_result)
                         if C_result:
                             drink_select_prom = DrinkSelection()
                             drink_select_prom.drink_selection_prompt()
                             continue
                         else :
-                            print("c_result가 false됨")
                             break
                 elif command == 2:
                     login_instance = Login()  # Login 클래스의 인스턴스 생성
