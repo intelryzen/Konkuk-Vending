@@ -42,7 +42,7 @@ def main():
         Drinks_util().read_from_file(c.DRINKS_FILE_PATH)
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
-        
+
         status, command = Mode().mode_selection_prompt()
         
         if status:
