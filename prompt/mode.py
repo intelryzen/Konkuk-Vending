@@ -18,7 +18,6 @@ class Mode:
 
     # 모드 선택 프롬프트
     def mode_selection_prompt(self):
-        while True:  # 잘못된 입력이면 모드 선택 프롬프트 반복
             print("\n<모드 선택>")
             print("0. 종료")
             print("1. 음료수 구매")
@@ -27,19 +26,29 @@ class Mode:
             
             command = input("모드를 선택해주세요.\n>>>")
             
-            is_valid, mode = self.parser.parse(command)
-             # if is_vaild == True:
-            if is_valid:
-                if mode == 0:
-                    return True, mode
-                elif mode == 1:
-                    return True, mode
-                elif mode == 2:
-                    return True, mode
-            # if is_vaild == False:
-            else:   
-                print(mode)  # 오류 메시지 출력
-                return False, Mode.mode_selection_prompt()
+            while True:
+                status, command = Mode().mode_selection_prompt()
+                
+                if status:
+                    if command == 0:
+                        print("프로그램을 종료합니다.")        
+                        exit()
+                    elif command == 1:
+                        show_drink_list = ShowDrinksList()
+                        show_drink_list.show_drinks_list()  # 음료수 목록을 출력
+                        CashInput()  # 금액 입력 프롬프트로 이동
+                    elif command == 2:
+                        login_instance = Login()  # Login 클래스의 인스턴스 생성
+                        login_instance.show_admin_login_prompt()
+                        log_command = login_instance.show_admin_login_prompt()
+                        # log_status = True
+                        if log_command == 0:
+                            continue
+                        else:
+                            admin_instance = Admin()
+                            admin_instance.admin_prompt # 로그인 성공 어드민 프롬프트로이동
+                else:
+                    continue
             
 from file_utils.drinks_util import Drinks_util
 class ShowDrinksList:
