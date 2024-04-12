@@ -85,13 +85,14 @@ class AdminFunctionParser(BaseParser):
                 return False, "오류: 음료수의 번호는 1과 99사이의 숫자만 허용합니다."
             if parts[1] in drinknum :
                 return False, "오류: 해당 음료수 번호는 중복되어서 사용할 수 없습니다."
-            if not parts[4].isdigit :
+            if not parts[4].isdigit() :
                 return False, "오류: 음료수의 가격 입력시 숫자만 입력해 주세요."
-            if parts[4]<100: 
+            price = int(parts[4])
+            if price<100: 
                 return False, "오류: 음료수의 가격은 최소 100원이어야 합니다."
-            if parts[4]>1000000: 
+            if price>1000000: 
                 return False, "오류: 음료수의 가격은 1000000원 이하이어야 합니다."
-            if parts[4]%100 != 0: 
+            if price%100 != 0: 
                 return False, "오류: 음료수의 가격은 100의 배수이어야 합니다."
             if not self.is_count(parts[3]):
                 return False, "오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요."
