@@ -69,7 +69,7 @@ class AdminPrompt:
                     # 음료수 추가
                     drinks_utils_instance = Drinks_util()
                     drinks_utils_instance.add_new_drink(parts[1], parts[2], parts[3], parts[4])
-
+                    drinks_utils_instance.write_to_file(c.DRINKS_FILE_PATH)
                 elif command == 0:
                     return command
                     '''

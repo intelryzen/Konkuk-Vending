@@ -38,9 +38,3 @@ class LoginParser(BaseParser):
 
         return False, "오류: 아이디 또는 비밀번호가 입력규칙을 준수하지 않습니다."
 
-# 테스트
-if __name__ == "__main__":
-    parser = LoginParser()
-    test_input = "   \t\f\va \t \tb\t"
-    t = parser.parse(test_input, "a", "b")
-    print(t)
