@@ -17,6 +17,7 @@ class Drinks_util:
     def add_drink(self, drink):
         '''
             개수가 0개이면 그냥 추가 안함.
+            파일 읽고 추가하는 거라서 
         '''
         if drink.stock != 0:
             config.drinks_list.append(drink)
@@ -29,6 +30,8 @@ class Drinks_util:
         파일 내의 데이터가 없는 경우 처리 완.
         음료수들의 번호 중복 처리 완.
         '''
+        bp = BaseParser()
+
         try:
             with open(filename, 'r', encoding=encoding) as file:
                 lines = file.readlines()
@@ -42,12 +45,11 @@ class Drinks_util:
                         price = int(data[2])
                         stock = int(data[3])
                     elif len(data) != 0:
-                        print(f"최초 오류 발생 행: {line}")
                         raise wrongData("행의 데이터 개수 안 맞음", line)
-                    if(not BaseParser.is_number(number) or not BaseParser.is_word(name) or BaseParser.is_count(stock)):
+                    if(not bp.is_number(number) or not bp.is_word(name) or not bp.is_count(str(stock))):
                         #iscount가 문자열만 받으려나?
                         raise wrongData("행의 데이터 중 최소 하나가 잘못됨", line)
-                    if(price>100 or price>1000000 or price%100 != 0):
+                    if(price<100 or price>1000000 or price%100 != 0):
                         raise wrongData("가격이 범위 밖이거나 100의 배수 아님", line)
                     self.add_drink(Drink(number, name, price, stock))
 
@@ -158,8 +160,8 @@ class Drinks_util:
         인자: 번호, 이름, 가격, 개수
         새로운 음료수를 추가하는 함수.
         '''
-        number = number.lstrip("0")
-        self.add_drink(Drink(number, name, price, stock))
+        number = str(number).lstrip("0")
+        self.add_drink(Drink(number, str(name), int(price), int(stock)))
 
     # 돈 처리는 완료되었다고 가정
     def buy_drink(self, number:str):
@@ -187,6 +189,10 @@ if __name__ == "__main__":
     du = Drinks_util()
     du.read_from_file()
     du.print_drinks()
+    du.add_new_drink(7,"이에로사이다",1800,30)
+    du.add_new_drink(8,"화르르멘션사이다",2500,30)
+
+
     # du.modify_stock('2', '8')
     du.buy_drink('1')
     print()
