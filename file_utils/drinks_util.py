@@ -4,20 +4,11 @@ sys.path.append(os.getcwd())
 
 from config import Config as config
 from model.drink import Drink
-from my_parser.base_parser import BaseParser
-
-class wrongData(Exception):
-    def __init__(self, msg="오류: 잘못된 데이터가 있습니다.", line=""):
-        self.msg = f"최초 오류 발생 행: {line}"
-        self.msg += msg
-    def __str__(self):
-        return self.msg
 
 class Drinks_util:
     def add_drink(self, drink):
         '''
             개수가 0개이면 그냥 추가 안함.
-            파일 읽고 추가하는 거라서 
         '''
         if drink.stock != 0:
             config.drinks_list.append(drink)
@@ -30,8 +21,6 @@ class Drinks_util:
         파일 내의 데이터가 없는 경우 처리 완.
         음료수들의 번호 중복 처리 완.
         '''
-        bp = BaseParser()
-
         try:
             with open(filename, 'r', encoding=encoding) as file:
                 lines = file.readlines()
@@ -40,27 +29,17 @@ class Drinks_util:
                     if len(data) == 4:
                         number = data[0].lstrip("0")
                         name = data[1]
-                        if(not data[2].isdigit() or not data[3].isdigit()):
-                            raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않음", line)
                         price = int(data[2])
                         stock = int(data[3])
+                        self.add_drink(Drink(number, name, price, stock))
                     elif len(data) != 0:
-                        raise wrongData("행의 데이터 개수 안 맞음", line)
-                    if(not bp.is_number(number) or not bp.is_word(name) or not bp.is_count(str(stock))):
-                        #iscount가 문자열만 받으려나?
-                        raise wrongData("행의 데이터 중 최소 하나가 잘못됨", line)
-                    if(price<100 or price>1000000 or price%100 != 0):
-                        raise wrongData("가격이 범위 밖이거나 100의 배수 아님", line)
-                    self.add_drink(Drink(number, name, price, stock))
-
+                        print(f"최초 오류 발생 행: {line}")
+                        print("오류: 잘못된 데이터가 있습니다.")
+                        exit()
         except FileNotFoundError:
             print("경고: 음료수 리스트 파일이 없습니다. 파일을 생성합니다.")
             with open(filename, 'w'):
                 pass
-
-        except wrongData as wd:
-            print(wd)
-            exit()
         # except UnicodeDecodeError:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
@@ -160,8 +139,8 @@ class Drinks_util:
         인자: 번호, 이름, 가격, 개수
         새로운 음료수를 추가하는 함수.
         '''
-        number = str(number).lstrip("0")
-        self.add_drink(Drink(number, str(name), int(price), int(stock)))
+        number = number.lstrip("0")
+        self.add_drink(Drink(number, name, price, stock))
         self.write_to_file(config.DRINKS_FILE_PATH)
 
     # 돈 처리는 완료되었다고 가정
@@ -190,11 +169,7 @@ if __name__ == "__main__":
     du = Drinks_util()
     du.read_from_file()
     du.print_drinks()
-    du.add_new_drink(7,"이에로사이다",1800,30)
-    du.add_new_drink(8,"화르르멘션사이다",2500,30)
-
-
-    # du.modify_stock('2', '8')
+    du.modify_stock('2', '8')
     du.buy_drink('1')
     print()
     du.print_drinks()

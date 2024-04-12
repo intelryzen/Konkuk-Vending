@@ -1,11 +1,5 @@
 from .base_parser import BaseParser
 
-'''
-모드
-    올바른 입력이 아닙니다.
-'''
-
-# 허용 명령어
 allows = [0, 1, 2]
 
 class ModeParser(BaseParser):
@@ -18,9 +12,7 @@ class ModeParser(BaseParser):
         else: 
             return False, "오류: 올바른 입력이 아닙니다."
 
-# 테스트
 if __name__ == "__main__":
-    parser = ModeParser()
-    test_input = "   \t\f\v2 \t"
-    t = parser.parse(test_input)
-    print(t)
+    # 모드 선택 프롬프트 테스트
+    mode = Mode()
+    mode.mode_selection_prompt()
