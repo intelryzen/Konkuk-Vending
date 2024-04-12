@@ -11,11 +11,12 @@ class AdminFunctionParser(BaseParser):
 
         #drinklist에서 drinknum , drinkname 분리하기
         for i in range(len(c.drinks_list)):
-            if i % 4 == 0:
-                drinknum.append(c.drinks_list[i])  # .append()를 사용하여 값을 추가
-            elif i % 4 == 1:
-                drinkname.append(c.drinks_list[i])  # .append()를 사용하여 값을 추가
-
+                   
+            #if i % 4 == 0:
+                drinknum.append(c.drinks_list[i].number)  # .append()를 사용하여 값을 추가
+            #elif i % 4 == 1:
+                drinkname.append(c.drinks_list[i].name)  # .append()를 사용하여 값을 추가
+        
 
         # 입력 문자열 앞뒤 공백 제거
         input = input.strip()
@@ -60,8 +61,8 @@ class AdminFunctionParser(BaseParser):
             if command == 4:
                 if not self.is_number(parts[1]):
                     return False , "오류 : 음료수의 번호는 1과 99사이의 숫자만 입력 가능합니다."
-                if not parts[1] in drinknum :
-                     return False #  "오류: 존재하지 않는 음료수 번호입니다. 자판기에 있는 음료수만 재고를 수정할 수 있습니다."
+                if not(parts[1] in drinknum) :
+                     return False, "오류: 존재하지 않는 음료수 번호입니다. 자판기에 있는 음료수만 재고를 수정할 수 있습니다."
                 if not self.is_count(parts[2]):
                     return False, "오류: 음료수의 개수의 입력은 오직 0과 99사이의 숫자만 허용합니다."
                 
@@ -75,6 +76,8 @@ class AdminFunctionParser(BaseParser):
 
         # 5번 메뉴
         elif command == 5:
+            print([parts[3]])
+            print([parts[4]])
             # 5번 메뉴 인자 개수 확인
             if len(parts) != 5:
                 return False, "오류: 4개의 인자가 필요합니다. 첫번째 인자는 번호, 두번째 인자는 이름, 세번째 인자는 개수, 네번째 인자는 가격을 입력해주세요.(음료수 추가)"
@@ -85,16 +88,16 @@ class AdminFunctionParser(BaseParser):
                 return False, "오류: 음료수의 번호는 1과 99사이의 숫자만 허용합니다."
             if parts[1] in drinknum :
                 return False, "오류: 해당 음료수 번호는 중복되어서 사용할 수 없습니다."
-            if not parts[4].isdigit() :
+            if not parts[3].isdigit() :
                 return False, "오류: 음료수의 가격 입력시 숫자만 입력해 주세요."
-            price = int(parts[4])
+            price = int(parts[3])
             if price<100: 
                 return False, "오류: 음료수의 가격은 최소 100원이어야 합니다."
             if price>1000000: 
                 return False, "오류: 음료수의 가격은 1000000원 이하이어야 합니다."
             if price%100 != 0: 
                 return False, "오류: 음료수의 가격은 100의 배수이어야 합니다."
-            if not self.is_count(parts[3]):
+            if not self.is_count(parts[4]):
                 return False, "오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요."
             return True,command
         
