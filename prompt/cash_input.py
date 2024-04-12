@@ -14,7 +14,19 @@ class CashInput:
         self.cash_input_prompt()
 
     def cash_input_prompt(self):
-
+        '''
+        여기에서 new_input(투입 금액에 대한 parser가 존재해야함)
+        check, input_money = parser.input_money_parser(new_input)
+        if check:
+            if(input_money == 0):
+                return
+            else:
+                c.cash_by_cus = c.cash_by_cus + input_money
+                return
+        else :
+            print("오류: 올바른 입력이 아닙니다.")
+            self.cash_input_prompt()
+        '''
         new_input = input("금액을 투입해주세요.\n>>>")   
         c.cash_by_cus = c.cash_by_cus + new_input
 
