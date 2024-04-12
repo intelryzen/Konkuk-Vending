@@ -1,26 +1,57 @@
-from .base_parser import BaseParser
+from my_parser.mode_parser import ModeParser
+from prompt.cash_input import CashInput
+from prompt.login import Login
 
-'''
-모드
-    올바른 입력이 아닙니다.
-'''
 
-# 허용 명령어
-allows = [0, 1, 2]
+class Mode:
+    '''
+    모드 선택 프롬프트
+    command:
+        #ModeParser 클래스 연동
+        0: 프로그램 종료
+        1: 금액 입력 프롬프트로 이동
+        2: 관리자 프롬프트로 이동
+        비정상: 모드 선택 프롬프트로 이동
+    '''
+    def __init__(self):
+        self.parser = ModeParser()
 
-class ModeParser(BaseParser):
-    
-    # 반환 형식: (정상 여부[bool], 정상일 경우 명령어(int)나 비정상일 경우 오류메시지[str])
-    def parse(self, input: str) -> tuple[bool, any]:
-        command = self.parse_command(input)
-        if command in allows:
-            return True, command
-        else: 
-            return False, "오류: 올바른 입력이 아닙니다."
+    # 모드 선택 프롬프트
+    def mode_selection_prompt(self):
+        print("\n<모드 선택>")
+        print("0. 종료")
+        print("1. 음료수 구매")
+        print("2. 관리자 로그인")
+        print("-------------------------------------------")
+            
+        command = input("모드를 선택해주세요.\n>>>")
+            
+        is_valid, mode = self.parser.parse(command)
+        # if is_vaild == True:
+        if is_valid:
+            if mode == 0:
+                return True, mode
+            elif mode == 1:
+                return True, mode
+            elif mode == 2:
+                return True, mode
+        # if is_vaild == False:
+        else:   
+            print(mode)  # 오류 메시지 출력
+            return False, mode
+            
+from file_utils.drinks_util import Drinks_util
+class ShowDrinksList:
+    def __init__(self):
+        self.du = Drinks_util()
 
-# 테스트
+    def show_drinks_list(self):
+        print("\n<음료수 목록>")
+        self.du.print_drinks()
+        print("(0. 뒤로가기)")
+        print("-------------------------------------------")
+
 if __name__ == "__main__":
-    parser = ModeParser()
-    test_input = "   \t\f\v2 \t"
-    t = parser.parse(test_input)
-    print(t)
+    # 모드 선택 프롬프트 테스트
+    mode = Mode()
+    mode.mode_selection_prompt()
