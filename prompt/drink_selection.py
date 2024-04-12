@@ -30,6 +30,8 @@ class DrinkSelection:
             if parsed_command ==0:
                 canChange = Change(c.cash_by_cus) # 거스름 돈 출력
                 c.cash_by_cus =0
+                canChange, msg = Change(drink_price) # 거스름 돈 출력
+                print(msg)
                 return
             else :
                 # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
@@ -40,6 +42,7 @@ class DrinkSelection:
                 if r_flag==False:
                     return
                 else:
+                    Change(drink_price)
                     return self.drink_selection_prompt()
             '''
             if not canChange:
