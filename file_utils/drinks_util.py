@@ -162,6 +162,7 @@ class Drinks_util:
         '''
         number = str(number).lstrip("0")
         self.add_drink(Drink(number, str(name), int(price), int(stock)))
+        self.write_to_file(config.DRINKS_FILE_PATH)
 
     # 돈 처리는 완료되었다고 가정
     def buy_drink(self, number:str):
