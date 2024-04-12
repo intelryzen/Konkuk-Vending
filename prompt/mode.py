@@ -40,50 +40,6 @@ class Mode:
             else:   
                 print(mode)  # 오류 메시지 출력
                 return False, Mode.mode_selection_prompt()
-
-
-            '''
-            if is_valid:
-                if mode == 0:
-                    print("프로그램을 종료합니다.")
-                    return False, mode
-                elif mode == 1:
-                    show_drink_list = ShowDrinksList()
-                    show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                    
-                    CashInput()  # 금액 입력 프롬프트로 이동
-                    return True, mode
-                elif mode == 2:
-                    
-                    Login()  # 로그인 프롬프트로 이동
-                    return True, mode
-            else:
-                print(mode)  # 오류 메시지 출력
-                continue
-            '''
-            '''
-            # Mode()수정
-            is_valid, mode = self.parser.parse(command)
-            
-            if is_valid:
-                return mode
-            else:
-                print(mode)
-                continue
-                
-            # main() 추가
-            mode = Mode()
-            mode = mode.mode_selection_prompt()
-            if mode == 0:
-                print("프로그램을 종료합니다.")
-                return
-            elif mode == 1:
-                show_drink_list = ShowDrinksList()
-                show_drink_list.show_drinks_list()
-                CashInput()
-            elif mode == 2:
-                Login()
-            '''
             
 from file_utils.drinks_util import Drinks_util
 class ShowDrinksList:
