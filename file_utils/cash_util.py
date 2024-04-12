@@ -53,10 +53,10 @@ class Cash_Utils(BaseParser):
 	def change_currency(self, Currency_Value, Currency_Amount):
 		found = False  # Currency 객체를 찾았는지 여부를 추적하는 플래그
 		for Currency in c.currency_list:
+			print(Currency)
 			if Currency.value == Currency_Value:
 				Currency.quantity = Currency_Amount
 				found = True  # Currency 객체를 찾았으므로 플래그를 True로 설정
-				self.save_currencies(c.CASH_FILE_PATH, Currency)
 				break
 		if not found:  # Currency 객체를 찾지 못했으면, 예외를 발생시킴
 			print("Currency not found.")
