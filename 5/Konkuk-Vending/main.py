@@ -33,7 +33,6 @@ file_utils 의 seller_util.py에서
 '''
 
 def main():
-    while(True):
         # 자판기(vending) 인스턴스 생성
             # 자판기가 파일 데이터를 가져와 초기값 저장. 물론 파일을 디코딩하면서 오류생기면 오류문구 출력 후 종료 (클래스가 직접 가져오던, 먼저 가져와서 자판기 클래스의 초기값을 주던 상관없을 것 같습니다.)
         
@@ -43,35 +42,46 @@ def main():
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
+        while(True):
+            status, command = Mode().mode_selection_prompt()
+            
+            if status:
+                if command == 0:
+                    print("프로그램을 종료합니다.")        
+                    exit()
+                elif command == 1:
+                    show_drink_list = ShowDrinksList()
+                    show_drink_list.show_drinks_list()  # 음료수 목록을 출력
+                    C_result = CashInput()  # 금액 입력 프롬프트로 이동
+                    print(C_result)
+                    if C_result:
+                        print("체크")
+                        drink_select_prom = DrinkSelection()
+                        drink_select_prom.drink_selection_prompt()
+                    else:
+                        continue
+                elif command == 2:
+                    login_instance = Login()  # Login 클래스의 인스턴스 생성
+                    login_instance.show_admin_login_prompt()
+                    log_command = login_instance.show_admin_login_prompt()
+                    # log_status = True
+                    if log_command == 0:
+                        continue
+                    else:
+                        admin_instance = Admin()
+                        admin_instance.admin_prompt() # 로그인 성공 어드민 프롬프트로이동
+            else:
+                continue
 
 
-        is_exit, command = Mode().mode_selection_prompt()
-        print(is_exit)
-        print(command)
-
-        if is_exit:
-            if command == 0:
-                print("프로그램을 종료합니다.")        
-                exit()
-            elif command == 1:
-                show_drink_list = ShowDrinksList()
-                show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                CashInput()  # 금액 입력 프롬프트로 이동
-            elif command == 2:
-                Login()  # 로그인 프롬프트로 이동
-        else:
-            print("오류 발생:", command)  # 오류 메시지 출력
-
-
-        # 모드 프롬프트를 호출
-            # 모드 프롬프트 내 반복문 
-            # 올바른 입력을 받을 때까지 계속 반복 수행함. (ex. 1(관리자 로그인) 또는 2(음료수 보기)를 리턴)
-        # Mode()
-        # 모드 프롬프트에서 반환한 값을 바탕으로 관리자 로그인 또는 금액 입력 프롬프트 호출
-            # ...
-        #i = input(c.cashFilePath)
-        exit()
-
+            # 모드 프롬프트를 호출
+                # 모드 프롬프트 내 반복문 
+                # 올바른 입력을 받을 때까지 계속 반복 수행함. (ex. 1(관리자 로그인) 또는 2(음료수 보기)를 리턴)
+            # Mode()
+            # 모드 프롬프트에서 반환한 값을 바탕으로 관리자 로그인 또는 금액 입력 프롬프트 호출
+                # ...
+            #i = input(c.cashFilePath)
+            exit()
 
 # 강제 종료
 def exit():
