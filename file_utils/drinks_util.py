@@ -144,7 +144,7 @@ class Drinks_util:
         0개가 입력된 경우 음료 삭제.
         음료수 재고 수정 후 파일 재작성까지 처리 완.
         '''
-        number = number.lstrip("0")
+        number = str(number).lstrip("0")
         target = self.find_drink(number)
         stock = int(stock)
         if(stock == 0):
@@ -191,9 +191,7 @@ if __name__ == "__main__":
     du.print_drinks()
     du.add_new_drink(7,"이에로사이다",1800,30)
     du.add_new_drink(8,"화르르멘션사이다",2500,30)
-
-
-    # du.modify_stock('2', '8')
     du.buy_drink('1')
+    du.modify_stock('8', 9)
     print()
     du.print_drinks()
