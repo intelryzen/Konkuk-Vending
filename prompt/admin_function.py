@@ -37,6 +37,7 @@ class AdminPrompt:
             if is_valid:
                 admin_input = admin_input.strip()
                 parts = admin_input.split()
+                
                 if command == 1:
                     sorted_currency_list = sorted(c.currency_list, key=lambda x: x.value, reverse=True)
                     for Currency in sorted_currency_list:
@@ -47,18 +48,28 @@ class AdminPrompt:
                     Drinks_util().print_drinks()
                     
                 elif command == 3:
-                    # 잔돈 수정 기능 구현 
+                    # 잔돈 수정 기능 구현
+                    parts = [int(i) for i in parts]
                     cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성
-                    cash_utils_instance.change_currency(parts[1], parts[2], Currency)
+                    cash_utils_instance.change_currency(parts[1], parts[2])
+                    from model.cash import Currency
+                    currency = Currency(parts[1], parts[2])
+                    cash_utils_instance.save_currencies(c.CASH_FILE_PATH, currency)
                     
+
+
                 elif command == 4:
+                    # 음료수 재고 수정
                     drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.modify_stock(parts[1], parts[2])
-                    
+                    isheredrink = drinks_utils_instance.find_drink(parts[1])
+                    if isheredrink != None:
+                        print(isheredrink)
+                        drinks_utils_instance.modify_stock(parts[1], parts[2])
                 elif command == 5:
+                    # 음료수 추가
                     drinks_utils_instance = Drinks_util()
                     drinks_utils_instance.add_new_drink(parts[1], parts[2], parts[3], parts[4])
-                    
+
                 elif command == 0:
                     return command
                     '''
