@@ -27,6 +27,14 @@ class Cash_Utils(BaseParser):
 			Currency(10000,0),
 			Currency(50000,0)
 		]
+		c.customer_list = [
+			Currency(100,0),
+			Currency(500,0),
+			Currency(1000,0),
+			Currency(5000,0),
+			Currency(10000,0),
+			Currency(50000,0)
+		]
   
 		try:
 			with open(cash_file_path, 'r') as file:
