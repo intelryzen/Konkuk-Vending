@@ -77,7 +77,7 @@ class ShowDrinksList:
 
     def show_drinks_list(self):
         print("\n<음료수 목록>")
-        self.du.print_drinks_for_admin()
+        self.du.print_drinks_for_customer()
         print("(0. 뒤로가기)")
         print("-------------------------------------------")
 
