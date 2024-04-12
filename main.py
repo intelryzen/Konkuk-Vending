@@ -1,6 +1,6 @@
 import sys
 from file_utils import *
-from prompt import Mode
+from prompt import *
 from model import *
 from config import config as c
 
@@ -43,11 +43,9 @@ def main():
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
-        is_exit, command = Mode().mode_selection_prompt()
-        print(is_exit)
-        print(command)
+        status, command = Mode().mode_selection_prompt()
         
-        if is_exit:
+        if status:
             if command == 0:
                 print("프로그램을 종료합니다.")        
                 exit()
