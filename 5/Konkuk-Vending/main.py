@@ -1,6 +1,6 @@
 import sys
 from file_utils import *
-from prompt import Mode
+from prompt import *
 from model import *
 from config import config as c
 
@@ -43,10 +43,26 @@ def main():
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         
+
+
         is_exit, command = Mode().mode_selection_prompt()
         print(is_exit)
         print(command)
-        
+
+        if is_exit:
+            if command == 0:
+                print("프로그램을 종료합니다.")        
+                exit()
+            elif command == 1:
+                show_drink_list = ShowDrinksList()
+                show_drink_list.show_drinks_list()  # 음료수 목록을 출력
+                CashInput()  # 금액 입력 프롬프트로 이동
+            elif command == 2:
+                Login()  # 로그인 프롬프트로 이동
+        else:
+            print("오류 발생:", command)  # 오류 메시지 출력
+
+
         # 모드 프롬프트를 호출
             # 모드 프롬프트 내 반복문 
             # 올바른 입력을 받을 때까지 계속 반복 수행함. (ex. 1(관리자 로그인) 또는 2(음료수 보기)를 리턴)
@@ -55,6 +71,7 @@ def main():
             # ...
         #i = input(c.cashFilePath)
         exit()
+
 
 # 강제 종료
 def exit():
