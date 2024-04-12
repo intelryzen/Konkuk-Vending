@@ -17,12 +17,12 @@ class CashInput:
       #  c.cash_by_cus = c.cash_by_cus + new_input
 
         parser = CashInputParser()
-        parsed_command, c.parser_money = parser.parse(new_input)
+        parsed_command, parser_money = parser.parse(new_input)
         total_money = 0
         if parsed_command:     
             if not parser_money==0:
-                for key in c.parser_money:
-                    total_money += key * c.parser_money[key]
+                for key in parser_money:
+                    total_money += key * parser_money[key]
                 c.cash_by_cus = total_money
                 return True
             else:
