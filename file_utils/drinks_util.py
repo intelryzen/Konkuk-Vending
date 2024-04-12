@@ -32,6 +32,10 @@ class Drinks_util:
                         price = int(data[2])
                         stock = int(data[3])
                         self.add_drink(Drink(number, name, price, stock))
+                    else:
+                        print(f"최초 오류 발생 행: {line}")
+                        print("오류: 잘못된 데이터가 있습니다.")
+                        exit()
         except FileNotFoundError:
             print("경고: 음료수 리스트 파일이 없습니다. 파일을 생성합니다.")
             with open(filename, 'w'):
@@ -147,14 +151,16 @@ class Drinks_util:
         개수 차감 후 0개가 되면 목록에서 삭제
         구매 완료 후 파일 재작성까지 완.
         '''
-        tStock = target.stock - 1
-        # 수량이 0개가 된 경우 목록에서 삭제
-        if(tStock == 0):
-            config.drinks_list.remove(target)
+        if(target!=None):
+            tStock = target.stock - 1
+            # 수량이 0개가 된 경우 목록에서 삭제
+            if(tStock == 0):
+                config.drinks_list.remove(target)
+            else:
+                target.stock = tStock
+            self.write_to_file()
         else:
-            target.stock = tStock
-        self.write_to_file()
-
+            print("오류: 올바른 입력이 아닙니다.")
 
 # 테스트
 if __name__ == "__main__":
