@@ -1,46 +1,43 @@
-from .base_parser import BaseParser
+from my_parser.login_parser import LoginParser
+from config import config as c
 
-'''
-관리자 로그인
-    올바른 입력이 아닙니다.
-    아이디와 비밀번호를 구분하여 입력해주세요. 아이디와 비밀번호 사이에는 적어도 하나의 횡공백류열이 필요합니다.
-    아이디 또는 비밀번호가 입력규칙을 준수하지 않습니다.
-    아이디 또는 비밀번호가 일치하지 않습니다.
-'''
+class Login:
+    '''
+        관리자 로그인 프롬프트
+        command:
+            0: 모드 선택 프롬프트로 이동
+            그외: 
+                비정상: 오류 메시지 + 관리자 로그인 프롬프트로 이동
+                정상: "로그인 성공" 관리자 프롬프트로 이동
+    '''    
+    def __init__(self):
+        self.parser = LoginParser()
+        self.show_admin_login_prompt()
 
-# 허용 명령어
-allows = [0]
+    # 관리자 로그인 프롬프트
+    def show_admin_login_prompt(self):
+        print("\n<관리자 로그인>")
+        print("이전 화면으로 가려면 '0'을 입력해주세요.")
+        print("-------------------------------------------")
+        while True:
+            login_input = input("로그인\n>>>")
 
-class LoginParser(BaseParser):
-    
-    # 반환 형식: (정상 여부[bool], 정상일 경우 뒤로가기(0)나 None을, 비정상일 경우 오류메시지[str])
-    # id , pw 를 seller 클래스로 대체 예정
-    def parse(self, input: str, id: str, pw: str) -> tuple[bool, any]:
-        command = self.parse_command(input)
+            is_valid, result = self.parser.parse(login_input, c.admin_list[0].name, c.admin_list[0].password)  # parse 메서드 호출 시 입력 문자열 전달
 
-        # 뒤로가기
-        if command in allows:
-            return True, command
-        
-        input = self.parse_all(input)
-        
-        if input == None or (len(input) == 1 and input[0] == ""):
-            return False, "오류: 올바른 입력이 아닙니다."
+            if is_valid:
+                if result == 0:
+                    return 0
+                else:
+                    print("로그인 성공")
+                    return 1
+                    '''
+                    from .admin_function import Admin
+                    Admin()  # 로그인 성공 시 관리자 프롬프트로 이동
+                    '''
+            else:
+                print(result)  # 오류 메시지 출력
+                continue
 
-        if len(input) == 1:
-            return False, "오류: 아이디와 비밀번호를 구분하여 입력해주세요. 아이디와 비밀번호 사이에는 적어도 하나의 횡공백류열이 필요합니다."
-
-        if len(input) == 2 and len(input[0]) <= 10 and len(input[1]) <= 10 and self.is_word(input[0]) and self.is_word(input[1]):
-            if input[0] == id and input[1] == pw:
-                return True, None
-            else: 
-                return False, "오류: 아이디 또는 비밀번호가 일치하지 않습니다."
-
-        return False, "오류: 아이디 또는 비밀번호가 입력규칙을 준수하지 않습니다."
-
-# 테스트
 if __name__ == "__main__":
-    parser = LoginParser()
-    test_input = "   \t\f\va \t \tb\t"
-    t = parser.parse(test_input, "a", "b")
-    print(t)
+    # 로그인 프롬프트 테스트
+    Login()
