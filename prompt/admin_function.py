@@ -55,16 +55,14 @@ class AdminPrompt:
                     from model.cash import Currency
                     currency = Currency(parts[1], parts[2])
                     cash_utils_instance.save_currencies(c.CASH_FILE_PATH, currency)
-                    
-
+                    msg = str(parts[1]) + "원의 수량이 " + str(parts[2]) + "개로 변경되었습니다."
+                    print(msg)
 
                 elif command == 4:
                     # 음료수 재고 수정
                     drinks_utils_instance = Drinks_util()
-                    isheredrink = drinks_utils_instance.find_drink(parts[1])
-                    if isheredrink != None:
-                        print(isheredrink)
-                        drinks_utils_instance.modify_stock(parts[1], parts[2])
+                    drinks_utils_instance.modify_stock(parts[1], parts[2])
+
                 elif command == 5:
                     # 음료수 추가
                     drinks_utils_instance = Drinks_util()
@@ -80,8 +78,3 @@ class AdminPrompt:
             else:
                 print(command)  # 오류 메시지 출력
                 continue
-            
-            
-if __name__ == "__main__":
-    # 관리자 프롬프트 테스트
-    AdminPrompt()
