@@ -1,6 +1,12 @@
 from config import config as c
 
-def Change(change):
+def Change():
+	change = 0
+	for key in parser_money:
+		change += key * parser_money[key]
+		for i in range(5):
+			if c.currency_list[i].value == key:
+				c.currency_list[i].quantity += parser_money[key]
 	won = [0] * 6
 	i = 5
 	while change > 0:
@@ -20,6 +26,9 @@ def Change(change):
 	for i in range(5, -1, -1):
 		if won[i] > 0:
 			ret += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
+			for key in parser_money:
+				if key == c.currency_list[i].value:
+					parser_money[key] = won[i]
 	ret += ")"
 	print(ret)
 	return True
