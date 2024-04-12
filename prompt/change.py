@@ -4,7 +4,7 @@ def Change(change):
 	won = [0] * 6
 	i = 5
 	while change > 0:
-		if change >= c.currency_list[i].value and c.currency_list[i].quantity > 0:
+		if change > c.currency_list[i].value and c.currency_list[i].quantity > 0:
 			change -= c.currency_list[i].value
 			c.currency_list[i].quantity -= 1
 			won[i] += 1

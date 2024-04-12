@@ -55,14 +55,21 @@ def main():
                     CashInput()  # 금액 입력 프롬프트로 이동
                 elif command == 2:
                     login_instance = Login()  # Login 클래스의 인스턴스 생성
-                    login_instance.show_admin_login_prompt()
                     log_command = login_instance.show_admin_login_prompt()
-                    # log_status = True
-                    if log_command == 0:
+                    if log_command == 1:
+                        admin_instance = AdminPrompt()
+                        admin_command = admin_instance.admin_prompt() # 로그인 성공 어드민 프롬프트로 이동
+                        # 관리자 프롬프트
+                        if admin_command == 0:
+                            continue
+                        else:
+                            admin_instance = AdminPrompt()
+                            admin_instance.admin_prompt()
+                    elif log_command == 0:
                         continue
                     else:
-                        admin_instance = Admin()
-                        admin_instance.admin_prompt # 로그인 성공 어드민 프롬프트로이동
+                        login_instance = Login()  # Login 클래스의 인스턴스 생성 ------------ 안써도 ㅇㅋ?
+                        login_instance.show_admin_login_prompt()
             else:
                 continue
 

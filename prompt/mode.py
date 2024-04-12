@@ -1,7 +1,4 @@
 from my_parser.mode_parser import ModeParser
-from prompt.cash_input import CashInput
-from prompt.login import Login
-
 
 class Mode:
     '''
@@ -18,72 +15,27 @@ class Mode:
 
     # 모드 선택 프롬프트
     def mode_selection_prompt(self):
-        while True:  # 잘못된 입력이면 모드 선택 프롬프트 반복
-            print("\n<모드 선택>")
-            print("0. 종료")
-            print("1. 음료수 구매")
-            print("2. 관리자 로그인")
-            print("-------------------------------------------")
+        print("\n<모드 선택>")
+        print("0. 종료")
+        print("1. 음료수 구매")
+        print("2. 관리자 로그인")
+        print("-------------------------------------------")
             
-            command = input("모드를 선택해주세요.\n>>>")
+        command = input("모드를 선택해주세요.\n>>>")
             
-            is_valid, mode = self.parser.parse(command)
-             # if is_vaild == True:
-            if is_valid:
-                if mode == 0:
-                    return True, mode
-                elif mode == 1:
-                    return True, mode
-                elif mode == 2:
-                    return True, mode
-            # if is_vaild == False:
-            else:   
-                print(mode)  # 오류 메시지 출력
-                return False, Mode.mode_selection_prompt()
-
-
-            '''
-            if is_valid:
-                if mode == 0:
-                    print("프로그램을 종료합니다.")
-                    return False, mode
-                elif mode == 1:
-                    show_drink_list = ShowDrinksList()
-                    show_drink_list.show_drinks_list()  # 음료수 목록을 출력
-                    
-                    CashInput()  # 금액 입력 프롬프트로 이동
-                    return True, mode
-                elif mode == 2:
-                    
-                    Login()  # 로그인 프롬프트로 이동
-                    return True, mode
-            else:
-                print(mode)  # 오류 메시지 출력
-                continue
-            '''
-            '''
-            # Mode()수정
-            is_valid, mode = self.parser.parse(command)
-            
-            if is_valid:
-                return mode
-            else:
-                print(mode)
-                continue
-                
-            # main() 추가
-            mode = Mode()
-            mode = mode.mode_selection_prompt()
+        is_valid, mode = self.parser.parse(command)
+        # if is_vaild == True:
+        if is_valid:
             if mode == 0:
-                print("프로그램을 종료합니다.")
-                return
+                return True, mode
             elif mode == 1:
-                show_drink_list = ShowDrinksList()
-                show_drink_list.show_drinks_list()
-                CashInput()
+                return True, mode
             elif mode == 2:
-                Login()
-            '''
+                return True, mode
+        # if is_vaild == False:
+        else:   
+            print(mode)  # 오류 메시지 출력
+            return False, mode
             
 from file_utils.drinks_util import Drinks_util
 class ShowDrinksList:
