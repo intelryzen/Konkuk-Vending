@@ -37,10 +37,12 @@ class Mode:
                 elif mode == 2:
                     return True, mode
             # if is_vaild == False:
-            else:
-            '''    
-            print(mode)  # 오류 메시지 출력
-            return False, Mode.mode_selection_prompt()
+            else:   
+                print(mode)  # 오류 메시지 출력
+                return False, Mode.mode_selection_prompt()
+
+
+            '''
             if is_valid:
                 if mode == 0:
                     print("프로그램을 종료합니다.")
