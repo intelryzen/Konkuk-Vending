@@ -1,5 +1,5 @@
 import re
-from parser.base_parser import BaseParser
+from my_parser.base_parser import BaseParser
 from config import config as c
 
 class Cash_Utils(BaseParser):

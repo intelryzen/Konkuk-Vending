@@ -1,4 +1,4 @@
-from parser.login_parser import LoginParser
+from my_parser.login_parser import LoginParser
 from config import config as c
 
 class Login:

@@ -1,4 +1,4 @@
-from parser.mode_parser import ModeParser
+from my_parser.mode_parser import ModeParser
 from prompt.cash_input import CashInput
 from prompt.login import Login
 

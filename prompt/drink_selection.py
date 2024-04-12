@@ -1,5 +1,5 @@
 from file_utils.drinks_util import Drinks_util
-from parser.drink_selection_parser import DrinkSelectionParser
+from my_parser.drink_selection_parser import DrinkSelectionParser
 from config import config as c
 from prompt.mode import ShowDrinksList
 

@@ -1,4 +1,4 @@
-from parser.admin_function_parser import AdminFunctionParser
+from my_parser.admin_function_parser import AdminFunctionParser
 from file_utils.cash_util import Cash_Utils
 from file_utils.drinks_util import Drinks_util
 from config import config as c

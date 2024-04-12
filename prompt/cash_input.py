@@ -1,4 +1,4 @@
-from parser.cash_input_parser import CashInputParser
+from my_parser.cash_input_parser import CashInputParser
 from config import config as c
 
 class CashInput:
