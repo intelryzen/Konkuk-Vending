@@ -76,12 +76,12 @@ class AdminFunctionParser(BaseParser):
 
         # 5번 메뉴
         elif command == 5:
-            print([parts[3]])
-            print([parts[4]])
+            
             # 5번 메뉴 인자 개수 확인
             if len(parts) != 5:
                 return False, "오류: 4개의 인자가 필요합니다. 첫번째 인자는 번호, 두번째 인자는 이름, 세번째 인자는 개수, 네번째 인자는 가격을 입력해주세요.(음료수 추가)"
-            
+            print([parts[3]])
+            print([parts[4]])
             # 5번 음료수 추가 명령어인자 유효성 검사
 
             if not self.is_number(parts[1]):
