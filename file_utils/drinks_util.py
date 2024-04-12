@@ -50,13 +50,13 @@ class Drinks_util:
             print("오류: 번호의 중복이 확인되었습니다.")
             exit()
 
-    def write_to_file(self, filename=config.DRINKS_FILE_PATH):
+    def write_to_file(self, filename=config.DRINKS_FILE_PATH, encoding='utf-8'):
         '''
         인자: filename = config.DRINKS_FILE_PATH
         파일에 config.drinks_list의 요소들을 한 행에 하나씩 저장
         프롬프트에서 직접적으로 호출할 필요 없음.
         '''
-        with open(filename, 'w') as file:
+        with open(filename, 'w', encoding=encoding) as file:
             for drink in config.drinks_list:
                 file.write(f"{drink.number} {drink.name} {drink.price} {drink.stock}\n")
                 
@@ -70,6 +70,7 @@ class Drinks_util:
         for drink in config.drinks_list:
             if drink.number in numbers:
                 return True
+            numbers.add(drink.number)
         return False
         # duplicates = set()
         # for drink in config.drinks_list:
