@@ -51,7 +51,7 @@ class Admin:
                 elif command == 3:
                     # 잔돈 수정 기능 구현 
                     cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성
-                    cash_utils_instance.change_currency(parts[1], parts[2], Currency)
+                    cash_utils_instance.change_currency(parts[1], parts[2])
                 elif command == 4:
                     drinks_utils_instance = Drinks_util()
                     drinks_utils_instance.modify_stock(parts[1], parts[2])
