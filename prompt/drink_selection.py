@@ -23,8 +23,6 @@ class DrinkSelection:
         self.command = input("\n구매하실 음료수 번호를 입력해주세요.(0. 거스름 돈 반환 및 뒤로가기)\n>>>")
         parser = DrinkSelectionParser()
         drink_check, parsed_command = parser.parse(self.command)
-        print(drink_check)
-        print(parsed_command)
         drink_price=0
         
         # 0: 거스름돈 출력하고 음료수 목록 출력 후 금액입력 프롬프트로 이동
