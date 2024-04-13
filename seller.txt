@@ -1,1 +1,2 @@
     admin   password
+    관리자 비밀번호

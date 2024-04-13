@@ -9,7 +9,7 @@ class Seller_Utils:
 		아이디 비밀번호 이후 다른 문자에 대한 예외 처리 혹은 에러 처리가 필요함
 		"""
 		try:
-			with open(seller_file_path, 'r') as file:
+			with open(seller_file_path, 'r', encoding = 'utf-8') as file:
 				for line in file:
 					parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
 					try:
