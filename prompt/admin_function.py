@@ -52,11 +52,6 @@ class AdminPrompt:
                     parts = [int(i) for i in parts]
                     cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성
                     cash_utils_instance.change_currency(parts[1], parts[2])
-                    from model.cash import Currency
-                    currency = Currency(parts[1], parts[2])
-                    cash_utils_instance.save_currencies(c.CASH_FILE_PATH, currency)
-                    msg = str(parts[1]) + "원의 수량이 " + str(parts[2]) + "개로 변경되었습니다."
-                    print(msg)
 
                 elif command == 4:
                     # 음료수 재고 수정
