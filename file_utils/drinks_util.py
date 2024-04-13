@@ -41,16 +41,16 @@ class Drinks_util:
                         number = data[0].lstrip("0")
                         name = data[1]
                         if(not data[2].isdigit() or not data[3].isdigit()):
-                            raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않음", line)
+                            raise wrongData(line)
                         price = int(data[2])
                         stock = int(data[3])
                     elif len(data) != 0:
-                        raise wrongData("행의 데이터 개수 안 맞음", line)
+                        raise wrongData(line)
                     if(not bp.is_number(number) or not bp.is_word(name) or not bp.is_count(str(stock))):
                         #iscount가 문자열만 받으려나?
-                        raise wrongData("행의 데이터 중 최소 하나가 잘못됨", line)
+                        raise wrongData(line)
                     if(price<100 or price>1000000 or price%100 != 0):
-                        raise wrongData("가격이 범위 밖이거나 100의 배수 아님", line)
+                        raise wrongData(line)
                     self.add_drink(Drink(number, name, price, stock))
 
         except FileNotFoundError:
