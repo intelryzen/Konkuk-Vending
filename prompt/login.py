@@ -22,7 +22,7 @@ class Login:
             login_input = input("로그인\n>>>")
 
             for Admin in c.admin_list:
-                is_valid, result = self.parser.parse(login_input, Admin.name, Admin.password)  # parse 메서드 호출 시 입력 문자열 전달
+                is_valid, result = self.parser.parse(login_input, str(Admin.name), str(Admin.password))  # parse 메서드 호출 시 입력 문자열 전달
 
             if is_valid:
                 if result == 0:
