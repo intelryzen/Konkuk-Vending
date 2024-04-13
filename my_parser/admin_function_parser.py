@@ -2,12 +2,16 @@ from my_parser.base_parser import BaseParser
 from config import config as c
 #config.py import
 
+allows=[0,1,2,3,4,5]
+
 class AdminFunctionParser(BaseParser):
     def parser(self, input: str ) -> tuple[bool,any]:  
         
         #파일 이름 앞뒤 공백 제거
         drinknum = []  #음료 번호 리스트    
         drinkname = [] #음료 이름 리스트
+
+
 
         #drinklist에서 drinknum , drinkname 분리하기
         for i in range(len(c.drinks_list)):
@@ -23,12 +27,11 @@ class AdminFunctionParser(BaseParser):
         
         # 명령어와 인자 분리
         parts = input.split()
-        
+        command = self.parse_command(parts[0])
         # 명령어 유효성 검사
-        if not parts or not parts[0].isdigit() or not 0 <= int(parts[0]) <= 5:
+        if not command in allows:
             return False , "오류 : 올바른 입력이 아닙니다."
         
-        command = int(parts[0])
         
         # 각 명령어별 인자 검사
 
