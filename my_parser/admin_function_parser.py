@@ -27,6 +27,8 @@ class AdminFunctionParser(BaseParser):
         
         # 명령어와 인자 분리
         parts = input.split()
+        if not parts:
+             return False , "오류 : 올바른 입력이 아닙니다."
         command = self.parse_command(parts[0])
         # 명령어 유효성 검사
         if not command in allows:
