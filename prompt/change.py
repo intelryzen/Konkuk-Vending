@@ -24,6 +24,7 @@ def Change(drink):
 				return False, "오류: 잔돈이 포화상태입니다. 관리자에게 문의하거나 타 음료수를 선택해주세요." 
 		if i == -1:
 			break
+	i = 5
 	while change > 0:
 		if change >= c.currency_list[i].value and c.currency_list[i].quantity > 0:
 			change -= c.currency_list[i].value
