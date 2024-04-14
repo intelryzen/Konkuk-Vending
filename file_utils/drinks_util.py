@@ -60,7 +60,7 @@ class Drinks_util:
 
         except wrongData as wd:
             print(wd)
-            exit()
+            sys.exit()
         # except UnicodeDecodeError:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
