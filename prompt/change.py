@@ -38,6 +38,8 @@ def Change(drink):
 			return False, "오류: 잔돈이 부족합니다."
 
 	if ret == 0:
+		for i in range(6):
+			c.customer_list[i].quantity = 0
 		return True, "거스름돈: 0원"
 	msg = "거스름돈: " + str(ret) + "원 ("
 	for i in range(5, -1, -1):
