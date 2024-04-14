@@ -1,4 +1,6 @@
 import re
+import sys
+import os
 from my_parser.base_parser import BaseParser
 from config import config as c
 
@@ -40,10 +42,12 @@ class Cash_Utils(BaseParser):
 									pass
 								else:
 									print("파일 내 <개수>를 확인하십시오.")
-									exit()
+									os.system('pause')
+									sys.exit()
 					else:
 						print("허용되지 않은 권종이 포함된 파일입니다. 파일 내 권종을 확인하십시오.")
-						exit()
+						os.system('pause')
+						sys.exit()
 		except FileNotFoundError:
 			print("잔돈 파일이 없습니다. 파일을 생성합니다.")
 			self.save_currencies(Cash_Utils, cash_file_path, Currency)

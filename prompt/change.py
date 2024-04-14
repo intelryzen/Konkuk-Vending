@@ -16,10 +16,12 @@ def Change(change):
 			print("잔돈이 부족합니다.")
 			return False
 
-	ret = "거스름돈: " + str(change) + "원 ("
+	if ret == 0:
+		return True, "거스름돈: 0원"
+	msg = "거스름돈: " + str(ret) + "원 ("
 	for i in range(5, -1, -1):
 		if won[i] > 0:
-			ret += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
-	ret += ")"
-	print(ret)
-	return True
+			msg += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
+		c.customer_list[i].quantity = won[i]
+	msg += ")"
+	return True, msg

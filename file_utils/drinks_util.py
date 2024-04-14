@@ -54,7 +54,7 @@ class Drinks_util:
                     self.add_drink(Drink(number, name, price, stock))
 
         except FileNotFoundError:
-            print("경고: 음료수 리스트 파일이 없습니다. 파일을 생성합니다.")
+            print("경고: \"음료수 리스트 파일이 없습니다. 파일을 생성합니다.\"")
             with open(filename, 'w'):
                 pass
 
@@ -66,12 +66,11 @@ class Drinks_util:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
         if(len(config.drinks_list)==0):
-            print("경고: 음료수 리스트 파일 내 데이터가 없습니다.")
+            print("경고: \"음료수 리스트 파일 내 데이터가 없습니다.\"")
 
         if(self.check_duplicate_numbers()):
             print("오류: 번호의 중복이 확인되었습니다.")
-            os.system('pause')
-            sys.exit()
+            exit()
 
     def write_to_file(self, filename=config.DRINKS_FILE_PATH, encoding='utf-8'):
         '''
