@@ -1,4 +1,5 @@
 import re
+import sys
 
 """
 아이디 비밀번호 변경 함수 추가할지 논의 필요함
@@ -18,11 +19,11 @@ class Seller_Utils:
 							pass
 					admin_list.append(Admin(name, password)) #인스턴스 생성 (리스트)
 		except FileNotFoundError:
-			print("관리자 로그인 정보 파일이 없습니다. 프로그램을 종료합니다.")
+			print("오류: 관리자 로그인 정보 파일이 없습니다. 프로그램을 종료합니다.")
 			exit()
 
 		if not admin_list:
-			print("관리자 로그인 정보 파일 내 데이터가 없습니다. 프로그램을 종료합니다.")
+			print("오류: 관리자 로그인 정보 파일 내 데이터가 없습니다. 프로그램을 종료합니다.")
 			exit()
 
 	def save_admin(self, seller_file_path, admin_list, Admin): #관리자 파일 생성/저장
