@@ -22,10 +22,12 @@ def Change(drink):
 				c.currency_list[j].quantity -= c.customer_list[j].quantity
 			return False, "오류: 잔돈이 부족합니다."
 
-	ret = "거스름돈: " + str(ret) + "원 ("
+	if ret == 0:
+		return True, "거스름돈: 0원"
+	msg = "거스름돈: " + str(ret) + "원 ("
 	for i in range(5, -1, -1):
 		if won[i] > 0:
-			ret += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
+			msg += str(c.currency_list[i].value) + "원 " + str(won[i]) + "개 "
 		c.customer_list[i].quantity = won[i]
-	ret += ")"
-	return True, ret
+	msg += ")"
+	return True, msg
