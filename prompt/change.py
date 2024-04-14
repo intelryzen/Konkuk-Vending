@@ -9,21 +9,19 @@ def Change(drink):
 	change -= drink
 	ret = change
 	i = 5
-	while change > 0:
+	while i >= 0:
 		if change >= c.currency_list[i].value and c.currency_list[i].quantity > 99:
 			change -= c.currency_list[i].value
 			c.currency_list[i].quantity -= 1
 			won[i] += 1
-		if change < c.currency_list[i].value:
-			if c.currency_list[i].quantity < 100:
-				i -= 1
-			else:
+		if change < c.currency_list[i].value or c.currency_list[i].quantity < 100:
+			if c.currency_list[i].quantity > 99:
 				for j in range(6):
 					c.currency_list[j].quantity += won[j]
 					c.currency_list[j].quantity -= c.customer_list[j].quantity
 				return False, "오류: 잔돈이 포화상태입니다. 관리자에게 문의하거나 타 음료수를 선택해주세요." 
-		if i == -1:
-			break
+			else:
+				i -= 1
 	i = 5
 	while change > 0:
 		if change >= c.currency_list[i].value and c.currency_list[i].quantity > 0:
