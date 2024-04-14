@@ -7,9 +7,9 @@ from model.drink import Drink
 from my_parser.base_parser import BaseParser
 
 class wrongData(Exception):
-    def __init__(self, msg="오류: 잘못된 데이터가 있습니다.", line=""):
+    def __init__(self, msg="잘못된 데이터가 있습니다.", line=""):
         self.msg = f"최초 오류 발생 행: {line}"
-        self.msg += msg
+        self.msg += "오류: "+msg
     def __str__(self):
         return self.msg
 
@@ -41,16 +41,16 @@ class Drinks_util:
                         number = data[0].lstrip("0")
                         name = data[1]
                         if(not data[2].isdigit() or not data[3].isdigit()):
-                            raise wrongData(line)
+                            raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않습니다.", line)
                         price = int(data[2])
                         stock = int(data[3])
                     elif len(data) != 0:
-                        raise wrongData(line)
+                        raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
                     if(not bp.is_number(number) or not bp.is_word(name) or not bp.is_count(str(stock))):
                         #iscount가 문자열만 받으려나?
-                        raise wrongData(line)
+                        raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
                     if(price<100 or price>1000000 or price%100 != 0):
-                        raise wrongData(line)
+                        raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
                     self.add_drink(Drink(number, name, price, stock))
 
         except FileNotFoundError:
@@ -60,7 +60,8 @@ class Drinks_util:
 
         except wrongData as wd:
             print(wd)
-            exit()
+            os.system('pause')
+            sys.exit()
         # except UnicodeDecodeError:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
@@ -69,7 +70,8 @@ class Drinks_util:
 
         if(self.check_duplicate_numbers()):
             print("오류: 번호의 중복이 확인되었습니다.")
-            exit()
+            os.system('pause')
+            sys.exit()
 
     def write_to_file(self, filename=config.DRINKS_FILE_PATH, encoding='utf-8'):
         '''
