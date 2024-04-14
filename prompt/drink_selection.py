@@ -37,10 +37,15 @@ class DrinkSelection:
                 for i in range (0, len(c.drinks_list)):
                     if int(c.drinks_list[i].number) == int(parsed_command):
                         drink_price = c.drinks_list[i].price
-                r_flag = self.remain_cash(self.cash_by_custom(), drink_price,parsed_command)
-                if r_flag==False:
+                r_flag, rem = self.remain_cash(self.cash_by_custom(), drink_price,parsed_command)
+                if r_flag == False:
                     return
                 else:
+                    canChange, msg = Change(drink_price)
+                    if not canChange:
+                        print(msg)
+                    else:
+                        print ("잔돈: ", rem)
                     return self.drink_selection_prompt()
             '''
             if not canChange:
@@ -59,22 +64,21 @@ class DrinkSelection:
         print(number)
         if self.cash_by_custom() < drink_price: # (잔액 혹은 투입금액) < (음료수 가격)인 경우
             print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
-            return True
+            return False, None
         else:
             rem = self.cash_by_custom() - drink_price
             Drinks_util().buy_drink(str(number)) # 해당 위치에서 음료수 목록 파일 업데이트
             self.drink_list.show_drinks_list() # 음료수 목록 출력 
-            print("잔돈 :" , rem)
             if rem ==0:
-                return False #잔돈이 0일 때
+                return False, rem #잔돈이 0일 때
             
-            return True
+            return True, rem
 
-def cash_by_cus():
-        ret = 0
-        for i in range(6):
-            ret += (c.customer_list[i].value * c.customer_list[i].quantity)
-        return ret
+    def cash_by_custom(self):
+         ret = 0
+         for i in range(6):
+             ret += (c.customer_list[i].value * c.customer_list[i].quantity)
+         return ret
 
 if __name__ == "__main__":
     # 음료수 선택 프롬프트 테스트
