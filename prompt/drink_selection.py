@@ -62,6 +62,7 @@ class DrinkSelection:
         print(cash_by_cus)
         print(drink_price)
         print(number)
+
         if self.cash_by_custom() < drink_price: # (잔액 혹은 투입금액) < (음료수 가격)인 경우
             print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
             return False, None
