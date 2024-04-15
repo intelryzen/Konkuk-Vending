@@ -37,16 +37,22 @@ class DrinkSelection:
                 for i in range (0, len(c.drinks_list)):
                     if int(c.drinks_list[i].number) == int(parsed_command):
                         drink_price = c.drinks_list[i].price
-                r_flag, rem = self.remain_cash(self.cash_by_custom(), drink_price,parsed_command)
-                if r_flag == False:
+                if self.cash_by_custom() < drink_price: #투입금이 음료수 가격보다 적을 때
+                    print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
                     return
                 else:
                     canChange, msg = Change(drink_price)
-                    if not canChange:
+                    if not canChange: #거스름돈 없음
                         print(msg)
+                        return self.drink_selection_prompt()
                     else:
-                        print ("잔돈: ", rem)
-                    return self.drink_selection_prompt()
+                        Drinks_util().buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
+                        self.drink_list.show_drinks_list() # 음료수 목록 출력
+                        if self.cash_by_custom() == 0:
+                            return
+                        else:
+                            print ("잔돈: ", self.cash_by_custom)
+                            return self.drink_selection_prompt()
             '''
             if not canChange:
                 c.cash_by_cus += drink_price
@@ -56,24 +62,6 @@ class DrinkSelection:
             return self.drink_selection_prompt()
 
         # 정상: 잔액과 업데이트 된 음료수 목록 출력 후 음료수 선택 프롬프트로 이동
-        
-
-    def remain_cash(self, cash_by_cus, drink_price,number):
-        print(cash_by_cus)
-        print(drink_price)
-        print(number)
-
-        if self.cash_by_custom() < drink_price: # (잔액 혹은 투입금액) < (음료수 가격)인 경우
-            print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
-            return False, None
-        else:
-            rem = self.cash_by_custom() - drink_price
-            Drinks_util().buy_drink(str(number)) # 해당 위치에서 음료수 목록 파일 업데이트
-            self.drink_list.show_drinks_list() # 음료수 목록 출력 
-            if rem ==0:
-                return False, rem #잔돈이 0일 때
-            
-            return True, rem
 
     def cash_by_custom(self):
          ret = 0
