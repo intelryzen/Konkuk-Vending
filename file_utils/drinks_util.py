@@ -46,7 +46,7 @@ class Drinks_util:
                         stock = int(data[3])
                     elif len(data) != 0:
                         raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
-                    if(not bp.is_number(number) or not bp.is_word(name) or not bp.is_count(str(stock))):
+                    if((bp.is_number(number) == None) or (bp.is_word(name) == None) or (bp.is_count(str(stock))==None)):
                         #iscount가 문자열만 받으려나?
                         raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
                     if(price<100 or price>1000000 or price%100 != 0):
@@ -193,9 +193,11 @@ if __name__ == "__main__":
     du = Drinks_util()
     du.read_from_file()
     du.print_drinks()
-    du.add_new_drink(7,"이에로사이다",1800,30)
-    du.add_new_drink(8,"화르르멘션사이다",2500,30)
-    du.buy_drink('1')
-    du.modify_stock('8', 9)
-    print()
-    du.print_drinks()
+    du.write_to_file()
+    # du.print_drinks()
+    # du.add_new_drink(7,"이에로사이다",1800,30)
+    # du.add_new_drink(8,"화르르멘션사이다",2500,30)
+    # du.buy_drink('1')
+    # du.modify_stock('8', 9)
+    # print()
+    # du.print_drinks()
