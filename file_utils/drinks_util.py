@@ -37,7 +37,7 @@ class Drinks_util:
                 lines = file.readlines()
                 for line in lines:
                     data = line.split()
-                    if len(data) != 0:
+                    if len(data) != 0 and len(data) != 4:
                         raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
                     if len(data) == 4:
                         number = data[0].lstrip("0")
