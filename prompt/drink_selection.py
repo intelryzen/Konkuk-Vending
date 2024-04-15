@@ -51,7 +51,7 @@ class DrinkSelection:
                         if self.cash_by_custom() == 0:
                             return
                         else:
-                            print ("잔돈: ", self.cash_by_custom)
+                            print ("잔돈: ", self.cash_by_custom())
                             return self.drink_selection_prompt()
             '''
             if not canChange:
