@@ -23,6 +23,9 @@ class CashInput:
             if not parser_money==0:
                 for key in parser_money:
                     total_money += key * parser_money[key]
+                    for i in range(6):
+                        if key == c.customer_list[i].value:
+                            c.customer_list[i].quantity = parser_money[key]
                 c.cash_by_cus = total_money
                 return True
             else:
