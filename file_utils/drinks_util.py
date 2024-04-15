@@ -37,6 +37,8 @@ class Drinks_util:
                 lines = file.readlines()
                 for line in lines:
                     data = line.split()
+                    if len(data) != 0:
+                        raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
                     if len(data) == 4:
                         number = data[0].lstrip("0")
                         name = data[1]
@@ -44,14 +46,12 @@ class Drinks_util:
                             raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않습니다.", line)
                         price = int(data[2])
                         stock = int(data[3])
-                    elif len(data) != 0:
-                        raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
-                    if((bp.is_number(number) == None) or (bp.is_word(name) == None) or (bp.is_count(str(stock))==None)):
-                        #iscount가 문자열만 받으려나?
-                        raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
-                    if(price<100 or price>1000000 or price%100 != 0):
-                        raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
-                    self.add_drink(Drink(number, name, price, stock))
+                        if((bp.is_number(number) == None) or (bp.is_word(name) == None) or (bp.is_count(str(stock))==None)):
+                            #iscount가 문자열만 받으려나?
+                            raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
+                        if(price<100 or price>1000000 or price%100 != 0):
+                            raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
+                        self.add_drink(Drink(number, name, price, stock))
 
         except FileNotFoundError:
             print("경고: 음료수 리스트 파일이 없습니다. 파일을 생성합니다.")
