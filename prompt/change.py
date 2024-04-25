@@ -1,4 +1,5 @@
 from config import config as c
+from file_utils.cash_util import Cash_Utils
 
 def Change(drink):
 	change = 0
@@ -36,6 +37,9 @@ def Change(drink):
 				c.currency_list[j].quantity -= c.customer_list[j].quantity
 			return False, "오류: 잔돈이 부족합니다."
 
+	cash_utils_instance = Cash_Utils()
+	for currency in c.currency_list:
+		cash_utils_instance.save_currencies(c.CASH_FILE_PATH, currency)
 	if ret == 0:
 		for i in range(6):
 			c.customer_list[i].quantity = 0
