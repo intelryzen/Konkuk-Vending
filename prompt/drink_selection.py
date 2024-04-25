@@ -31,6 +31,9 @@ class DrinkSelection:
                 c.cash_by_cus =0
                 canChange, msg = Change(0) # 거스름 돈 출력
                 print(msg)
+                for i in range(6):
+                    c.customer_list[i].quantity = 0 #사용자가 투입한 금액 0으로 초기화
+                self.drink_list.show_drinks_list() #음료수 리스트 출력
                 return
             else :
                 # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
@@ -39,7 +42,7 @@ class DrinkSelection:
                         drink_price = c.drinks_list[i].price
                 if self.cash_by_custom() < drink_price: #투입금이 음료수 가격보다 적을 때
                     print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
-                    return
+                    return self.drink_selection_prompt()
                 else:
                     canChange, msg = Change(drink_price)
                     if not canChange: #거스름돈 없음
