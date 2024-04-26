@@ -91,7 +91,7 @@ class AdminFunctionParser(BaseParser):
                 return False, "오류: 음료수의 번호는 1과 99사이의 숫자만 허용합니다."
             if parts[1] in drinknum :
                 return False, "오류: 해당 음료수 번호는 중복되어서 사용할 수 없습니다."
-            if not parts[3].isdigit() :
+            if not parts[3].isdecimal() :
                 return False, "오류: 음료수의 가격 입력시 숫자만 입력해 주세요."
             price = int(parts[3])
             if price<100: 
