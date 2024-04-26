@@ -7,7 +7,7 @@ from model.drink import Drink
 from my_parser.base_parser import BaseParser
 
 class wrongData(Exception):
-    def __init__(self, msg="문법규칙 미준수", line=""):
+    def __init__(self,  line="", msg="문법규칙 미준수"):
         self.msg = f"최초 오류 발생 행: {line}"
         self.msg += "오류: "+msg
     def __str__(self):
