@@ -2,6 +2,8 @@ from my_parser.base_parser import BaseParser
 from config import config as c
 #config.py import
 
+#추가
+allows = [0,1,2,3,4,5]
 class AdminFunctionParser(BaseParser):
     def parser(self, input: str ) -> tuple[bool,any]:  
         
@@ -25,11 +27,14 @@ class AdminFunctionParser(BaseParser):
         parts = input.split()
         
         # 명령어 유효성 검사
-        if not parts or not parts[0].isdigit() or not 0 <= int(parts[0]) <= 5:
-            return False , "오류 : 올바른 입력이 아닙니다."
+        #if not parts or not parts[0].isdigit() or not 0 <= int(parts[0]) <= 5:
+        #    return False , "오류 : 올바른 입력이 아닙니다."
+        if not parts:
+            return False, "오류: 올바른 입력이 아닙니다."
         
-        command = int(parts[0])
-        
+        command = self.parse_command(parts[0])
+        if command not in allows:
+            return False, "오류: 올바른 입력이 아닙니다."
         # 각 명령어별 인자 검사
 
         # 1번 2번 메뉴
