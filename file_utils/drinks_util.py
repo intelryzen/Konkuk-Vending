@@ -7,7 +7,7 @@ from model.drink import Drink
 from my_parser.base_parser import BaseParser
 
 class wrongData(Exception):
-    def __init__(self, msg="잘못된 데이터가 있습니다.", line=""):
+    def __init__(self, msg="문법규칙 미준수", line=""):
         self.msg = f"최초 오류 발생 행: {line}"
         self.msg += "오류: "+msg
     def __str__(self):
@@ -38,23 +38,27 @@ class Drinks_util:
                 for line in lines:
                     data = line.split()
                     if len(data) != 0 and len(data) != 4:
-                        raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
+                        # raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
+                        raise wrongData(line)
                     if len(data) == 4:
                         number = data[0].lstrip("0")
                         name = data[1]
                         if(not data[2].isdigit() or not data[3].isdigit()):
-                            raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않습니다.", line)
+                            # raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않습니다.", line)
+                            raise wrongData(line)
                         price = int(data[2])
                         stock = int(data[3])
                         if((bp.is_number(number) == None) or (bp.is_word(name) == None) or (bp.is_count(str(stock))==None)):
                             #iscount가 문자열만 받으려나?
-                            raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
+                            # raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
+                            raise wrongData(line)
                         if(price<100 or price>1000000 or price%100 != 0):
-                            raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
+                            # raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
+                            raise wrongData(line)
                         self.add_drink(Drink(number, name, price, stock))
 
         except FileNotFoundError:
-            print("경고: 음료수 리스트 파일이 없습니다. 파일을 생성합니다.")
+            print("경고: “음료수 리스트 파일이 없습니다. 파일을 생성합니다.”")
             with open(filename, 'w'):
                 pass
 
@@ -66,10 +70,10 @@ class Drinks_util:
         #     print("파일을 올바르게 디코딩할 수 없습니다.")
         #     pass
         if(len(config.drinks_list)==0):
-            print("경고: 음료수 리스트 파일 내 데이터가 없습니다.")
+            print("경고: “음료수 리스트 파일 내 데이터가 없습니다.”")
 
         if(self.check_duplicate_numbers()):
-            print("오류: 번호의 중복이 확인되었습니다.")
+            print("오류: “번호의 중복이 확인되었습니다.”")
             os.system('pause')
             sys.exit()
 
