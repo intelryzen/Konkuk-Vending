@@ -65,7 +65,7 @@ class AdminFunctionParser(BaseParser):
             # 4번 음료수 재고 수정 명령어 인자 유효성 검사
             if command == 4:
                 if not self.is_number(parts[1]):
-                    return False , "오류 : 음료수의 번호는 1과 99사이의 숫자만 입력 가능합니다."
+                    return False , "오류 : 음료수의 번호는 숫자만 입력할 수 있습니다."
                 if not(parts[1] in drinknum) :
                      return False, "오류: 존재하지 않는 음료수 번호입니다. 자판기에 있는 음료수만 재고를 수정할 수 있습니다."
                 if not self.is_count(parts[2]):
