@@ -7,7 +7,7 @@ from model.drink import Drink
 from my_parser.base_parser import BaseParser
 
 class wrongData(Exception):
-    def __init__(self,  line="", msg="문법규칙 미준수"):
+    def __init__(self, msg="문법규칙 미준수", line = ""):
         self.msg = f"최초 오류 발생 행: {line}"
         self.msg += "오류: "+msg
     def __str__(self):
@@ -38,23 +38,23 @@ class Drinks_util:
                 for line in lines:
                     data = line.split()
                     if len(data) != 0 and len(data) != 4:
-                        # raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
-                        raise wrongData(line)
+                        raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
+                        # raise wrongData(line)
                     if len(data) == 4:
                         number = data[0].lstrip("0")
                         name = data[1]
                         if(not data[2].isdecimal() or not data[3].isdecimal()):
-                            # raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않습니다.", line)
-                            raise wrongData(line)
+                            raise wrongData("가격 또는 개수가 0~9로만 이루어져있지 않습니다.", line)
+                            # raise wrongData(line)
                         price = int(data[2])
                         stock = int(data[3])
                         if((bp.is_number(number) == None) or (bp.is_word(name) == None) or (bp.is_count(str(stock))==None)):
                             #iscount가 문자열만 받으려나?
-                            # raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
-                            raise wrongData(line)
+                            raise wrongData("행의 데이터 중 최소 하나가 잘못되었습니다.", line)
+                            # raise wrongData(line)
                         if(price<100 or price>1000000 or price%100 != 0):
-                            # raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
-                            raise wrongData(line)
+                            raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
+                            # raise wrongData(line)
                         self.add_drink(Drink(number, name, price, stock))
 
         except FileNotFoundError:
@@ -194,7 +194,7 @@ class Drinks_util:
 if __name__ == "__main__":
     du = Drinks_util()
     du.read_from_file()
-    du.print_drinks()
+    du.print_drinks_cus()
     du.write_to_file()
     # du.print_drinks()
     # du.add_new_drink(7,"이에로사이다",1800,30)
