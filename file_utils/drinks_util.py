@@ -43,7 +43,7 @@ class Drinks_util:
                     if len(data) == 4:
                         number = data[0].lstrip("0")
                         name = data[1]
-                        if(not data[2].isdigit() or not data[3].isdigit()):
+                        if(not data[2].isdecimal() or not data[3].isdecimal()):
                             # raise wrongData("가격 또는 개수가 숫자로만 이루어져있지 않습니다.", line)
                             raise wrongData(line)
                         price = int(data[2])
