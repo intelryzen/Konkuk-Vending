@@ -6,4 +6,4 @@ class Drink:
         self.stock = stock
 
     def __str__(self):
-        return f"{self.number} {self.name} {self.price}원 {self.stock}개"
+        return f"{self.number}. {self.name} {self.price}원 {self.stock}개"

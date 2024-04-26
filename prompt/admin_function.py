@@ -45,7 +45,7 @@ class AdminPrompt:
                     
                 elif command == 2:
                     # 음료수 재고 확인 기능 구현 1번 부터 정렬
-                    Drinks_util().print_drinks()
+                    Drinks_util().print_drinks_admin()
                     
                 elif command == 3:
                     # 잔돈 수정 기능 구현

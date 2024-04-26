@@ -47,7 +47,7 @@ class ShowDrinksList:
 
     def show_drinks_list(self):
         print("\n<음료수 목록>")
-        self.du.print_drinks()
+        self.du.print_drinks_cus()
         print("(0. 뒤로가기)")
         print("-------------------------------------------")
 
