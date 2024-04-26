@@ -21,7 +21,8 @@ class Login:
         while True:
             login_input = input("로그인\n>>>")
 
-            is_valid, result = self.parser.parse(login_input, c.admin_list[0].name, c.admin_list[0].password)  # parse 메서드 호출 시 입력 문자열 전달
+            for seller in c.admin_list:
+                is_valid, result = self.parser.parse(login_input, seller.name, seller.password)  # parse 메서드 호출 시 입력 문자열 전달
 
             if is_valid:
                 if result == 0:
