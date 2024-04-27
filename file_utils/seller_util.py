@@ -13,19 +13,30 @@ class Seller_Utils:
 		try:
 			with open(seller_file_path, 'r', encoding='utf-8') as file:
 				for line in file:
-					parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
-					if parts[0] == '\n' and parts[1] == '\n':
-						continue
+					if line == '\n':
+						print("오류 : 파일 내 <개행>의 갯수를 확인하십시오")
+						os.system('pause')
+						sys.exit()
 					else:
-						try:
-							name, password = parts[0], parts[1]
-							if len(name) > 10 or len(password) > 10:
-								print("오류 : 파일 내 <아이디>를 확인하십시오")
-								os.system('pause')
-								sys.exit()
-						except IndexError:
-								pass
+						parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
+						if len(parts) == 1:
+							print("오류 : 파일 내 요소의 수를 확인하십시오")
+							os.system('pause')
+							sys.exit()
+					
+					try:
+						name, password = parts[0], parts[1]
+						if len(name) > 10 or len(name) < 1:
+							print("오류 : 파일 내 <아이디>를 확인하십시오")
+							os.system('pause')
+							sys.exit()
+						if len(password) > 10 or len(password) < 1:
+							print("오류 : 파일 내 <비밀번호>를 확인하십시오")
+							os.system('pause')
+							sys.exit()
 						admin_list.append(Admin(name, password)) #인스턴스 생성 (리스트)
+					except IndexError:
+							pass
 		except FileNotFoundError:
 			print("오류: \"관리자 로그인 정보 파일이 없습니다. 프로그램을 종료합니다.\"")
 			os.system('pause')
