@@ -14,16 +14,18 @@ class Seller_Utils:
 			with open(seller_file_path, 'r', encoding='utf-8') as file:
 				for line in file:
 					parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
-					
-					try:
-						name, password = parts[0], parts[1]
-						if len(name) > 10 or len(password):
-							print("오류 : 파일 내 <아이디>를 확인하십시오")
-							os.system('pause')
-							sys.exit()
-					except IndexError:
-							pass
-					admin_list.append(Admin(name, password)) #인스턴스 생성 (리스트)
+					if parts[0] == '\n' and parts[1] == '\n':
+						continue
+					else:
+						try:
+							name, password = parts[0], parts[1]
+							if len(name) > 10 or len(password) > 10:
+								print("오류 : 파일 내 <아이디>를 확인하십시오")
+								os.system('pause')
+								sys.exit()
+						except IndexError:
+								pass
+						admin_list.append(Admin(name, password)) #인스턴스 생성 (리스트)
 		except FileNotFoundError:
 			print("오류: \"관리자 로그인 정보 파일이 없습니다. 프로그램을 종료합니다.\"")
 			os.system('pause')
