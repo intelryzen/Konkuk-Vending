@@ -57,10 +57,10 @@ class Cash_Utils(BaseParser):
 						os.system('pause')
 						sys.exit()
 		except FileNotFoundError:
-			print("잔돈 파일이 없습니다. 파일을 생성합니다.")
+			print("경고: 잔돈 파일이 없습니다. 파일을 생성합니다.")
 			self.save_currencies(cash_file_path, Currency)
 		if self.is_all_quantity_zero(c.currency_list, Currency):
-			print("잔돈 파일 내 데이터가 없습니다.")
+			print("경고: 잔돈 파일 내 데이터가 없습니다.")
 
 	def change_currency(self, Currency_Value, Currency_Amount):
 		found = False  # Currency 객체를 찾았는지 여부를 추적하는 플래그
