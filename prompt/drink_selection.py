@@ -50,11 +50,13 @@ class DrinkSelection:
                         return self.drink_selection_prompt()
                     else:
                         Drinks_util().buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
-                        self.drink_list.show_drinks_list() # 음료수 목록 출력
                         if self.cash_by_custom() == 0:
+                            self.drink_list.show_drinks_list() # 음료수 목록 출력
                             return
                         else:
-                            print ("잔액: ", self.cash_by_custom())
+                            print ("잔돈: ", self.cash_by_custom())
+                            print("-------------------------------------------")
+                            self.drink_list.show_drinks_list() # 음료수 목록 출력
                             return self.drink_selection_prompt()
             '''
             if not canChange:
