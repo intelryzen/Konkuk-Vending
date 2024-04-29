@@ -12,11 +12,21 @@ class Seller_Utils:
 		"""
 		try:
 			with open(seller_file_path, 'r', encoding='utf-8') as file:
-				lines = file.read().strip().split('\n')
-				if not lines[0]:
+				lines = file.read().rstrip().split('\n')
+				found_non_empty_line = False
+				for line in lines:
+					if line.strip():  # 공백이 아닌 줄 찾기
+						found_non_empty_line = True
+					elif not found_non_empty_line and not line.strip():  # 첫 유효한 데이터 전에 빈 줄 발견
+						print("오류 : 파일의 시작 부분에 불필요한 개행이 존재합니다. 프로그램을 종료합니다.")
+						os.system('pause')
+						sys.exit()
+				
+				if not found_non_empty_line:  # 파일 내 유효한 데이터가 전혀 없을 경우
 					print("오류 : 관리자 로그인 정보 파일 내 데이터가 없습니다. 프로그램을 종료합니다.")
-					os.system('pause')					
+					os.system('pause')
 					sys.exit()
+
 				for line in lines:
 					if line == '':
 						print("오류 : 파일 내 <개행>의 갯수를 확인하십시오")
@@ -44,11 +54,6 @@ class Seller_Utils:
 							pass
 		except FileNotFoundError:
 			print("오류: \"관리자 로그인 정보 파일이 없습니다. 프로그램을 종료합니다.\"")
-			os.system('pause')
-			sys.exit()
-
-		if not admin_list:
-			print("오류: \"관리자 로그인 정보 파일 내 데이터가 없습니다. 프로그램을 종료합니다.\"")
 			os.system('pause')
 			sys.exit()
 
