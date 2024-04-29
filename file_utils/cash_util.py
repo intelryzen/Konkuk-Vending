@@ -37,30 +37,46 @@ class Cash_Utils(BaseParser):
 			Currency(10000,0),
 			Currency(50000,0)
 		]
-  
+
 		try:
 			with open(cash_file_path, 'r') as file:
 				for line in file:
-					parts = re.split(r'\s+', line.strip()) #횡공백류열1 기준으로 분리
-					if self.is_money_type(parts[0]):
+					parts = re.split(r'\s+', line.strip())  # 공백으로 분리
+					if self.is_money_type(parts[0]):  # 권종 확인
 						for Currency in c.currency_list:
-							if str(Currency.value) == str(parts[0]):
+							if str(Currency.value) == str(parts[0]):  # 권종 일치 확인
 								Currency.quantity += int(parts[1])
-								if self.is_count(str(Currency.quantity)):
+								if self.is_count(str(Currency.quantity)):  # 개수 유효성 검사
 									pass
 								else:
-									print("파일 내 <개수>를 확인하십시오.")
+									print("파일 내 <개수>가 유효하지 않습니다.")
 									os.system('pause')
 									sys.exit()
 					else:
+						if str(parts[0]) == "":
+							print("오류 : 파일에 불필요한 개행이 존재합니다. 프로그램을 종료합니다.")
+							os.system('pause')
+							sys.exit()
 						print("허용되지 않은 권종이 포함된 파일입니다. 파일 내 권종을 확인하십시오.")
 						os.system('pause')
 						sys.exit()
 		except FileNotFoundError:
 			print("경고: 잔돈 파일이 없습니다. 파일을 생성합니다.")
-			self.save_currencies(cash_file_path, Currency)
-		if self.is_all_quantity_zero(c.currency_list, Currency):
+			self.save_currencies(cash_file_path, c.currency_list)  # 파일 생성 로직이 필요
+
+		if self.is_all_quantity_zero(c.currency_list, Currency):  # 모든 통화의 수량이 0인지 확인
 			print("경고: 잔돈 파일 내 데이터가 없습니다.")
+
+		try:
+			with open(cash_file_path, 'r') as file:
+				content = file.read()
+				if not content.endswith('\n'):
+					print("오류: 파일의 끝에 개행 문자가 없습니다. 파일을 확인하십시오.")
+					os.system('pause')
+					sys.exit()
+		except FileNotFoundError:
+			print("경고: 잔돈 파일이 없습니다. 파일을 생성합니다.")
+			self.save_currencies(cash_file_path, c.currency_list)  # 파일 생성 로직이 필요
 
 	def change_currency(self, Currency_Value, Currency_Amount):
 		found = False  # Currency 객체를 찾았는지 여부를 추적하는 플래그
