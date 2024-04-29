@@ -12,8 +12,9 @@ class Seller_Utils:
 		"""
 		try:
 			with open(seller_file_path, 'r', encoding='utf-8') as file:
-				for line in file:
-					if line == '\n':
+				lines = file.read().strip().split('\n')
+				for line in lines:
+					if line == '':
 						print("오류 : 파일 내 <개행>의 갯수를 확인하십시오")
 						os.system('pause')
 						sys.exit()
