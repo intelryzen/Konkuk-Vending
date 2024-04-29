@@ -36,6 +36,8 @@ class Drinks_util:
             with open(filename, 'r', encoding=encoding) as file:
                 lines = file.readlines()
                 for line in lines:
+                    if not line.endswith('\n'):
+                        raise wrongData("행 끝에 개행이 없습니다.", line+"\n")
                     data = line.split()
                     if len(data) != 0 and len(data) != 4:
                         raise wrongData("행의 데이터 개수가 맞지 않습니다.", line)
