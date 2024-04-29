@@ -32,10 +32,14 @@ class Drinks_util:
         '''
         bp = BaseParser()
 
+        flag = True
         try:
             with open(filename, 'r', encoding=encoding) as file:
                 lines = file.readlines()
                 for line in lines:
+                    if flag and line.strip() == '':
+                        raise wrongData("개행으로 파일이 시작하면 안됩니다.", line)
+                    flag = False
                     if not line.endswith('\n'):
                         raise wrongData("행 끝에 개행이 없습니다.", line+"\n")
                     data = line.split()
