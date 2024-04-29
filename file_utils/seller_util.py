@@ -13,10 +13,6 @@ class Seller_Utils:
 		try:
 			with open(seller_file_path, 'r', encoding='utf-8') as file:
 				lines = file.read().strip().split('\n')
-				if len(lines) != 1:
-					print("오류 : 관리자 로그인 정보 파일 내 데이터가 올바른 형식으로 저장되어 있지 않습니다. 프로그램을 종료합니다.")
-					os.system('pause')							
-					sys.exit()
 				for line in lines:
 					if line == '':
 						print("오류 : 파일 내 <개행>의 갯수를 확인하십시오")
