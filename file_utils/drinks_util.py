@@ -3,7 +3,8 @@ import sys
 sys.path.append(os.getcwd())
 
 from config import Config as config
-from model.drink import Drink
+from model.drink_info import Drink_info
+from model.slot import Slot
 from my_parser.base_parser import BaseParser
 
 class wrongData(Exception):
@@ -121,11 +122,10 @@ class Drinks_util:
     def print_drinks_cus(self):
         '''
         인자: 없음
-        음료수를 출력할 때 사용
-        번호와 음료수를 출력
         '''
-        for drink in config.drinks_list:
-            print(drink)
+        for slot in config.slots_list:
+            drink_info = self.find_drink_info(slot.drink_number)
+            print(f"{slot.slot_number}. {drink_info.name} {drink_info.price}원 {slot.stock}개")
     
     def print_drinks_admin(self):
         '''
@@ -133,37 +133,52 @@ class Drinks_util:
         음료수를 출력할 때 사용
         번호와 음료수를 출력
         '''
-        for drink in config.drinks_list:
-            print(f"{drink.number} {drink.name} {drink.stock}개 {drink.price}원")
+        for slot in config.drinks_list:
+            drink_info = self.find_drink_info(slot.drink_number)
+            print(f"{slot.number} {drink_info.drink_number} {drink_info.name} {drink_info.price}원 {slot.stock}개")
 
-    # 프롬프트에서 호출할 때 인자는 이미 검사 완료되었다고 생각함. 따라서 x는 항상 형식에 맞고 존재하는 번호이다.
-    def find_drink(self, x):
-        '''
-        인자: 번호
-        음료수 재고 수정 시 대상 음료를 찾을 때 사용하는 함수
-        프롬프트에서 직접적으로 호출할 필요 없음.
-        '''
-        for drink in config.drinks_list:
-            if(drink.number == x):
-                return drink
+    def find_slot(slot_number):
+        x = int(slot_number)
 
-    def modify_stock(self, number:str, stock:str):
+        for slot in config.slots_list:
+            if(slot.slot_number == x):
+                return slot
+        return None
+
+    def find_drink_info(drink_number):
+        x = int(drink_number)
+
+        for drink_info in config.drinks_list:
+            if(drink_info.drink_number == x):
+                return drink_info
+        return None
+
+    def modify_slot_stock(self, slot_number:str, stock:str):
         '''
-        인자: 번호, 개수
-        음료수 재고 수정 프롬프트에서 사용.
-        0개가 입력된 경우 음료 삭제.
+        인자: 슬롯 번호, 개수
+        슬롯 번호는 이미 존재하는 슬롯 번호임.
         음료수 재고 수정 후 파일 재작성까지 처리 완.
         '''
-        number = str(number).lstrip("0")
-        target = self.find_drink(number)
+        slot = self.find_slot(slot_number)
         stock = int(stock)
+        slot.stock = stock
+
         if(stock == 0):
-            print(f'{target.number}번 {target.name}가 삭제되었습니다.')
-            config.drinks_list.remove(target)
+            self.check_all_zero(slot.drink_number)
         else:
-            target.stock = stock
-            print(f'{target.number}번 {target.name}의 개수가 {target.stock}개로 변경되었습니다.')
-        self.write_to_file(config.DRINKS_FILE_PATH)
+            drink_info = self.find_drink_info(slot.drink_number)
+            print(f'{slot.slot_number}번 {drink_info.name}의 개수가 {slot.stock}개로 변경되었습니다.')
+            self.write_to_file(config.SLOTS_FILE_PATH)
+
+    def check_all_zero(self, drink_number):
+        for slot in config.slots_list:
+            if(slot.drink_number == drink_number):
+                if(slot.stock != 0):
+                    break
+                else:
+                    config.slots_list.remove(slot)
+
+        self.write_to_file(config.SLOTS_FILE_PATH)
 
     def add_new_drink(self, number:str, name:str, price:str, stock:str):
         '''
@@ -195,6 +210,7 @@ class Drinks_util:
             self.write_to_file()
         else:
             print("오류: 올바른 입력이 아닙니다.")
+
 
 # 테스트
 if __name__ == "__main__":
