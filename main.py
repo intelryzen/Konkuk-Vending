@@ -62,7 +62,7 @@ def main():
                         else :
                             break
                 elif command == 2:
-                    login_instance = Login()  # Login 클래스의 인스턴스 생성
+                    login_instance = AdminLogin()  # Login 클래스의 인스턴스 생성
                     log_command = login_instance.show_admin_login_prompt()
                     if log_command == 0:
                         continue
