@@ -1,7 +1,7 @@
 from my_parser.admin_login_parser import AdminLoginParser
 from config import config as c
 
-class Login:
+class AdminLogin:
     '''
         관리자 로그인 프롬프트
         command:
