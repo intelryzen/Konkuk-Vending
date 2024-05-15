@@ -93,32 +93,23 @@ class Drinks_util:
         with open(filename, 'w', encoding=encoding) as file:
             for drink in config.drinks_list:
                 file.write(f"{drink.number} {drink.name} {drink.price} {drink.stock}\n")
-                
-    def check_duplicate_numbers(self):
-        '''
-        인자: 없음
-        파일 읽어올 때 번호 중복을 확인하기 위한 함수로
-        프롬프트에서 직접적으로 호출할 필요 없음.
-        '''
+    
+    def check_duplicate_drink_number():
         numbers = set()
-        for drink in config.drinks_list:
-            if drink.number in numbers:
+        for drink_info in config.drinks_list:
+            if drink_info.number in numbers:
                 return True
-            numbers.add(drink.number)
+            numbers.add(drink_info.number)
         return False
-        # duplicates = set()
-        # for drink in config.drinks_list:
-        #     if drink.number in numbers:
-        #         duplicates.add(drink.number)
-        #     else:
-        #         numbers.add(drink.number)
-        # if duplicates:
-        #     print("오류: 번호의 중복이 확인되었습니다.")
-        #     return False
-        # return True
+    
+    def check_duplicate_slot_number():
+        numbers = set()
+        for slot in config.slots_list:
+            if slot.number in numbers:
+                return True
+            numbers.add(slot.number)
+        return False
 
-    #프롬프트별 출력 다름 주의
-    #관리자 프롬프트에서의 음료수 재고 출력
     def print_drinks_cus(self):
         '''
         인자: 없음
