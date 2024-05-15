@@ -15,7 +15,7 @@ class Config:
     admin_list = [] #관리자 클래스 리스트 생성
     currency_list = [] #권종 클래스 리스트 생성
     drinks_list = [] # 음료 정보 리스트
-    slot_list=[] # 슬롯 관리 리스트
+    slots_list=[] # 슬롯 관리 리스트
     customer_list = []
     
     coupon = 0 #쿠폰 개수
