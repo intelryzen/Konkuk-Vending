@@ -152,23 +152,19 @@ class Drinks_util:
         return None
 
     def modify_slot_stock(self, slot_number:str, stock:str):
-        '''
-        인자: 슬롯 번호, 개수
-        슬롯 번호는 이미 존재하는 슬롯 번호임.
-        음료수 재고 수정 후 파일 재작성까지 처리 완.
-        '''
         slot = self.find_slot(slot_number)
         s = int(stock)
         slot.stock = s
+
+        print(f'{slot.slot_number}번 {drink_info.name}의 개수가 {slot.stock}개로 변경되었습니다.')
 
         if(s == 0):
             self.check_all_zero(slot.drink_number)
         else:
             drink_info = self.find_drink_info(slot.drink_number)
-            print(f'{slot.slot_number}번 {drink_info.name}의 개수가 {slot.stock}개로 변경되었습니다.')
             #슬롯 정보 파일 작성
 
-    def check_all_zero(self, drink_number):
+    def check_all_zero(self, drink_number:int):
         slots = list()
 
         for slot in config.slots_list:
@@ -190,17 +186,23 @@ class Drinks_util:
         s = int(stock)
         self.add_slot(Slot(sN, dN, s))
         #슬롯 파일 작성
+        drink_info = self.find_drink_info(dN)
+        print(f"{sN}번 슬롯에 {drink_info.drink_number}번 {drink_info.name}가 개당 {drink_info.price}원으로 {s}개 추가되었습니다.")
 
-    def add_drink_info(self, drink_number:str, name:str, price:str):
+    def append_drink_info(self, drink_number:str, name:str, price:str):
         dN = int(drink_number)
         p = int(price)
         self.add_drink_info(Drink_info(dN, name, p))
         #음료수 파일 작성
+
+        print(f"{dN}번 {name}가 개당 {p}원으로 추가되었습니다.")
     
-    def sub_drink_info(self, drink_number:str):
+    def remove_drink_info(self, drink_number:str):
         drink_info = self.find_drink_info(drink_number)
         config.drinks_list.remove(drink_info)
         #음료수 파일 작성
+
+        print(f"{drink_info.drink_number}번 {drink_info.name} {drink_info.price}원이 삭제되었습니다.")
 
     # 돈 처리는 완료되었다고 가정
     def buy_drink(self, slot_number:str):
