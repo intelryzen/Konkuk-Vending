@@ -134,7 +134,7 @@ class Drinks_util:
                 return slot
         return None
     
-    def find_list_drink_info(drink_number):
+    def find_slots_with_same_drink_number(drink_number):
         dN = int(drink_number)
         slots = list()
         for slot in config.slots_list:
@@ -208,7 +208,7 @@ class Drinks_util:
         if(target_slot.stock != 0):
             target_slot.stock -= 1
         else:
-            slots = self.find_list_drink_info(target_slot.drink_number)
+            slots = self.find_slots_with_same_drink_number(target_slot.drink_number)
             for slot in slots:
                 if(slot.stock != 0):
                     target_slot = slot
