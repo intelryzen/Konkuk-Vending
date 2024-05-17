@@ -9,12 +9,12 @@ class AdminFunctionParser(BaseParser):
         
         
         drinknum = []  #음료 번호 리스트    
-        drinkname = [] #음료 이름 리스트
-        #drinkprice = [] ##음료 가격 리스트 추가
+        drinkname = [] #음료 이름 리스트  >> 필요 없을 수도 있음
+        #drinkprice = [] ##음료 가격 리스트 추가 >>필요 없을 수도 있음
         '''
         s_num = [] ## 슬롯 번호 리스트
         s_drink_num = [] ##슬롯에 있는 음료 번호 리스트
-        s_drink_count =[] ## 슬롯에 있는 음료 개수 리스트
+        s_drink_count =[] ## 슬롯에 있는 음료 재고 리스트 >> 필요 없을 수도 있음
         '''
         
 
@@ -76,16 +76,12 @@ class AdminFunctionParser(BaseParser):
             if command == 4:
                 if not self.is_number(parts[1]):
                     return False , "오류 : 음료수의 슬롯 번호는 숫자만 입력할 수 있습니다."
-                if not(parts[1] in drinknum) : ##if not(parts[1] in s_drink_num) :
+                if not(parts[1] in drinknum) : ##if not(parts[1] in s_num) :
                      return False, "오류: 존재하지 않는 음료수 슬롯 번호입니다. 사용하는 슬롯만 재고를 수정할 수 있습니다."
                 if not self.is_count(parts[2]):
                     return False, "오류: 음료수의 개수의 입력은 오직 0과 99사이의 숫자만 허용합니다."
-                
-
-                if not parts[2]==0:
-                    return True,command
-                elif parts[2]==0:
-                    return True,command
+                return True,command
+              
 
         
         # 5번 메뉴
