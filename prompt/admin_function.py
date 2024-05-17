@@ -24,10 +24,12 @@ class AdminPrompt:
         while True:
             print("\n<관리자>")
             print("1. 잔돈 확인")
-            print("2. 음료수 재고 확인")
+            print("2. 음료수 슬롯별 재고 확인")
             print("3. 잔돈 수정")
-            print("4. 음료수 재고 수정")
-            print("5. 음료수 추가")
+            print("4. 자판기 슬롯별 음료수 재고 수정")
+            print("5. 자판기 슬롯에 음료수 할당")
+            print("6. 음료수 정보 추가")
+            print("7. 음료수 정보 삭제")
             print("(0.로그아웃)")
             print("-------------------------------------------")
             admin_input = input(">>>")
@@ -55,18 +57,14 @@ class AdminPrompt:
                     from model.cash import Currency
                     currency = Currency(parts[1], parts[2])
                     cash_utils_instance.save_currencies(c.CASH_FILE_PATH, currency)
-                    
-
 
                 elif command == 4:
-                    # 음료수 재고 수정
+                    # 자판기 슬롯별 음료수 재고 수정
                     drinks_utils_instance = Drinks_util()
-                    isheredrink = drinks_utils_instance.find_drink(parts[1])
-                    if isheredrink != None:
-                        # print(isheredrink)
-                        drinks_utils_instance.modify_stock(parts[1], parts[2])
+                    drinks_utils_instance.modify_slot_stock(parts[1], parts[2])
+                    
                 elif command == 5:
-                    # 음료수 추가
+                    # 자판기 슬롯에 음료수 할당
                     drinks_utils_instance = Drinks_util()
                     drinks_utils_instance.add_new_drink(parts[1], parts[2], parts[3], parts[4])
                     drinks_utils_instance.write_to_file(c.DRINKS_FILE_PATH)
