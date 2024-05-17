@@ -46,11 +46,11 @@ class AdminPrompt:
                         print(f"{Currency.value}원 {Currency.quantity}개")            
                     
                 elif command == 2:
-                    # 음료수 재고 확인 기능 구현 1번 부터 정렬
+                    # 음료수 슬롯별 재고 확인
                     Drinks_util().print_drinks_admin()
                     
                 elif command == 3:
-                    # 잔돈 수정 기능 구현
+                    # 잔돈 수정
                     parts = [int(i) for i in parts]
                     cash_utils_instance = Cash_Utils()  # Cash_Utils 클래스의 인스턴스 생성
                     cash_utils_instance.change_currency(parts[1], parts[2])
@@ -66,8 +66,18 @@ class AdminPrompt:
                 elif command == 5:
                     # 자판기 슬롯에 음료수 할당
                     drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.add_new_drink(parts[1], parts[2], parts[3], parts[4])
-                    drinks_utils_instance.write_to_file(c.DRINKS_FILE_PATH)
+                    drinks_utils_instance.assign_drink_slot(parts[1], parts[2], parts[3])
+
+                elif command == 6:
+                    #음료수 정보 추가
+                    drinks_utils_instance = Drinks_util()
+                    drinks_utils_instance.add_drink_info(parts[1], parts[2], parts[3])
+
+                elif command == 7:
+                    #음료수 정보 삭제
+                    drinks_utils_instance = Drinks_util()
+                    drinks_utils_instance.sub_drink_info(parts[1])
+
                 elif command == 0:
                     return command
                     '''
