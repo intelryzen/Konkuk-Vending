@@ -23,7 +23,7 @@ class Drinks_util:
         if drink.stock != 0:
             config.drinks_list.append(drink)
 
-    def read_from_file(self, filename=config.DRINKS_FILE_PATH, encoding = 'utf-8'):
+    def read_from_file(self, filename, encoding = 'utf-8'):
         '''
         인자: filename = config.DRINKS_FILE_PATH, encoding = 'utf-8'
         파일을 읽어와서 음료수의 번호의 선행 0 지우고 개수가 0인 경우를 제외하여 config.drinks_list에 추가한다.
@@ -162,12 +162,18 @@ class Drinks_util:
             self.write_to_file(config.SLOTS_FILE_PATH)
 
     def check_all_zero(self, drink_number):
+        slots = list()
+
         for slot in config.slots_list:
             if(slot.drink_number == drink_number):
                 if(slot.stock != 0):
-                    break
+                    self.write_to_file(config.SLOTS_FILE_PATH)
+                    return
                 else:
-                    config.slots_list.remove(slot)
+                    slots.append(slot)
+
+        for slot in slots:
+            config.slots_list.remove(slot)
 
         self.write_to_file(config.SLOTS_FILE_PATH)
 
