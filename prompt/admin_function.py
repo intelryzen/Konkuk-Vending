@@ -71,12 +71,12 @@ class AdminPrompt:
                 elif command == 6:
                     #음료수 정보 추가
                     drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.add_drink_info(parts[1], parts[2], parts[3])
+                    drinks_utils_instance.append_drink_info(parts[1], parts[2], parts[3])
 
                 elif command == 7:
                     #음료수 정보 삭제
                     drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.sub_drink_info(parts[1])
+                    drinks_utils_instance.remove_drink_info(parts[1])
 
                 elif command == 0:
                     return command
