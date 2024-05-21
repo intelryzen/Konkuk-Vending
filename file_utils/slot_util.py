@@ -53,11 +53,39 @@ class SlotUtils(BaseParser):
             print(f"오류: {e}")
             sys.exit()
             
+    def __read_records(self):
+        with open(c.SLOTS_FILE_PATH, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            records = []
+            for line in lines:
+                record = line.split()
+                if line.strip(): 
+                    records.append(record)
+            return records
+    
+    def __write_records(self, records):
+        with open(c.SLOTS_FILE_PATH, 'w') as file:
+            file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
+        
     def update_stock(self, slot_number:int, stock:int):
-        pass
+        records = self.__read_records()
+        
+        for record in records:
+            if(int(record[0]) == slot_number):
+                record[2] = stock
+                break
+
+        self.__write_records(records)
+
     
     def delete_slots_used_same_drink(self, drink_number:int):
-        pass
-    
+        records = self.__read_records()
+        records = [record for record in records if int(record[1]) != drink_number]
+
+        self.__write_records(records)
+
     def delete_slot(self, slot_number:int):
-        pass
+        records = self.__read_records()
+        records = [record for record in records if int(record[0]) != slot_number]
+        
+        self.__write_records(records)
