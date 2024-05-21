@@ -59,7 +59,7 @@ class Drinks_util:
                         if(price<100 or price>1000000 or price%100 != 0):
                             raise wrongData("가격이 범위 밖이거나 100의 배수가 아닙니다.", line)
                             # raise wrongData(line)
-                        self.add_drink_info(Drink_info(number, name, price, stock))
+                        self.add_drink_info(Drink_info(number, name, price))
 
         except FileNotFoundError:
             print("경고: “음료수 리스트 파일이 없습니다. 파일을 생성합니다.”")
