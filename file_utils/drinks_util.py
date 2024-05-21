@@ -92,7 +92,7 @@ class Drinks_util:
             for drink in config.drinks_list:
                 file.write(f"{drink.number} {drink.name} {drink.price} {drink.stock}\n")
     
-    def check_duplicate_drink_number():
+    def check_duplicate_drink_number(self):
         numbers = set()
         for drink_info in config.drinks_list:
             if drink_info.drink_number in numbers:
@@ -100,7 +100,7 @@ class Drinks_util:
             numbers.add(drink_info.drink_number)
         return False
     
-    def check_duplicate_slot_number():
+    def check_duplicate_slot_number(self):
         numbers = set()
         for slot in config.slots_list:
             if slot.slot_number in numbers:
@@ -134,7 +134,7 @@ class Drinks_util:
                 return slot
         return None
     
-    def find_slots_with_same_drink_number(drink_number):
+    def find_slots_with_same_drink_number(self, drink_number):
         dN = int(drink_number)
         slots = list()
         for slot in config.slots_list:
@@ -143,7 +143,7 @@ class Drinks_util:
 
         return slots
 
-    def find_drink_info(drink_number):
+    def find_drink_info(self, drink_number):
         x = int(drink_number)
 
         for drink_info in config.drinks_list:
