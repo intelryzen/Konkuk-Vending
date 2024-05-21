@@ -11,6 +11,7 @@ class Config:
     CASH_FILE_PATH : str = 'cash.txt'
     DRINKS_FILE_PATH : str = 'drinks.txt'
     SLOTS_FILE_PATH : str = 'machine.txt'
+    BUYER_FILE_PATH : str = 'buyers.txt'
     
     buyer_list = [] #구매자 정보 리스트 
     admin_list = [] #관리자 클래스 리스트 생성
