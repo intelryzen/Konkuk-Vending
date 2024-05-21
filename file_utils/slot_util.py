@@ -53,3 +53,12 @@ class SlotUtils(BaseParser):
         except Exception as e:
             print(f"오류: {e}")
             sys.exit()
+            
+    def update_stock(self, slot_number:int, stock:int):
+        pass
+    
+    def delete_slots_used_same_drink(self, drink_number:int):
+        pass
+    
+    def delete_slot(self, slot_number:int):
+        pass
