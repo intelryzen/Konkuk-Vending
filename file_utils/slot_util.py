@@ -13,6 +13,7 @@ class SlotUtils(BaseParser):
                     drink_nums.add(drink.drink_number)
 
                 for line in lines:
+                    data = line.split()
                     comment = f"{line}\n"
                     
                     if not line.strip():  # 공백줄 무시
@@ -20,8 +21,6 @@ class SlotUtils(BaseParser):
 
                     if not line.endswith('\n'):
                         raise ValueError(f"행 끝에 개행이 없습니다. {comment}")
-
-                    data = line.split()
                     
                     if len(data) != 3:
                         raise ValueError(f"행의 데이터 개수가 맞지 않습니다. {comment}")
