@@ -95,17 +95,17 @@ class Drinks_util:
     def check_duplicate_drink_number():
         numbers = set()
         for drink_info in config.drinks_list:
-            if drink_info.number in numbers:
+            if drink_info.drink_number in numbers:
                 return True
-            numbers.add(drink_info.number)
+            numbers.add(drink_info.drink_number)
         return False
     
     def check_duplicate_slot_number():
         numbers = set()
         for slot in config.slots_list:
-            if slot.number in numbers:
+            if slot.slot_number in numbers:
                 return True
-            numbers.add(slot.number)
+            numbers.add(slot.slot_number)
         return False
 
     def print_drinks_cus(self):
