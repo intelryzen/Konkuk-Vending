@@ -47,39 +47,33 @@ class BuyerUtils(BaseParser):
             print(f"오류: {e}")
             sys.exit()
             
-    # def __read_records(self):
-    #     with open(c.SLOTS_FILE_PATH, 'r', encoding='utf-8') as file:
-    #         lines = file.readlines()
-    #         records = []
-    #         for line in lines:
-    #             record = line.split()
-    #             if line.strip(): 
-    #                 records.append(record)
-    #         return records
+    def __read_records(self):
+        with open(c.BUYER_FILE_PATH, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            records = []
+            for line in lines:
+                record = line.split()
+                if line.strip(): 
+                    records.append(record)
+            return records
     
-    # def __write_records(self, records):
-    #     with open(c.SLOTS_FILE_PATH, 'w') as file:
-    #         file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
+    def __write_records(self, records):
+        with open(c.BUYER_FILE_PATH, 'w') as file:
+            file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
         
-    # def update_stock(self, slot_number:int, stock:int):
-    #     records = self.__read_records()
+    def update_money_coupon(self, buyer_id:str, money:int, coupon_number:int):
+        records = self.__read_records()
         
-    #     for record in records:
-    #         if(int(record[0]) == slot_number):
-    #             record[2] = stock
-    #             break
+        for record in records:
+            if(record[0] == buyer_id):
+                record[1] = money
+                record[2] = coupon_number
+                break
 
-    #     self.__write_records(records)
-
+        self.__write_records(records)
     
-    # def delete_slots_used_same_drink(self, drink_number:int):
-    #     records = self.__read_records()
-    #     records = [record for record in records if int(record[1]) != drink_number]
+    def insert_buyer(self, buyer_id:str):
+        records = self.__read_records()
+        records.append([buyer_id, 0, 0])
 
-    #     self.__write_records(records)
-
-    # def delete_slot(self, slot_number:int):
-    #     records = self.__read_records()
-    #     records = [record for record in records if int(record[0]) != slot_number]
-        
-    #     self.__write_records(records)
+        self.__write_records(records)
