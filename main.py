@@ -41,6 +41,7 @@ def main():
         Drinks_util().read_from_file(c.DRINKS_FILE_PATH)
         # c.drinks_list = [Drink_info(drink_number=1,name="d",price=11,stock=12)]
         SlotUtils().read()
+        BuyerUtils().read()
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
         Cash_Utils().save_currencies(c.CASH_FILE_PATH, cash.Currency)
         

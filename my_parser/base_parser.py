@@ -81,6 +81,17 @@ class BaseParser():
         pattern = r'^(0?[1-9]|[1-9][0-9])$'
         return re.match(pattern, input)
     
+    def is_id(self, input: str) -> bool:
+        return len(input) <= 10 and self.is_word(input)
+    
+    def is_price(self, input: str) -> bool:
+        pattern = r'^(1000000|[1-9][0-9]{0,3}00)$'
+        return re.match(pattern, input)
+    
+    def is_mileage(self, input: str) -> bool:
+        pattern = r'^(0|1000000|[1-9][0-9]{0,3}00)$'
+        return re.match(pattern, input) and int(input) < 10000
+    
     # 개행이 포함되어 있는지 확인
     def contains_newline(self, input: str):
         if '\n' in input:
