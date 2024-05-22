@@ -64,10 +64,10 @@ class DrinkInfoUtils(BaseParser):
         with open(c.DRINKS_FILE_PATH, 'w') as file:
             file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
 
-    def delete_drink(self, drink_number:int):
+    def delete_drink(self, drink_num:int):
         records = self.__read_drinks_records()
-        records = [record for record in records if int(record[0]) != drink_number]
-        SlotUtils.delete_slots(drink_number)
+        records = [record for record in records if int(record[0]) != drink_num]
+        SlotUtils.delete_slots(drink_num)
         self.__write_drinks_records(records)
 
     def update_new_drinks(self, drink_num:int, drink_name:str, price:int):
