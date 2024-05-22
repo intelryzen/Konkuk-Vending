@@ -71,9 +71,18 @@ class BuyerUtils(BaseParser):
                 break
 
         self.__write_records(records)
-    
+    '''
     def insert_buyer(self, buyer_id:str):
         records = self.__read_records()
         records.append([buyer_id, 0, 0])
 
         self.__write_records(records)
+    '''
+    def insert_buyer(self, buyer_id: str) -> bool:
+        try:
+            records = self.__read_records()
+            records.append([buyer_id, 0, 0])
+            self.__write_records(records)
+            return True 
+        except Exception as e:
+            return False
