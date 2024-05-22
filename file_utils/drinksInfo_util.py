@@ -50,7 +50,7 @@ class DrinkInfoUtils(BaseParser):
             print(f"오류: {e}")
             sys.exit()
            
-    def __read_records(self):
+    def __read_drinks_records(self):
         with open(c.DRINKS_FILE_PATH, 'r', encoding='utf-8') as file:
             lines = file.readlines()
             records = []
@@ -60,19 +60,18 @@ class DrinkInfoUtils(BaseParser):
                     records.append(record)
             return records
 
-    def __write_records(self, records):
-        with open(c.SLOTS_FILE_PATH, 'w') as file:
+    def __write_drinks_records(self, records):
+        with open(c.DRINKS_FILE_PATH, 'w') as file:
             file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
 
     def delete_drink(self, drink_number:int):
-        records = self.__read_records()
+        records = self.__read_drinks_records()
         records = [record for record in records if int(record[0]) != drink_number]
-        if(drink_number in c.slots_list[0]):
-            SlotUtils.delete_slots_used_same_drink(drink_number)
-        self.__write_records(records)
+        SlotUtils.delete_slots(drink_number)
+        self.__write_drinks_records(records)
 
     def update_new_drinks(self, drink_num:int, drink_name:str, price:int):
-        records = self.__read_records()
+        records = self.__read_drinks_records()
         new_drink = [str(drink_num), drink_name, str(price)] 
         records.append(new_drink)
-        self.__write_records(records)
+        self.__write_drinks_records(records)
