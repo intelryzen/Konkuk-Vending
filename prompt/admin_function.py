@@ -1,7 +1,10 @@
 from my_parser.admin_function_parser import AdminFunctionParser
 from file_utils.cash_util import Cash_Utils
-from file_utils.drinks_util import Drinks_util
-from config import config as c
+from file_utils.slot_util import SlotUtils
+from file_utils.drinkInfo_util import DrinkInfoUtils
+from model.drink_info import Drink_info
+from model.slot import Slot
+from config import Config as config
 
 
 class AdminPrompt:
@@ -41,13 +44,13 @@ class AdminPrompt:
                 parts = admin_input.split()
                 
                 if command == 1:
-                    sorted_currency_list = sorted(c.currency_list, key=lambda x: x.value, reverse=True)
+                    sorted_currency_list = sorted(config.currency_list, key=lambda x: x.value, reverse=True)
                     for Currency in sorted_currency_list:
                         print(f"{Currency.value}원 {Currency.quantity}개")            
                     
                 elif command == 2:
                     # 음료수 슬롯별 재고 확인
-                    Drinks_util().print_drinks_admin()
+                    self.print_drinks_admin()
                     
                 elif command == 3:
                     # 잔돈 수정
@@ -60,23 +63,19 @@ class AdminPrompt:
 
                 elif command == 4:
                     # 자판기 슬롯별 음료수 재고 수정
-                    drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.modify_slot_stock(parts[1], parts[2])
+                    self.modify_slot_stock(parts[1], parts[2])
                     
                 elif command == 5:
                     # 자판기 슬롯에 음료수 할당
-                    drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.assign_drink_slot(parts[1], parts[2], parts[3])
+                    self.assign_drink_slot(parts[1], parts[2], parts[3])
 
                 elif command == 6:
                     #음료수 정보 추가
-                    drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.append_drink_info(parts[1], parts[2], parts[3])
+                    self.append_drink_info(parts[1], parts[2], parts[3])
 
                 elif command == 7:
                     #음료수 정보 삭제
-                    drinks_utils_instance = Drinks_util()
-                    drinks_utils_instance.remove_drink_info(parts[1])
+                    self.remove_drink_info(parts[1])
 
                 elif command == 0:
                     return command
@@ -88,7 +87,94 @@ class AdminPrompt:
             else:
                 print(command)  # 오류 메시지 출력
                 continue
-            
+
+    def print_drinks_admin(self):
+        '''
+        인자: 없음
+        음료수를 출력할 때 사용
+        번호와 음료수를 출력
+        '''
+        for slot in config.drinks_list:
+            drink_info = self.find_drink_info(slot.drink_number)
+            print(f"{slot.number} {drink_info.drink_number} {drink_info.name} {drink_info.price}원 {slot.stock}개")
+
+    def find_slot(slot_number):
+        x = int(slot_number)
+
+        for slot in config.slots_list:
+            if(slot.slot_number == x):
+                return slot
+        return None
+    
+    def find_slots_with_same_drink_number(self, drink_number):
+        dN = int(drink_number)
+        slots = list()
+        for slot in config.slots_list:
+            if(slot.drink_number == dN):
+                slots.append(slot)
+
+        return slots
+
+    def find_drink_info(self, drink_number):
+        x = int(drink_number)
+
+        for drink_info in config.drinks_list:
+            if(drink_info.drink_number == x):
+                return drink_info
+        return None
+
+    def modify_slot_stock(self, slot_number:str, stock:str):
+        slot = self.find_slot(slot_number)
+        s = int(stock)
+        slot.stock = s
+
+        print(f'{slot.slot_number}번 {drink_info.name}의 개수가 {slot.stock}개로 변경되었습니다.')
+
+        if(s == 0):
+            self.check_all_zero(slot.drink_number)
+        else:
+            drink_info = self.find_drink_info(slot.drink_number)
+            SlotUtils.__write_records(config.slots_list)
+
+    def check_all_zero(self, drink_number:int):
+        slots = list()
+
+        for slot in config.slots_list:
+            if(slot.drink_number == drink_number):
+                if(slot.stock != 0):
+                    SlotUtils.__write_records(config.slots_list)
+                    return
+                else:
+                    slots.append(slot)
+
+        for slot in slots:
+            config.slots_list.remove(slot)
+
+        SlotUtils.__write_records(config.slots_list)
+
+    def assign_drink_slot(self, slot_number:str, drink_number:str, stock:str):
+        sN = int(slot_number)
+        dN = int(drink_number)
+        s = int(stock)
+        config.slots_list.append(Slot(sN, dN, s))
+        SlotUtils.__write_records(config.slots_list)
+        drink_info = self.find_drink_info(dN)
+        print(f"{sN}번 슬롯에 {drink_info.drink_number}번 {drink_info.name}가 개당 {drink_info.price}원으로 {s}개 추가되었습니다.")
+
+    def append_drink_info(self, drink_number:str, name:str, price:str):
+        dN = int(drink_number)
+        p = int(price)
+        config.drinks_list.append(Drink_info(dN, name, p))
+        DrinkInfoUtils.__write_drinks_records(config.drinks_list)
+
+        print(f"{dN}번 {name}가 개당 {p}원으로 추가되었습니다.")
+    
+    def remove_drink_info(self, drink_number:str):
+        drink_info = self.find_drink_info(drink_number)
+        config.drinks_list.remove(drink_info)
+        DrinkInfoUtils.__write_drinks_records(config.drinks_list)
+
+        print(f"{drink_info.drink_number}번 {drink_info.name} {drink_info.price}원이 삭제되었습니다.")
             
 if __name__ == "__main__":
     # 관리자 프롬프트 테스트

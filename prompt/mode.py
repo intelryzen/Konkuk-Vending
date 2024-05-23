@@ -39,8 +39,7 @@ class Mode:
             # if is_vaild == False:
             else:   
                 print(mode)  # 오류 메시지 출력
-            
-from file_utils.drinks_util import Drinks_util
+
 class ShowDrinksList:
     def __init__(self):
         self.du = Drinks_util()

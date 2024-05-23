@@ -1,9 +1,10 @@
-from file_utils.drinks_util import Drinks_util
 from my_parser.drink_selection_parser import DrinkSelectionParser
 from config import config as c
 from prompt.mode import ShowDrinksList
 from .change import Change
 from .cash_input import CashInput
+from file_utils.slot_util import SlotUtils
+
 
 class DrinkSelection:
     '''
@@ -49,7 +50,7 @@ class DrinkSelection:
                         print(msg)
                         return self.drink_selection_prompt()
                     else:
-                        Drinks_util().buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
+                        self.buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
                         if self.cash_by_custom() == 0:
                             self.drink_list.show_drinks_list() # 음료수 목록 출력
                             return
@@ -73,6 +74,58 @@ class DrinkSelection:
          for i in range(6):
              ret += (c.customer_list[i].value * c.customer_list[i].quantity)
          return ret
+    
+    def find_drink_info(self, drink_number):
+        x = int(drink_number)
+
+        for drink_info in c.drinks_list:
+            if(drink_info.drink_number == x):
+                return drink_info
+        return None
+    
+    def print_drinks_cus(self):
+        for slot in c.slots_list:
+            drink_info = self.find_drink_info(slot.drink_number)
+            print(f"{slot.slot_number}. {drink_info.name} {drink_info.price}원 {slot.stock}개")
+    
+    # 돈 처리는 완료되었다고 가정
+    def buy_drink(self, slot_number:str):
+        target_slot = self.find_slot(slot_number)
+        if(target_slot.stock != 0):
+            target_slot.stock -= 1
+        else:
+            slots = self.find_slots_with_same_drink_number(target_slot.drink_number)
+            for slot in slots:
+                if(slot.stock != 0):
+                    target_slot = slot
+                    target_slot.stock -= 1
+        if(target_slot.stock == 0):
+            self.check_all_zero()
+
+    def check_all_zero(self, drink_number:int):
+        slots = list()
+
+        for slot in c.slots_list:
+            if(slot.drink_number == drink_number):
+                if(slot.stock != 0):
+                    SlotUtils.__write_records(c.slots_list)
+                    return
+                else:
+                    slots.append(slot)
+
+        for slot in slots:
+            c.slots_list.remove(slot)
+
+        SlotUtils.__write_records(c.slots_list)
+
+    def find_slots_with_same_drink_number(self, drink_number):
+        dN = int(drink_number)
+        slots = list()
+        for slot in c.slots_list:
+            if(slot.drink_number == dN):
+                slots.append(slot)
+
+        return slots
 
 if __name__ == "__main__":
     # 음료수 선택 프롬프트 테스트
