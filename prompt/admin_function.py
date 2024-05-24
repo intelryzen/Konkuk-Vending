@@ -94,9 +94,9 @@ class AdminPrompt:
         음료수를 출력할 때 사용
         번호와 음료수를 출력
         '''
-        for slot in config.drinks_list:
+        for slot in config.slots_list:
             drink_info = self.find_drink_info(slot.drink_number)
-            print(f"{slot.number} {drink_info.drink_number} {drink_info.name} {drink_info.price}원 {slot.stock}개")
+            print(f"{slot.slot_number} {drink_info.drink_number} {drink_info.name} {drink_info.price}원 {slot.stock}개")
 
     def find_slot(slot_number):
         x = int(slot_number)
@@ -127,14 +127,13 @@ class AdminPrompt:
         slot = self.find_slot(slot_number)
         s = int(stock)
         slot.stock = s
+        SlotUtils.update_stock(slot.slot_number, slot.stock)
 
+        drink_info = self.find_drink_info(slot.drink_number)
         print(f'{slot.slot_number}번 {drink_info.name}의 개수가 {slot.stock}개로 변경되었습니다.')
 
         if(s == 0):
             self.check_all_zero(slot.drink_number)
-        else:
-            drink_info = self.find_drink_info(slot.drink_number)
-            SlotUtils.__write_records(config.slots_list)
 
     def check_all_zero(self, drink_number:int):
         slots = list()
@@ -142,22 +141,21 @@ class AdminPrompt:
         for slot in config.slots_list:
             if(slot.drink_number == drink_number):
                 if(slot.stock != 0):
-                    SlotUtils.__write_records(config.slots_list)
                     return
                 else:
                     slots.append(slot)
 
         for slot in slots:
             config.slots_list.remove(slot)
-
-        SlotUtils.__write_records(config.slots_list)
+        SlotUtils.delete_slots_used_same_drink()
+        return
 
     def assign_drink_slot(self, slot_number:str, drink_number:str, stock:str):
         sN = int(slot_number)
         dN = int(drink_number)
         s = int(stock)
         config.slots_list.append(Slot(sN, dN, s))
-        SlotUtils.__write_records(config.slots_list)
+        SlotUtils.__write_records(config.slots_list)#slot_util의 insert로 변경 예정
         drink_info = self.find_drink_info(dN)
         print(f"{sN}번 슬롯에 {drink_info.drink_number}번 {drink_info.name}가 개당 {drink_info.price}원으로 {s}개 추가되었습니다.")
 
@@ -165,14 +163,13 @@ class AdminPrompt:
         dN = int(drink_number)
         p = int(price)
         config.drinks_list.append(Drink_info(dN, name, p))
-        DrinkInfoUtils.__write_drinks_records(config.drinks_list)
-
+        DrinkInfoUtils.update_new_drinks(dN, name, p)
         print(f"{dN}번 {name}가 개당 {p}원으로 추가되었습니다.")
     
     def remove_drink_info(self, drink_number:str):
         drink_info = self.find_drink_info(drink_number)
         config.drinks_list.remove(drink_info)
-        DrinkInfoUtils.__write_drinks_records(config.drinks_list)
+        DrinkInfoUtils.delete_drink(drink_info.drink_number)
 
         print(f"{drink_info.drink_number}번 {drink_info.name} {drink_info.price}원이 삭제되었습니다.")
             
