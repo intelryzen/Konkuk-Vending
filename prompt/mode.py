@@ -40,15 +40,15 @@ class Mode:
             else:   
                 print(mode)  # 오류 메시지 출력
 
-class ShowDrinksList:
-    def __init__(self):
-        self.du = Drinks_util()
+# class ShowDrinksList:
+#     def __init__(self):
+#         self.du = Drinks_util()
 
-    def show_drinks_list(self):
-        print("\n<음료수 목록>")
-        self.du.print_drinks_cus()
-        print("(0. 뒤로가기)")
-        print("-------------------------------------------")
+#     def show_drinks_list(self):
+#         print("\n<음료수 목록>")
+#         self.du.print_drinks_cus()
+#         print("(0. 뒤로가기)")
+#         print("-------------------------------------------")
 
 if __name__ == "__main__":
     # 모드 선택 프롬프트 테스트

@@ -39,6 +39,7 @@ def main():
         #잔돈, 관리자 파일 로드
         Cash_Utils().load_currencies(c.CASH_FILE_PATH, cash.Currency)
         # c.drinks_list = [Drink_info(drink_number=1,name="d",price=11,stock=12)]
+        DrinkInfoUtils().read()
         SlotUtils().read()
         BuyerUtils().read()
         Seller_Utils().load_admin(c.SELLER_FILE_PATH, c.admin_list, seller.Admin)
@@ -52,8 +53,7 @@ def main():
                     print("프로그램을 종료합니다.")        
                     exit()
                 elif command == 1:
-                    show_drink_list = ShowDrinksList()
-                    show_drink_list.show_drinks_list()  # 음료수 목록을 출력
+                    DrinkSelection().print_drinks_cus()
                     while True:
                         cash_input_instans = CashInput() 
                         C_result = cash_input_instans.cash_input_prompt() # 금액 입력 프롬프트로 이동

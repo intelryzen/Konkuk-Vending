@@ -1,8 +1,6 @@
 from my_parser.drink_selection_parser import DrinkSelectionParser
 from config import config as c
-from prompt.mode import ShowDrinksList
 from .change import Change
-from .cash_input import CashInput
 from file_utils.slot_util import SlotUtils
 
 
@@ -14,10 +12,6 @@ class DrinkSelection:
         정상: 잔액 업데이트, 음료수 목록 업데이트 후 출력, 음료수 재고 0이면 drinks.txt에서 삭제
         비정상: 음료수 선택 프롬프트로 이동
     '''
-    
-    def __init__(self):
-        self.drink_list = ShowDrinksList() #음료수 목록 출력 
-       
 
     # 음료수 선택 프롬프트
     def drink_selection_prompt(self):
@@ -34,12 +28,12 @@ class DrinkSelection:
                 print(msg)
                 for i in range(6):
                     c.customer_list[i].quantity = 0 #사용자가 투입한 금액 0으로 초기화
-                self.drink_list.show_drinks_list() #음료수 리스트 출력
+                self.print_drinks_cus() #음료수 리스트 출력
                 return
             else :
                 # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
                 for i in range (0, len(c.drinks_list)):
-                    if int(c.drinks_list[i].number) == int(parsed_command):
+                    if int(c.drinks_list[i].drink_number) == int(parsed_command):
                         drink_price = c.drinks_list[i].price
                 if self.cash_by_custom() < drink_price: #투입금이 음료수 가격보다 적을 때
                     print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
@@ -52,12 +46,12 @@ class DrinkSelection:
                     else:
                         self.buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
                         if self.cash_by_custom() == 0:
-                            self.drink_list.show_drinks_list() # 음료수 목록 출력
+                            self.print_drinks_cus() # 음료수 목록 출력
                             return
                         else:
                             print ("잔돈: ", self.cash_by_custom())
                             print("-------------------------------------------")
-                            self.drink_list.show_drinks_list() # 음료수 목록 출력
+                            self.print_drinks_cus() # 음료수 목록 출력
                             return self.drink_selection_prompt()
             '''
             if not canChange:
@@ -84,13 +78,17 @@ class DrinkSelection:
         return None
     
     def print_drinks_cus(self):
+        print("\n<음료수 목록>")
         for slot in c.slots_list:
             drink_info = self.find_drink_info(slot.drink_number)
             print(f"{slot.slot_number}. {drink_info.name} {drink_info.price}원 {slot.stock}개")
+        print("(0. 뒤로가기)")
+        print("-------------------------------------------")
     
     # 돈 처리는 완료되었다고 가정
     def buy_drink(self, slot_number:str):
         target_slot = self.find_slot(slot_number)
+
         if(target_slot.stock != 0):
             target_slot.stock -= 1
         else:
@@ -99,16 +97,25 @@ class DrinkSelection:
                 if(slot.stock != 0):
                     target_slot = slot
                     target_slot.stock -= 1
+                    break
         if(target_slot.stock == 0):
-            self.check_all_zero()
+            self.check_all_zero(target_slot.drink_number)
 
+    def find_slot(self, slot_number):
+            x = int(slot_number)
+
+            for slot in c.slots_list:
+                if(slot.slot_number == x):
+                    return slot
+            return None
+    
     def check_all_zero(self, drink_number:int):
         slots = list()
 
         for slot in c.slots_list:
             if(slot.drink_number == drink_number):
                 if(slot.stock != 0):
-                    SlotUtils.__write_records(c.slots_list)
+                    SlotUtils.update_stock(slot_number=slot.slot_number, stock=slot.stock - 1)
                     return
                 else:
                     slots.append(slot)
@@ -126,6 +133,7 @@ class DrinkSelection:
                 slots.append(slot)
 
         return slots
+
 
 if __name__ == "__main__":
     # 음료수 선택 프롬프트 테스트

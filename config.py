@@ -13,12 +13,12 @@ class Config:
     SLOTS_FILE_PATH : str = 'machine.txt'
     BUYER_FILE_PATH : str = 'buyers.txt'
     
-    buyer_list = [] #구매자 정보 리스트 
-    admin_list = [] #관리자 클래스 리스트 생성
-    currency_list = [] #권종 클래스 리스트 생성
-    drinks_list = [] # 음료 정보 리스트
-    slots_list=[] # 슬롯 관리 리스트
-    customer_list = []
+    buyer_list : list = [] #구매자 정보 리스트 
+    admin_list  : list= [] #관리자 클래스 리스트 생성
+    currency_list  : list= [] #권종 클래스 리스트 생성
+    drinks_list : list = [] # 음료 정보 리스트
+    slots_list  : list =[] # 슬롯 관리 리스트
+    # customer_list : list[Drink_info] = []
     
     coupon = 0 #쿠폰 개수
     cash_by_cus = 0 # 투입금액 변수 생성

@@ -1,4 +1,3 @@
-import os
 import sys
 
 from config import Config as c
@@ -34,10 +33,10 @@ class DrinkInfoUtils(BaseParser):
                     if not super().is_price(input=data[2]):  
                         raise ValueError(f"음료수 가격 오류가 확인되었습니다. {comment}")
                    
-                    if any(drink.drink_number == int(data[0]) for drink_num in c.drinks_list): 
+                    if any(drink.drink_number == int(data[0]) for drink in c.drinks_list): 
                         raise ValueError(f"음료수 번호의 중복이 확인되었습니다. {comment}")
                    
-                    c.drink_list.append(Drink(drink_number=int(data[0]), drink_name=int(data[1]), price=int(data[2]))) 
+                    c.drinks_list.append(Drink_info(drink_number=int(data[0]), name=data[1], price=int(data[2]))) 
 
                 if len(c.drinks_list) == 0:
                     print("경고: 자판기 슬롯 파일 내 데이터가 없습니다.")
@@ -67,7 +66,7 @@ class DrinkInfoUtils(BaseParser):
     def delete_drink(self, drink_num:int):
         records = self.__read_drinks_records()
         records = [record for record in records if int(record[0]) != drink_num]
-        SlotUtils.delete_slots(drink_num)
+        # SlotUtils.delete_slots(drink_num)
         self.__write_drinks_records(records)
 
     def update_new_drinks(self, drink_num:int, drink_name:str, price:int):
