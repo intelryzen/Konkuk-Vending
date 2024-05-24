@@ -155,7 +155,7 @@ class AdminPrompt:
         dN = int(drink_number)
         s = int(stock)
         config.slots_list.append(Slot(sN, dN, s))
-        SlotUtils.__write_records(config.slots_list)#slot_util의 insert로 변경 예정
+        SlotUtils.insert_slot(sN, dN, s)
         drink_info = self.find_drink_info(dN)
         print(f"{sN}번 슬롯에 {drink_info.drink_number}번 {drink_info.name}가 개당 {drink_info.price}원으로 {s}개 추가되었습니다.")
 
