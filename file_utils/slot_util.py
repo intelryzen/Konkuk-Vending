@@ -89,3 +89,9 @@ class SlotUtils(BaseParser):
         records = [record for record in records if int(record[0]) != slot_number]
         
         self.__write_records(records)
+
+    def insert_slot(self, slot_number:int, drink_number:int, stock:int):
+        records = self.__read_records()
+        records.append([slot_number, drink_number, stock])
+        
+        self.__write_records(records)
