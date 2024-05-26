@@ -59,7 +59,7 @@ class AdminPrompt:
                     cash_utils_instance.change_currency(parts[1], parts[2])
                     from model.cash import Currency
                     currency = Currency(parts[1], parts[2])
-                    cash_utils_instance.save_currencies(c.CASH_FILE_PATH, currency)
+                    cash_utils_instance.save_currencies(config.CASH_FILE_PATH, currency)
 
                 elif command == 4:
                     # 자판기 슬롯별 음료수 재고 수정
