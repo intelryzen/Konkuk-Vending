@@ -67,8 +67,8 @@ class AdminFunctionParser(BaseParser):
             # 4번 자판기 슬롯별 음료수 재고 수정 인자 유효성 검사
             if command == 4:
                 if not self.is_number(parts[1]):
-                    return False , "오류 : 음료수의 슬롯 번호는 숫자만 입력할 수 있습니다."
-                if not(parts[1] in s_num) :
+                    return False , "오류 : 음료수의 슬롯 번호는 숫자만 입력할 수 있습니다." # 0이어도 오류로 인식2
+                if not(int(parts[1]) in s_num) :
                      return False, "오류: 존재하지 않는 음료수 슬롯 번호입니다. 사용하는 슬롯만 재고를 수정할 수 있습니다."
                 if not self.is_count(parts[2]):
                     return False, "오류: 음료수의 개수의 입력은 오직 0과 99사이의 숫자만 허용합니다."
@@ -97,9 +97,9 @@ class AdminFunctionParser(BaseParser):
                     return False, "오류: 음료수의 슬롯 번호는 1과 99사이의 숫자만 허용합니다."
                 if not self.is_number(parts[2]):
                     return False, "오류: 음료수의 번호는 1과 99사이의 숫자만 허용합니다."
-                if not parts[2] in drinknum :   
+                if not int(parts[2]) in drinknum :   
                     return False, "오류 : 해당 음료수 번호는 존재하지 않습니다."
-                if parts[1] in s_num :
+                if int(parts[1]) in s_num :
                     return False, "오류: 해당 슬롯 번호는 중복되어서 사용할 수 없습니다."
                 if not self.is_count(parts[3]):
                     return False, "오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요."
@@ -108,7 +108,7 @@ class AdminFunctionParser(BaseParser):
             if command == 6:
                 if not self.is_number(parts[1]):
                     return False, "오류 : 음료수 번호는 1과 99사이의 숫자만 허용합니다."
-                if parts[1] in drinknum :
+                if int(parts[1]) in drinknum :
                     return False, "오류: 해당 음료수 번호는 중복되어서 사용할 수 없습니다."
                 if not parts[3].isdecimal() :
                     return False, "오류: 음료수의 가격 입력시 숫자만 입력해 주세요."
@@ -119,8 +119,6 @@ class AdminFunctionParser(BaseParser):
                     return False, "오류: 음료수의 가격은 1000000원 이하이어야 합니다."
                 if price%100 != 0: 
                     return False, "오류: 음료수의 가격은 100의 배수이어야 합니다."
-                if not self.is_count(parts[4]):
-                    return False, "오류: 음료수 개수 입력시 0과 99사이의 숫자만 기입해 주세요."
                 return True,command
           
         elif command == 7:
@@ -129,7 +127,7 @@ class AdminFunctionParser(BaseParser):
                 return False , "오류: 1개의 인자가 필요합니다. 인자는 음료수 번호를 입력해주세요."
             if not self.is_number(parts[1]):
                 return False, "오류 : 음료수 번호는 1과 99사이의 숫자만 허용합니다."
-            if not parts[1] in drinknum :   
+            if not int(parts[1]) in drinknum :   
                 return False, "오류 : 해당 음료수 번호는 존재하지 않습니다."
             return True,command
  
