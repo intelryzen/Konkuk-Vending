@@ -20,8 +20,8 @@ class AdminFunctionParser(BaseParser):
         
         #슬롯의 정보 가져오기
         for i in range(len(c.slots_list)):
-                s_num.append(c.slots_list[i].number)
-                s_drink_num.append(c.slots_list[i].drinknum)  
+                s_num.append(c.slots_list[i].slot_number)
+                s_drink_num.append(c.slots_list[i].drink_number)  
         
 
         # 입력 문자열 앞뒤 공백 제거
