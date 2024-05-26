@@ -1,5 +1,5 @@
 from .base_parser import BaseParser
-from config import config as c
+from config import Config as c
 from model.buyer import Buyer
 from file_utils.buyer_util import BuyerUtils
 
