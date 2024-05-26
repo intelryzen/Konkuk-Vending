@@ -163,13 +163,13 @@ class AdminPrompt:
         dN = int(drink_number)
         p = int(price)
         config.drinks_list.append(Drink_info(dN, name, p))
-        DrinkInfoUtils.update_new_drinks(dN, name, p)
+        DrinkInfoUtils().update_new_drinks(dN, name, p)
         print(f"{dN}번 {name}가 개당 {p}원으로 추가되었습니다.")
     
     def remove_drink_info(self, drink_number:str):
         drink_info = self.find_drink_info(drink_number)
         config.drinks_list.remove(drink_info)
-        DrinkInfoUtils.delete_drink(drink_info.drink_number)
+        DrinkInfoUtils().delete_drink(drink_info.drink_number)
 
         print(f"{drink_info.drink_number}번 {drink_info.name} {drink_info.price}원이 삭제되었습니다.")
             
