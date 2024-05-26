@@ -2,7 +2,7 @@ import re
 import sys
 import os
 from my_parser.base_parser import BaseParser
-from config import config as c
+from config import Config as c
 
 class Cash_Utils(BaseParser):
 	def save_currencies(self,cash_file_path, Currency): #잔돈 파일 생성/저장
