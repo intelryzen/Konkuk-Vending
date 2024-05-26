@@ -1,5 +1,5 @@
 import sys
-from config import config as c
+from config import Config as c
 from my_parser.base_parser import BaseParser
 from model.slot import Slot
 
