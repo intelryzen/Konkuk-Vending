@@ -1,4 +1,4 @@
-from config import config as c
+from config import Config as c
 from file_utils.cash_util import Cash_Utils
 
 def Change(drink):
