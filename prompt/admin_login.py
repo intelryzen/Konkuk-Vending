@@ -1,5 +1,5 @@
 from my_parser.admin_login_parser import AdminLoginParser
-from config import config as c
+from config import Config as c
 
 class AdminLogin:
     '''
