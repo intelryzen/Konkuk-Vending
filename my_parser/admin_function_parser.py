@@ -16,7 +16,7 @@ class AdminFunctionParser(BaseParser):
 
         #drinklist에서 drinknum , drinkname 분리하기
         for i in range(len(c.drinks_list)):
-                drinknum.append(c.drinks_list[i].number)  # .append()를 사용하여 값을 추가
+                drinknum.append(c.drinks_list[i].drink_number)  # .append()를 사용하여 값을 추가
         
         #슬롯의 정보 가져오기
         for i in range(len(c.slots_list)):
