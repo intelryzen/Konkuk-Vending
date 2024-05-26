@@ -1,5 +1,5 @@
 from my_parser.cash_input_parser import CashInputParser
-from config import config as c
+from config import Config as c
 
 class CashInput:
     '''
