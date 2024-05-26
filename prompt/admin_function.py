@@ -168,6 +168,11 @@ class AdminPrompt:
     
     def remove_drink_info(self, drink_number:str):
         drink_info = self.find_drink_info(drink_number)
+        slots = self.find_slots_with_same_drink_number(drink_info.drink_number)
+        for slot in slots:
+            config.slots_list.remove(slot)
+        SlotUtils().delete_slots_used_same_drink(drink_info.drink_number)
+
         config.drinks_list.remove(drink_info)
         DrinkInfoUtils().delete_drink(drink_info.drink_number)
 
