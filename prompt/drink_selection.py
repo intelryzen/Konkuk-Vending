@@ -1,5 +1,5 @@
 from my_parser.drink_selection_parser import DrinkSelectionParser
-from config import config as c
+from config import Config as c
 from .change import Change
 from file_utils.slot_util import SlotUtils
 
