@@ -42,6 +42,10 @@ class BuyerLoginParser(BaseParser):
                         # 새로운 아이디가 생성되면 c.buyer_list에도 추가
                         new_buyer = Buyer(input[0],0,0)
                         c.buyer_list.append(new_buyer)
+                        ''' buyer_list 출력확인
+                        for buyer in c.buyer_list:
+                            print(buyer)
+                        '''
                         return True, f"{input[0]} 아이디를 생성하였습니다."
                     else:
                         return False, "아이디 생성을 실패했습니다."
