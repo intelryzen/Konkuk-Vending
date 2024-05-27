@@ -23,8 +23,10 @@ class BuyerLogin:
                             if buyer.buyer_id == login_input:
                                 c.logged_in_buyer = buyer
                                 break
-                        print(result)
-                        return 1
+                        else:
+                            c.logged_in_buyer = next(buyer for buyer in c.buyer_list if buyer.buyer_id == login_input)
+                    print(result)
+                    return 1
             else:
                 print(result)
 
