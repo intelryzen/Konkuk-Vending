@@ -30,13 +30,13 @@ class BuyerLoginParser(BaseParser):
             for buyer in c.buyer_list:
                 if input[0] == buyer.buyer_id:
                     return True, "로그인 성공"
+            else:
+                buyer_utils = BuyerUtils()
+                success = buyer_utils.insert_buyer(input[0])
+                if success:
+                    return True, f"{input[0]} 아이디를 생성하였습니다."
                 else:
-                    buyer_utils = BuyerUtils()
-                    success = buyer_utils.insert_buyer(input[0])
-                    if success:
-                        return True, f"{input[0]} 아이디를 생성하였습니다."
-                    else:
-                        return False, "아이디 생성을 실패했습니다."
+                    return False, "아이디 생성을 실패했습니다."
 
         return False, "오류: 아이디가 입력규칙을 준수하지 않습니다."
 
