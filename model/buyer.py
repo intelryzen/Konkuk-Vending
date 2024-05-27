@@ -3,3 +3,6 @@ class Buyer:
         self.buyer_id = buyer_id
         self.money = money
         self.coupon_number = coupon_number
+
+    def __str__(self):
+        return f"{self.buyer_id} {self.money}, {self.coupon_number}"
