@@ -26,19 +26,11 @@ class BuyerLogin:
                 if result == 0:
                     return 0
                 else:
-                    for buyer in c.buyer_list:
-                        if buyer.buyer_id == login_input:
-                            c.logged_in_buyer = buyer
-                            break
-                    else:
-                        # 신규 사용자인 경우
-                        new_buyer = buyer(buyer_id=login_input)
-                        c.buyer_list.append(new_buyer)
-                        c.logged_in_buyer = new_buyer
                     print(result)
                     return 1
             else:
                 print(result)
+                continue
 
 if __name__ == "__main__":
     # 로그인 프롬프트 테스트
