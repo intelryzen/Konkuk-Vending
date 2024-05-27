@@ -53,6 +53,7 @@ def main():
                     print("프로그램을 종료합니다.")        
                     exit()
                 elif command == 1:
+                    BuyerLogin().show_buyer_login_prompt()
                     DrinkSelection().print_drinks_cus()
                     while True:
                         cash_input_instans = CashInput() 

@@ -22,6 +22,7 @@ class Config:
     
     coupon = 0 #쿠폰 개수
     cash_by_cus = 0 # 투입금액 변수 생성
+    logged_in_buyer = None
 
     @staticmethod
     def get_instance():
