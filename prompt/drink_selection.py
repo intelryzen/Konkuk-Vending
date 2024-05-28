@@ -35,7 +35,7 @@ class DrinkSelection:
                 # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
                 num_coup = 0
                 cus_money = 0
-                id = "user"
+                id = c.logged_in_buyer
                 for i in range(0, len(c.buyer_list)):
                     if c.buyer_list[i].buyer_id == id:
                         num_coup = c.buyer_list[i].coupon_number
