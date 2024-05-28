@@ -146,13 +146,6 @@ class DrinkSelection:
                 if(slot.slot_number == x):
                     return slot
             return None
-    
-    def check_all_zero(self, drink_number:int):
-        for slot in c.slots_list:
-            if(slot.drink_number == drink_number):
-                if(slot.stock != 0):
-                    return False
-        return True
 
     def check_all_zero(self, drink_number:int):
         slots = list()
@@ -160,14 +153,13 @@ class DrinkSelection:
         for slot in c.slots_list:
             if(slot.drink_number == drink_number):
                 if(slot.stock != 0):
-                    SlotUtils().update_stock(slot_number=slot.slot_number, stock=slot.stock - 1)
                     return
                 else:
                     slots.append(slot)
 
         for slot in slots:
             c.slots_list.remove(slot)
-        SlotUtils().delete_slots_used_same_drink()
+        SlotUtils().delete_slots_used_same_drink(drink_number)
         return
 
     def find_slots_with_same_drink_number(self, drink_number:int):
