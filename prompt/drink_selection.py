@@ -126,14 +126,14 @@ class DrinkSelection:
 
         if(target_slot.stock != 0):
             target_slot.stock -= 1
-            SlotUtils().update_stock(target_slot.slot_number, target_slot.stock-1)
+            SlotUtils().update_stock(target_slot.slot_number, target_slot.stock)
         else:
             slots = self.find_slots_with_same_drink_number(target_slot.drink_number)
             for slot in slots:
                 if(slot.stock != 0):
                     target_slot = slot
                     target_slot.stock -= 1
-                    SlotUtils().update_stock(target_slot.slot_number, target_slot.stock-1)
+                    SlotUtils().update_stock(target_slot.slot_number, target_slot.stock)
                     break
         
         if(target_slot.stock == 0):
