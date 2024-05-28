@@ -106,11 +106,10 @@ class AdminPrompt:
                 return slot
         return None
     
-    def find_slots_with_same_drink_number(self, drink_number):
-        dN = int(drink_number)
+    def find_slots_with_same_drink_number(self, drink_number:int):
         slots = list()
         for slot in config.slots_list:
-            if(slot.drink_number == dN):
+            if(slot.drink_number == drink_number):
                 slots.append(slot)
 
         return slots

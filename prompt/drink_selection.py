@@ -170,6 +170,13 @@ class DrinkSelection:
         SlotUtils().delete_slots_used_same_drink()
         return
 
+    def find_slots_with_same_drink_number(self, drink_number:int):
+        slots = list()
+        for slot in c.slots_list:
+            if(slot.drink_number == drink_number):
+                slots.append(slot)
+
+        return slots
 
 if __name__ == "__main__":
     # 음료수 선택 프롬프트 테스트
