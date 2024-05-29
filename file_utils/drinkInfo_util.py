@@ -60,7 +60,7 @@ class DrinkInfoUtils(BaseParser):
             return records
 
     def __write_drinks_records(self, records):
-        with open(c.DRINKS_FILE_PATH, 'w') as file:
+        with open(c.DRINKS_FILE_PATH, 'w', encoding='utf-8') as file:
             file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
 
     def delete_drink(self, drink_num:int):
