@@ -23,6 +23,7 @@ class DrinkSelection:
         
         # 0: 거스름돈 출력하고 음료수 목록 출력 후 금액입력 프롬프트로 이동
         if  drink_check == True:
+            target_slot = self.find_slot(str(parsed_command))
             if parsed_command ==0:
                 c.cash_by_cus =0
                 canChange, msg = Change(0) # 거스름 돈 출력
@@ -31,25 +32,30 @@ class DrinkSelection:
                     c.customer_list[i].quantity = 0 #사용자가 투입한 금액 0으로 초기화
                 self.print_drinks_cus() #음료수 리스트 출력
                 return
+            if(target_slot == None):
+                print("오류: 올바른 입력이 아닙니다.")
+                return self.drink_selection_prompt()
             else :
                 # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
                 num_coup = 0
                 cus_money = 0
                 id = c.logged_in_buyer
-                print(id)
                 for i in range(0, len(c.buyer_list)):
                     if c.buyer_list[i].buyer_id == id:
                         num_coup = c.buyer_list[i].coupon_number
                         cus_money = c.buyer_list[i].money
                 use_coupon = Coupon.coupon_prompt(num_coup)
-                for i in range (0, len(c.drinks_list)):
-                    if int(c.drinks_list[i].drink_number) == int(parsed_command):
-                        drink_price = c.drinks_list[i].price
-                        if use_coupon == 1:
-                            drink_price -= 1000
-                            num_coup -= 1
-                            if drink_price < 0:
-                                drink_price = 0
+                for i in range (0, len(c.slots_list)):
+                    if int(c.slots_list[i].slot_number) == int(parsed_command) and c.slots_list[i].stock > 0:
+                        for j in range(0, len(c.drinks_list)):
+                            if int(c.slots_list[i].drink_number) == int(c.drinks_list[j].drink_number):
+                                drink_price = c.drinks_list[j].price
+                                print(drink_price)
+                            if use_coupon == 1:
+                                drink_price -= 1000
+                                num_coup -= 1
+                                if drink_price < 0:
+                                    drink_price = 0
                 if self.cash_by_custom() < drink_price: #투입금이 음료수 가격보다 적을 때
                     print("오류: 금액이 부족합니다. 다른 음료수를 선택해주세요")
                     return self.drink_selection_prompt()
@@ -66,7 +72,6 @@ class DrinkSelection:
                         print("보유 쿠폰 개수:" + str(num_coup) + "개")
                         cus_money = cus_money + drink_price
                         added_coup = int(cus_money / 10000)
-                        print(added_coup)
                         num_coup += added_coup
                         cus_money %= 10000
                         rem = 10000 - cus_money
