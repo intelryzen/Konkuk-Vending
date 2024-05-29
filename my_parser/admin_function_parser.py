@@ -67,7 +67,7 @@ class AdminFunctionParser(BaseParser):
             # 4번 자판기 슬롯별 음료수 재고 수정 인자 유효성 검사
             if command == 4:
                 if not self.is_number(parts[1]):
-                    return False , "오류 : 음료수의 슬롯 번호는 숫자만 입력할 수 있습니다." # 0이어도 오류로 인식2
+                    return False , "오류: 음료수의 슬롯 번호는 1~99사이의 숫자만 입력 가능합니다." # 기획서에 댓글 달아놓았음
                 if not(int(parts[1]) in s_num) :
                      return False, "오류: 존재하지 않는 음료수 슬롯 번호입니다. 사용하는 슬롯만 재고를 수정할 수 있습니다."
                 if not self.is_count(parts[2]):
