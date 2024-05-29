@@ -2,7 +2,7 @@ import sys
 from file_utils import *
 from prompt import *
 from model import *
-from config import config as c
+from config import Config as c
 
 '''
 parser/base_parser.py 의 BaseParser 클래스에서
