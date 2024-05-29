@@ -53,17 +53,20 @@ def main():
                     print("프로그램을 종료합니다.")        
                     exit()
                 elif command == 1:
-                    BuyerLogin().show_buyer_login_prompt()
-                    DrinkSelection().print_drinks_cus()
-                    while True:
-                        cash_input_instans = CashInput() 
-                        C_result = cash_input_instans.cash_input_prompt() # 금액 입력 프롬프트로 이동
-                        if C_result:
-                            drink_select_prom = DrinkSelection()
-                            drink_select_prom.drink_selection_prompt()
-                            continue
-                        else :
-                            break
+                    log_command = BuyerLogin().show_buyer_login_prompt()
+                    if log_command == 0:
+                        continue
+                    else:
+                        DrinkSelection().print_drinks_cus()
+                        while True:
+                            cash_input_instans = CashInput() 
+                            C_result = cash_input_instans.cash_input_prompt() # 금액 입력 프롬프트로 이동
+                            if C_result:
+                                drink_select_prom = DrinkSelection()
+                                drink_select_prom.drink_selection_prompt()
+                                continue
+                            else :
+                                break
                 elif command == 2:
                     login_instance = AdminLogin()  # Login 클래스의 인스턴스 생성
                     log_command = login_instance.show_admin_login_prompt()
