@@ -158,6 +158,9 @@ class AdminPrompt:
         drink_info = self.find_drink_info(dN)
         print(f"{sN}번 슬롯에 {drink_info.drink_number}번 {drink_info.name}가 개당 {drink_info.price}원으로 {s}개 추가되었습니다.")
 
+        if(s == 0):
+            self.check_all_zero(dN)
+
     def append_drink_info(self, drink_number:str, name:str, price:str):
         dN = int(drink_number)
         p = int(price)
