@@ -123,6 +123,9 @@ class DrinkSelection:
     # 돈 처리는 완료되었다고 가정
     def buy_drink(self, slot_number:str):
         target_slot = self.find_slot(slot_number)
+        if(target_slot == None):
+            print("오류: 올바른 입력이 아닙니다.")
+            return
 
         if(target_slot.stock != 0):
             target_slot.stock -= 1
