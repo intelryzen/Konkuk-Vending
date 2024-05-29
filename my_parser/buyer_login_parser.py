@@ -31,6 +31,7 @@ class BuyerLoginParser(BaseParser):
             for buyer in c.buyer_list:
                 if input[0] == buyer.buyer_id:
                     found = True
+                    c.logged_in_buyer = input[0]
                     return True, "로그인 성공"
 
             if not found:
@@ -46,6 +47,7 @@ class BuyerLoginParser(BaseParser):
                         for buyer in c.buyer_list:
                             print(buyer)
                         '''
+                        c.logged_in_buyer = input[0]
                         return True, f"{input[0]} 아이디를 생성하였습니다."
                     else:
                         return False, "아이디 생성을 실패했습니다."

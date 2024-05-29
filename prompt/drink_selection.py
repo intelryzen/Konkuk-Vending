@@ -36,6 +36,7 @@ class DrinkSelection:
                 num_coup = 0
                 cus_money = 0
                 id = c.logged_in_buyer
+                print(id)
                 for i in range(0, len(c.buyer_list)):
                     if c.buyer_list[i].buyer_id == id:
                         num_coup = c.buyer_list[i].coupon_number
