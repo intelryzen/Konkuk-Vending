@@ -64,7 +64,7 @@ class SlotUtils(BaseParser):
             return records
     
     def __write_records(self, records):
-        with open(c.SLOTS_FILE_PATH, 'w') as file:
+        with open(c.SLOTS_FILE_PATH, 'w', encoding='utf-8') as file:
             file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
         
     def update_stock(self, slot_number:int, stock:int):

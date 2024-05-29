@@ -61,6 +61,6 @@ class Seller_Utils:
 		"""
 		저장하는 과정에서 저장에 대한 에러는 무시하는것으로 하는것이 맞는지 확인 필요함
 		"""
-		with open(seller_file_path, 'w') as file:
+		with open(seller_file_path, 'w', encoding='utf-8') as file:
 			for Admin in admin_list:
 				file.write(f"{Admin.name} {Admin.password}\n") #공백으로 아이디, 비밀번호 분리

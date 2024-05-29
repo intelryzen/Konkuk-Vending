@@ -9,7 +9,7 @@ class Cash_Utils(BaseParser):
 		"""
 		저장하는 과정에서 저장에 대한 에러는 무시하는지 정해진 것으로 아는데 맞는지 확인 필요함
 		"""
-		with open(cash_file_path, 'w') as file:
+		with open(cash_file_path, 'w', encoding='utf-8') as file:
 			for Currency in c.currency_list:
 				file.write(f"{Currency.value} {Currency.quantity}\n") #공백으로 권종, 개수 분리
 
@@ -39,7 +39,7 @@ class Cash_Utils(BaseParser):
 		]
 
 		try:
-			with open(cash_file_path, 'r') as file:
+			with open(cash_file_path, 'r', encoding='utf-8') as file:
 				for line in file:
 					parts = re.split(r'\s+', line.strip())  # 공백으로 분리
 					if self.is_money_type(parts[0]):  # 권종 확인
@@ -68,7 +68,7 @@ class Cash_Utils(BaseParser):
 			print("경고: 잔돈 파일 내 데이터가 없습니다.")
 
 		try:
-			with open(cash_file_path, 'r') as file:
+			with open(cash_file_path, 'r', encoding='utf-8') as file:
 				content = file.read()
 				if not content.endswith('\n'):
 					print("오류: 파일의 끝에 개행 문자가 없습니다. 파일을 확인하십시오.")
