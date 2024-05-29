@@ -58,7 +58,7 @@ class BuyerUtils(BaseParser):
             return records
     
     def __write_records(self, records):
-        with open(c.BUYER_FILE_PATH, 'w') as file:
+        with open(c.BUYER_FILE_PATH, 'w', encoding='utf-8') as file:
             file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
         
     def update_money_coupon(self, buyer_id:str, money:int, coupon_number:int):
