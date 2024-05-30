@@ -37,14 +37,12 @@ class DrinkSelection:
                 return self.drink_selection_prompt()
             else :
                 # 구매자가 선택한 음료의 가격을 drink_price 변수로 저장
-                num_coup = 0
-                cus_money = 0
                 id = c.logged_in_buyer
+                use_no = 0
                 for i in range(0, len(c.buyer_list)):
                     if c.buyer_list[i].buyer_id == id:
-                        num_coup = c.buyer_list[i].coupon_number
-                        cus_money = c.buyer_list[i].money
-                use_coupon = Coupon.coupon_prompt(num_coup)
+                        use_no = i
+                use_coupon = Coupon.coupon_prompt(c.buyer_list[use_no].coupon_number)
                 for i in range (0, len(c.slots_list)):
                     if int(c.slots_list[i].slot_number) == int(parsed_command):
                         for j in range(0, len(c.drinks_list)):
@@ -53,7 +51,7 @@ class DrinkSelection:
                 if use_coupon == 1:
                     drink_price -= 1000
                     print(drink_price)
-                    num_coup -= 1
+                    c.buyer_list[use_no].coupon_number -= 1
                     if drink_price < 0:
                         drink_price = 0
                 if self.cash_by_custom() < drink_price: #투입금이 음료수 가격보다 적을 때
@@ -69,20 +67,20 @@ class DrinkSelection:
                             print("쿠폰을 사용하였습니다.")
                         elif use_coupon == 2:
                             print("쿠폰을 미사용하였습니다.")
-                        print("보유 쿠폰 개수:" + str(num_coup) + "개")
-                        cus_money = cus_money + drink_price
-                        added_coup = int(cus_money / 10000)
-                        num_coup += added_coup
-                        cus_money %= 10000
-                        rem = 10000 - cus_money
+                        print("보유 쿠폰 개수:" + str(c.buyer_list[use_no].coupon_number) + "개")
+                        c.buyer_list[use_no].money += drink_price
+                        added_coup = int(c.buyer_list[use_no].money / 10000)
+                        c.buyer_list[use_no].coupon_number += added_coup
+                        c.buyer_list[use_no].money %= 10000
+                        rem = 10000 - c.buyer_list[use_no].money
                         bu = BuyerUtils()
-                        bu.update_money_coupon(str(id), int(cus_money), int(num_coup))
+                        bu.update_money_coupon(str(id), int(c.buyer_list[use_no].money), int(c.buyer_list[use_no].coupon_number))
                         self.buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
                         if self.cash_by_custom() == 0:
                             if added_coup > 0:
                                 print("누적 결제금액이 10000원을 초과하여 1000원 할인쿠폰이 발급되었습니다.")
                                 print("다음 쿠폰 발급까지" + str(rem) + "원 남았습니다.")
-                                print("보유 쿠폰 개수:" + str(num_coup) + "개")
+                                print("보유 쿠폰 개수:" + str(c.buyer_list[use_no].coupon_number) + "개")
                             self.print_drinks_cus() # 음료수 목록 출력
                             return
                         else:
@@ -90,7 +88,7 @@ class DrinkSelection:
                             if added_coup > 0:
                                 print("누적 결제금액이 10000원을 초과하여 1000원 할인쿠폰이 발급되었습니다.")
                                 print("다음 쿠폰 발급까지" + str(rem) + "원 남았습니다.")
-                                print("보유 쿠폰 개수:" + str(num_coup) + "개")
+                                print("보유 쿠폰 개수:" + str(c.buyer_list[use_no].coupon_number) + "개")
                             print("-------------------------------------------")
                             self.print_drinks_cus() # 음료수 목록 출력
                             return self.drink_selection_prompt()
