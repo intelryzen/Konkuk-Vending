@@ -76,6 +76,8 @@ class DrinkSelection:
                         bu = BuyerUtils()
                         bu.update_money_coupon(str(id), int(c.buyer_list[use_no].money), int(c.buyer_list[use_no].coupon_number))
                         self.buy_drink(str(parsed_command)) # 해당 위치에서 음료수 목록 파일 업데이트
+                        if c.buyer_list[use_no].coupon_number > 99:
+                            c.buyer_list[use_no].coupon_number = 99
                         if self.cash_by_custom() == 0:
                             if added_coup > 0:
                                 print("누적 결제금액이 10000원을 초과하여 1000원 할인쿠폰이 발급되었습니다.")
