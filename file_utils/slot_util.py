@@ -45,6 +45,9 @@ class SlotUtils(BaseParser):
                 if len(c.slots_list) == 0:
                     print("경고: 자판기 슬롯 파일 내 데이터가 없습니다.")
 
+                for drink_number in drink_nums:
+                    self.__check_all_zero(drink_number)
+
         except FileNotFoundError:
             print("경고: 자판기 슬롯 파일이 없습니다. 파일을 생성합니다.")
             with open(c.SLOTS_FILE_PATH, 'w', encoding='utf-8'):
@@ -66,6 +69,20 @@ class SlotUtils(BaseParser):
     def __write_records(self, records):
         with open(c.SLOTS_FILE_PATH, 'w', encoding='utf-8') as file:
             file.writelines([f"{record[0]} {record[1]} {record[2]}\n" for record in records])
+        
+    def __check_all_zero(self, drink_number:int):
+        slots = list()
+
+        for slot in c.slots_list:
+            if(slot.drink_number == drink_number):
+                if(slot.stock != 0):
+                    return
+                else:
+                    slots.append(slot)
+
+        for slot in slots:
+            c.slots_list.remove(slot)
+        self.delete_slots_used_same_drink(drink_number)
         
     def update_stock(self, slot_number:int, stock:int):
         records = self.__read_records()
