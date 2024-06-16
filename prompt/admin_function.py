@@ -60,6 +60,7 @@ class AdminPrompt:
                     from model.cash import Currency
                     currency = Currency(parts[1], parts[2])
                     cash_utils_instance.save_currencies(config.CASH_FILE_PATH, currency)
+                    print(f"{parts[1]}원의 수량이 {parts[2]}개로 변경되었습니다.")
 
                 elif command == 4:
                     # 자판기 슬롯별 음료수 재고 수정
