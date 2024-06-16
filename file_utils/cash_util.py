@@ -84,6 +84,6 @@ class Cash_Utils(BaseParser):
 			if Currency.value == Currency_Value:
 				Currency.quantity = Currency_Amount
 				found = True  # Currency 객체를 찾았으므로 플래그를 True로 설정
-				break
+				return Currency_Value, Currency_Amount
 		if not found:  # Currency 객체를 찾지 못했으면, 예외를 발생시킴
 			print("Currency not found.")
